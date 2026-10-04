@@ -17,13 +17,3 @@
 É um único arquivo estático: pode subir no GitHub Pages, Netlify ou Vercel. Em hospedagem, se o TSE bloquear CORS, use o `server.js` (ou uma função serverless equivalente).
 
 Mapa: @svg-maps/brazil (CC BY 4.0). Projeto independente, sem vínculo com a Justiça Eleitoral.
-
-## Executar localmente
-
-Com Node.js instalado, execute `node server.js` na pasta do projeto e abra http://localhost:8080. Não é necessário instalar dependências.
-
-## GitHub Pages
-
-Em Settings → Pages, escolha Deploy from a branch, branch `main` e pasta `/ (root)`. O GitHub Pages serve apenas o HTML; o proxy `server.js` exige hospedagem com Node.js.
-
-A disponibilidade dos resultados depende do TSE e da compatibilidade dos arquivos publicados. O modo Demonstração utiliza dados fictícios e não representa resultados eleitorais.
