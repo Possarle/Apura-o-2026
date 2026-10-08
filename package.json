@@ -1,0 +1,18 @@
+{
+  "name": "apuracao-2026",
+  "version": "3.1.0",
+  "private": true,
+  "description": "Apuração por município, busca de candidatos, histórico persistente e notícias",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "build": "node gerar-pacote-dados.js && node preparar-site.js",
+    "test": "node --test test/*.test.cjs",
+    "prestart": "npm run build"
+  },
+  "devDependencies": {
+    "jsdom": "30.1.2"
+  }
+}

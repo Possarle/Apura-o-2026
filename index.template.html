@@ -3,7 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Apuração 2026 – mapa ao vivo</title>
+<title>Apuração 2026 · Central de resultados</title>
+<meta name="description" content="Resultados das Eleições 2026: votos por estado e município, perfis de candidatos, evolução da apuração e notícias, com dados do TSE.">
+<meta name="theme-color" content="#0b1017">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
@@ -136,17 +140,92 @@ table.lideres td.dir{text-align:right;white-space:nowrap}
 .ponto.lula{background:var(--lula)} .ponto.flavio{background:var(--flavio)} .ponto.outros{background:var(--outros)}
 .vazio{color:var(--suave);padding:18px 4px}
 footer{padding:0 clamp(14px,3vw,32px) 28px;color:var(--suave);font-size:12.5px;max-width:980px}
+/* por cidade */
+#cidadesWrap{padding:16px clamp(14px,3vw,32px) 32px}
+.cid-controles{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+.cid-controles input[type=search]{background:var(--painel);border:1px solid var(--linha);border-radius:8px;padding:7px 12px;color:var(--texto);min-width:210px;font:inherit}
+.cid-controles .espaco{flex:1}
+#cidResumo h2{margin:0 0 2px;font-size:22px;font-stretch:80%;font-weight:800}
+#cidResumo .meta{color:var(--suave);font-size:13px;margin-bottom:8px}
+#cidResumo .barra{margin:8px 0 4px}
+.tabela-wrap{max-height:70vh;overflow:auto;margin-top:12px;border-top:1px solid var(--linha)}
+table.cidades{width:100%;border-collapse:collapse;font-size:14px}
+table.cidades th{text-align:left;color:var(--suave);font-weight:600;font-size:12.5px;padding:8px;border-bottom:1px solid var(--linha);position:sticky;top:0;background:#000;z-index:1}
+table.cidades td{padding:7px 8px;border-bottom:1px solid var(--linha);vertical-align:middle}
+table.cidades tr.linha{cursor:pointer}
+table.cidades tr.linha:hover{background:var(--painel2)}
+table.cidades .dir{text-align:right;white-space:nowrap}
+table.cidades td.nome{font-weight:600}
+table.cidades .pct{font-weight:800;font-stretch:80%;margin-left:4px}
+table.cidades .mudo{color:var(--suave)}
+.mini{display:flex;height:8px;width:110px;border-radius:4px;overflow:hidden;background:var(--sem)}
+.mini i{display:block;height:100%}
+tr.detalhe td{background:#0a0a0a;padding:12px}
+@media (max-width:820px){.esconde-m{display:none}}
+/* gráficos */
+.graficos{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:18px;padding:0 clamp(14px,3vw,32px) 32px}
+.graficos h3,.cid-graficos h3{margin:0 0 2px;font-size:17px;font-stretch:85%;font-weight:800}
+.graficos .sub,.cid-graficos .sub{color:var(--suave);font-size:12.5px;margin:0 0 12px}
+.g-vazio{color:var(--suave);font-size:14px;padding:14px 0}
+.donut-wrap{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.donut-wrap svg{width:170px;height:170px;flex:none}
+.donut-wrap text{fill:var(--texto);font-family:var(--fonte)}
+.leg{display:flex;flex-direction:column;gap:5px;font-size:13.5px;min-width:150px;flex:1}
+.leg div{display:flex;align-items:center;gap:8px}
+.leg i{width:11px;height:11px;border-radius:3px;flex:none}
+.leg b{margin-left:auto;font-stretch:80%;font-weight:800;padding-left:8px}
+.hb{display:grid;grid-template-columns:minmax(70px,150px) 1fr auto;gap:7px 10px;align-items:center;font-size:13px}
+.hb .tr{height:12px;background:var(--painel2);border-radius:6px;overflow:hidden}
+.hb .tr i{display:block;height:100%;border-radius:6px}
+.hb .v{font-stretch:80%;font-weight:800;text-align:right;white-space:nowrap}
+.hb .r{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.emp{display:grid;grid-template-columns:110px 1fr 130px;gap:8px 10px;align-items:center;font-size:13px}
+.emp .st{display:flex;height:16px;border-radius:5px;overflow:hidden;background:var(--sem)}
+.emp .st i{display:block;height:100%}
+.emp .v{font-size:12px;color:var(--suave);text-align:right;white-space:nowrap}
+.rolagem{max-height:460px;overflow:auto;padding-right:6px}
+.mg{display:grid;grid-template-columns:34px 1fr 74px;gap:4px 8px;align-items:center;font-size:12.5px}
+.mg .eixo{position:relative;height:12px}
+.mg .eixo::before{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:#666}
+.mg .eixo i{position:absolute;top:0;height:100%;border-radius:3px}
+.mg .v{text-align:right;font-stretch:80%;font-weight:800;white-space:nowrap}
+.mg .u{font-weight:800;font-stretch:80%}
+.mg .u.sel{color:#fff;text-decoration:underline}
+.eixo-leg{display:flex;justify-content:space-between;font-size:12px;color:var(--suave);margin:0 74px 6px 42px}
+svg.linhas{width:100%;height:auto;display:block}
+svg.linhas text{fill:var(--suave);font-size:10px;font-family:var(--fonte)}
+.det{display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap}
+.det .donut-wrap{flex:none;width:300px}
+.det .donut-wrap svg{width:130px;height:130px}
+.det .grade{flex:1;min-width:280px}
+.cid-graficos{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin:4px 0 14px}
+.cid-graficos .g{background:var(--painel2);border-radius:12px;padding:14px}
+table.cidades td.cel{line-height:1.2}
+table.cidades .v{font-weight:800;font-stretch:80%;font-size:15px;display:block}
+table.cidades .p{color:var(--suave);font-size:12px}
+table.cidades td.lider{background:#ffffff10}
+.det .grade{max-height:520px;overflow:auto} table.cidades th.t-lula{color:var(--lula)} table.cidades th.t-flavio{color:var(--flavio)} table.cidades th.t-outros{color:var(--outros)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.extras{max-width:1400px;margin:24px auto;padding:24px}.extras input,.extras select,#perfilUF{padding:12px;background:#171717;color:#eee;border:1px solid #444;border-radius:8px;font:inherit}.extras input{flex:1;min-width:200px}.extras a{color:#9ac4ff}.extras p{line-height:1.6}#buscaLista{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;max-height:400px;overflow:auto}.resultado-cand{display:flex;flex-direction:column;gap:8px;text-align:left;padding:14px;border:1px solid #333;border-radius:8px;background:#191919;color:#eee;font:inherit;cursor:pointer}.resultado-cand:hover{background:#292929}.resultado-cand span{font-size:12px;color:#aaa}.perfil-metricas{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:22px 0}.perfil-metricas b{font-size:25px;display:block}.perfil-metricas span{color:#aaa}.cand .pct{color:var(--cor-candidato)}#perfilCandidato{margin-top:20px}#noticiasLista{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}#noticiasLista article{border-top:1px solid #444;padding-top:14px}#noticiasLista small{color:#aaa}#noticiasLista h3{line-height:1.5}summary{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #eee;outline-offset:3px}@media(max-width:600px){.extras{padding:16px;margin:16px 10px}.perfil-metricas{grid-template-columns:repeat(2,1fr)}.cid-controles .seg{flex-wrap:wrap}.extras .cid-controles>*{max-width:100%}}
+/* Linha do tempo: contraste escuro, largura completa e controles por toque. */
+.timeline{grid-column:1/-1;order:-1;min-width:0;padding:26px;border:1px solid #293444;border-radius:18px;background:linear-gradient(145deg,#111a27,#0b1019 70%);box-shadow:0 18px 50px #0004;color:#edf2f9}.tl-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}.tl-eyebrow{display:block;color:#93a5bd;letter-spacing:.15em;font-size:10px;font-weight:700;margin-bottom:9px}.graficos .timeline h3{font-size:24px;letter-spacing:-.03em}.tl-head p{margin:5px 0 0;color:#8d9eb6;font-size:13px}.tl-badge{border:1px solid #43516a;background:#182232;color:#bcc9db;padding:7px 12px;border-radius:30px;white-space:nowrap;font-size:12px}.tl-badge.live{color:#82dcc0;border-color:#285246;background:#142d28}.tl-toolbar{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:24px 0 18px}.tl-segments{display:flex;gap:4px;flex-wrap:wrap;padding:4px;background:#080e17;border:1px solid #263143;border-radius:10px}.tl-segments button,.tl-legend button{cursor:pointer;border:1px solid transparent;background:transparent;color:#99aac1;font:inherit;font-size:12px;border-radius:7px;padding:9px 12px}.tl-segments button[aria-pressed=true]{background:#29374d;color:#fff;box-shadow:0 1px 4px #0005}.tl-selects{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.tl-selects label{display:flex;gap:8px;align-items:center;font-size:12px;color:#a6b6ca}.tl-selects select{background:#111c2b;color:#e8effa;border:1px solid #35445b;border-radius:7px;padding:8px;font:inherit}.tl-legend{display:flex;gap:7px;flex-wrap:wrap}.tl-legend button{display:flex;align-items:center;gap:8px;background:#101925;border-color:#293449;color:#78879b;padding:8px 10px}.tl-legend button i{width:8px;height:8px;border-radius:50%;background:var(--candidate-color);opacity:.3}.tl-legend button[aria-pressed=true]{color:#e7edf8;border-color:var(--candidate-color)}.tl-legend button[aria-pressed=true] i{opacity:1}.tl-chart-wrap{margin:16px 0 0;min-width:0}#tl-svg{display:block;width:100%;height:auto;min-height:240px;overflow:visible;touch-action:pan-y}#tl-svg text{fill:#94a6bf;font:12px var(--fonte)}.tl-hint{font-size:12px;color:#92a3ba;line-height:1.6;margin:4px 0 20px}.tl-scrub{display:flex;align-items:center;gap:10px;background:#0a121e;padding:12px;border:1px solid #25334a;border-radius:10px}.tl-scrub input{flex:1;min-width:40px;accent-color:#90abd4;cursor:pointer}.timeline .btn{border-color:#35445b;color:#c3d1e5;background:#142033;white-space:nowrap}.timeline .btn:hover{background:#24374f}.timeline .btn:disabled{opacity:.4;cursor:default}.tl-summary-head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:23px 0 12px;font-size:13px}.tl-summary-head span{color:#95a9c5}.tl-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.tl-stat{padding:16px 18px;background:#131e2c;border:1px solid #29384c;border-top:2px solid var(--candidate-color);border-radius:10px;display:flex;flex-direction:column;gap:7px}.tl-stat>span{color:#bdcadb;font-size:13px}.tl-stat strong{color:var(--candidate-color);font-variant-numeric:tabular-nums;font-size:29px;letter-spacing:-.025em}.tl-stat small{color:#93a4bb;line-height:1.5;font-size:11px}.tl-footer{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:20px;border-top:1px solid #263246;padding-top:15px}.tl-note{font-size:11px;color:#8c9db5;line-height:1.7;margin:0}.tl-empty-chart{padding:60px 20px;margin:25px 0;text-align:center;border:1px dashed #32425b;border-radius:12px;background:repeating-linear-gradient(0deg,transparent,transparent 44px,#23314877 45px)}.tl-empty-chart span{font-size:20px;font-weight:700}.tl-empty-chart p{max-width:440px;margin:15px auto 0;color:#9aabc2;font-size:13px;line-height:1.7}.timeline-empty .tl-note{margin-bottom:15px}@media(max-width:640px){.timeline{padding:17px 12px;border-radius:12px}.tl-head{flex-wrap:wrap}.graficos .timeline h3{font-size:21px}.tl-toolbar{gap:12px;margin-top:18px}.tl-segments button{padding:8px;font-size:11px}.tl-selects{gap:8px}.tl-selects label{font-size:11px;gap:5px}.tl-selects select{max-width:155px}.tl-legend{gap:5px}.tl-legend button{font-size:10px;padding:7px}#tl-svg{min-height:0;aspect-ratio:auto}.tl-summary{grid-template-columns:1fr 1fr;gap:8px}.tl-stat{padding:12px 10px;min-width:0}.tl-stat strong{font-size:24px}.tl-scrub{padding:9px 7px;gap:5px}.tl-scrub .btn{font-size:11px;padding:7px}.tl-footer{flex-direction:column;align-items:flex-start}.tl-summary-head{font-size:12px}}
+
+
+.estado-controle{margin:0 32px 22px;display:flex;gap:12px;align-items:center;padding:16px;border:1px solid #344052;border-radius:12px;background:#101a28;color:#c7d7ef}.estado-controle[hidden]{display:none}.estado-controle select{background:#1c2b40;color:#fff;padding:10px;border:1px solid #405576;border-radius:8px;font:inherit}#avisoPacote{margin:14px 32px;padding:13px 16px;background:#302718;border:1px solid #795e31;border-radius:9px;color:#e9cc95;font-size:13px;line-height:1.5}@media(max-width:640px){.estado-controle{margin:0 14px 16px;flex-wrap:wrap}#avisoPacote{margin:14px}}
 </style>
+<link rel="stylesheet" href="professional.css">
 </head>
-<body>
+<body><a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+<aside class="app-sidebar" aria-label="Navegação principal"><a class="brand" href="#" data-home><span class="brand-mark"><i></i><i></i><i></i></span><span>apuração<span class="brand-year">BRASIL / 2026</span></span></a><span class="nav-caption">CENTRAL DE ELEIÇÕES</span><nav class="app-nav"><button data-page="resultados" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3l9 8v10h-6v-7H9v7H3Z"/></svg><span>Visão geral</span></button><button data-page="cidades" aria-current="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3Z"/><path d="M9 3v15m6-12v15"/></svg><span>Por município</span></button><button data-page="candidatos" aria-current="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="8" r="4"/><path d="M3 21v-2a7 7 0 0 1 14 0v2m2-13a4 4 0 0 1 0 8m1 0a6 6 0 0 1 3 5"/></svg><span>Candidatos</span></button><button data-page="noticias" aria-current="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 8h10M7 12h10M7 16h6"/></svg><span>Notícias</span></button><button data-page="metodo" aria-current="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v1"/></svg><span>Sobre os dados</span></button></nav><div class="sidebar-bottom"><div class="source-seal"><span class="seal-dot"></span>Dados públicos do TSE</div><p>Informação aberta.<br>Uma visão do país inteiro.</p><span class="edition">ELEIÇÕES GERAIS · 2026</span></div></aside>
+<div class="app-shell" id="conteudo" tabindex="-1">
 
 <header class="topo">
-  <h1>Apuração 2026<small>1º turno em 4 de outubro</small></h1>
+  <div class="top-label"><span class="top-kicker">ELEIÇÕES 2026</span><span id="topTurno">1º turno · 04 de outubro</span></div>
   <div class="controles">
     <label class="sr" for="fonte" style="position:absolute;left:-9999px">Fonte dos dados</label>
     <select id="fonte" title="Fonte dos dados">
-      <option value="tse">Ao vivo (TSE)</option>
+      <option value="tse">Dados oficiais · TSE</option>
       <option value="sim">Simulado do TSE (teste)</option>
       <option value="demo">Demonstração (dados fictícios)</option>
     </select>
@@ -157,35 +236,82 @@ footer{padding:0 clamp(14px,3vw,32px) 28px;color:var(--suave);font-size:12.5px;m
     <button class="btn" id="atualizar" title="Atualizar agora">Atualizar</button>
     <span class="status" id="status" role="status" aria-live="polite">Carregando…</span>
   </div>
-</header>
+</header><div class="page-intro"><div><span class="eyebrow" id="pageEyebrow">PANORAMA ELEITORAL</span><h1 id="pageTitle">O Brasil, voto a voto.</h1><p id="pageSubtitle">Acompanhe a apuração. Explore o resultado de cada região.</p></div><button class="btn share-button" id="compartilhar">Copiar consulta <span aria-hidden="true">↗</span></button></div>
+<div class="toast" id="toast" role="status" hidden></div>
 
 <div class="aviso demo" id="avisoDemo" hidden><b>Demonstração.</b> Todos os números, candidatos e fotos deste modo são fictícios e só servem para testar o visual. Para ver a apuração real, escolha “Ao vivo (TSE)”.</div>
 <div class="aviso" id="avisoEspera" hidden></div>
 <div class="aviso erro" id="avisoErro" hidden></div>
 
+<nav class="tabs" id="tabs" aria-label="Cargo"></nav><div id="estadoControle" class="estado-controle" hidden><label for="estadoResultado">Resultados e gráficos de</label> <select id="estadoResultado"><option value="">Brasil · resumo por UF</option></select></div>
 <section class="placar" id="placar" aria-label="Placar nacional"></section>
 
-<nav class="tabs" id="tabs" aria-label="Cargo"></nav>
+<div id="avisoPacote" class="aviso" role="status" hidden></div>
 
-<main>
-  <section class="cartao">
+
+<main id="overviewMain">
+  <section class="cartao map-card"><div class="section-heading"><div><span class="eyebrow">TERRITÓRIO</span><h2>O mapa da votação</h2></div><span class="subtle-tag" id="mapScope">Brasil · 27 UFs</span></div>
     <div class="mapa-wrap">
       <svg id="mapa" role="group" aria-label="Mapa do Brasil por estado"></svg>
       <div class="dica" id="dica" hidden></div>
     </div>
     <div class="legenda" id="legenda"></div>
-    <p class="nota">A cor de cada estado mostra quem lidera a apuração; quanto mais forte, maior a vantagem. Estados em cinza ainda não têm votos apurados. Clique em um estado para ver os dados dele e clique de novo no mesmo estado para voltar ao Brasil inteiro.</p>
+    <p class="nota map-note">A cor de cada estado mostra quem lidera a apuração; quanto mais forte, maior a vantagem. Estados em cinza ainda não têm votos apurados. Clique em um estado para ver os dados dele e clique de novo no mesmo estado para voltar ao Brasil inteiro.</p>
     <div class="ufs" id="ufs" aria-label="Escolher estado"></div>
   </section>
 
   <aside class="cartao painel" id="painel" aria-live="polite"></aside>
 </main>
 
+<div class="analytics-heading" id="analyticsHeading"><span class="eyebrow">ALÉM DO PLACAR</span><h2>A apuração em perspectiva</h2><p>Compare territórios, partidos e a evolução dos votos.</p></div><section class="graficos" id="graficos" aria-label="Gráficos"></section>
+
+
+<section id="cidadesWrap" hidden aria-label="Resultado por cidade">
+  <div class="cartao">
+    <div class="cid-controles">
+      <label class="sr" for="cidUf" style="position:absolute;left:-9999px">Estado</label>
+      <select id="cidUf" title="Estado"></select>
+      <div class="seg" id="cidCargos" role="group" aria-label="Cargo">
+        <button data-cidcargo="1" aria-pressed="true">Presidente</button>
+        <button data-cidcargo="3" aria-pressed="false">Governador</button>
+        <button data-cidcargo="5" aria-pressed="false">Senador</button><button data-cidcargo="6" aria-pressed="false">Deputado federal</button><button data-cidcargo="7" aria-pressed="false">Deputado estadual / distrital</button>
+      </div>
+      <input id="cidBusca" type="search" placeholder="Buscar cidade" aria-label="Buscar cidade" autocomplete="off">
+      <select id="cidOrdem" title="Ordenar por">
+        <option value="nome">Ordem alfabética</option>
+        <option value="votos">Mais votos primeiro</option>
+        <option value="menos">Menos apuradas primeiro</option>
+      </select>
+      <span class="espaco"></span>
+      <button class="btn" id="cidCsv">Baixar planilha (CSV)</button>
+    </div>
+    <div id="cidResumo"></div>
+    <div class="cid-graficos" id="cidGraficos"></div>
+    <p class="table-hint">Deslize a tabela para consultar todas as colunas.</p><div class="tabela-wrap">
+      <table class="cidades">
+        <thead id="cidCab"></thead>
+        <tbody id="cidCorpo"></tbody>
+      </table>
+    </div>
+    <p class="nota">Clique em uma cidade para ver todos os candidatos dela, com votos e gráfico. Os votos mostrados são nominais dos candidatos, sem votos de legenda; as cores são as mesmas do mapa.</p>
+  </div>
+</section>
+
+<section class="extras cartao" id="centralCandidatos" aria-label="Pesquisar candidatos">
+<div class="section-heading"><div><span class="eyebrow">BUSCA ELEITORAL</span><h2>Encontre um candidato</h2><p>Nome, número ou partido. A votação que você quer entender, em detalhe.</p></div><span class="subtle-tag" id="buscaScope">2 cargos · segundo turno</span></div>
+<div class="cid-controles"><input id="buscaCandidato" type="search" placeholder="Nome, número ou partido" aria-label="Pesquisar candidato"><select id="buscaCargo" aria-label="Filtrar cargo"></select><select id="buscaUF" aria-label="Filtrar UF"></select><button class="btn" id="carregarBusca">Atualizar todos os cargos</button></div>
+<p id="buscaStatus" class="nota" aria-live="polite"></p><p id="buscaContagem"></p><div id="buscaLista"></div><button class="btn search-more" id="buscaMais" hidden>Mostrar mais resultados</button><div id="perfilCandidato"></div></section>
+<section class="extras cartao" id="canalNoticias"><div class="section-heading"><div><span class="eyebrow">ACOMPANHE O CONTEXTO</span><h2>Radar eleitoral</h2><p>Manchetes de fontes públicas, com acesso à publicação original.</p></div><button class="btn" id="recarregarNoticias">Atualizar notícias</button></div><p id="noticiasStatus" class="nota" aria-live="polite">Carregando notícias…</p><div id="noticiasLista"></div></section>
+
+<section id="sobreDados" class="method-section" hidden><div class="method-hero"><span class="eyebrow">TRANSPARÊNCIA</span><h2>Os números precisam de contexto.</h2><p>Esta é uma central independente. A fonte dos resultados é o Tribunal Superior Eleitoral; a apresentação dos dados é responsabilidade deste projeto.</p></div><div class="method-grid"><article class="cartao"><span class="method-number">01</span><h3>Atualizado ou salvo?</h3><p>Uma consulta concluída ao TSE atualiza os resultados. Se a conexão falhar, o site mantém a última cópia disponível e mostra seu horário. “Salvo” não significa atualização ao vivo.</p></article><article class="cartao"><span class="method-number">02</span><h3>Votos e percentuais</h3><p>Os totais do painel somam votos nominais dos candidatos, sem votos de legenda. Os percentuais individuais seguem os arquivos do TSE. No Senado, votos não equivalem a número de eleitores.</p></article><article class="cartao"><span class="method-number">03</span><h3>Liderança não é eleição</h3><p>Um candidato na frente pode não estar eleito. A marcação de eleito vem do TSE. Para deputados, a posição por votos não determina sozinha a distribuição de cadeiras.</p></article><article class="cartao"><span class="method-number">04</span><h3>Histórico e cobertura</h3><p>A linha do tempo exibe os registros reais disponíveis. Lacunas não são preenchidas com estimativas. O pacote traz resultados por UF; a consulta individual dos municípios exige conexão.</p></article></div><div class="method-links"><a href="https://resultados.tse.jus.br/" target="_blank" rel="noopener noreferrer">Consultar o TSE ↗</a><a href="https://www.tse.jus.br/eleicoes/informacoes-tecnicas-sobre-a-divulgacao-de-resultados" target="_blank" rel="noopener noreferrer">Documentação das fontes ↗</a></div></section>
 <footer>
   Dados: arquivos públicos de divulgação de resultados do TSE (resultados.tse.jus.br). Projeto independente, sem vínculo com a Justiça Eleitoral; os números oficiais são os do TSE.
   Mapa dos estados: @svg-maps/brazil (CC BY 4.0).
-</footer>
+</footer></div>
 
+<script src="history-core.js"></script>
+<script src="election-core.js"></script>
+<script src="snapshot-data.js"></script>
 <script>
 (() => {
 'use strict';
@@ -196,6 +322,7 @@ const MAPA = {"viewBox":"0 0 613 639","estados":[{"id":"ac","nome":"Acre","d":"m
 const CONFIG = {
   intervaloSegundos: 30,          // atualização automática (ao vivo)
   intervaloDemoSegundos: 3,       // atualização no modo demonstração
+  intervaloCidadesSegundos: 60,   // atualização da aba "Por cidade" (baixa uma cidade por arquivo)
   // Cor das candidaturas que não são para presidente (pelo número do partido):
   partidosVermelho: ['13', '65', '43'],   // PT, PCdoB, PV (Federação Brasil da Esperança)
   partidosAzul: ['22'],                    // PL
@@ -218,27 +345,30 @@ const CARGOS = [
   { cd: '7', rotulo: 'Deputado estadual', grupo: 'est', majoritario: false, doisTurnos: false }
 ];
 const COR_ROTULO = { lula: 'vermelho', flavio: 'azul', outros: 'amarelo' };
+const CID_CARGOS = CARGOS.map(c => [c.cd, c.rotulo]);
 
 /* ------------------------------- Estado ------------------------------- */
 const S = {
-  fonte: 'tse', turno: 1, cargo: '1', uf: null,
+  fonte: 'tse', turno: 2, cargo: '3', uf: null,
   codigos: null, dados: {}, proxy: false,
-  carregando: false, refazer: false, timer: null, restante: 0,
-  demoTick: 0, maisCandidatos: 24, ultimaGeracao: ''
+  run: 0, carregando: false, refazer: false, timer: null, restante: 0,
+  demoTick: 0, maisCandidatos: 24, ultimaGeracao: '', cm: {}, hist: {},
+  cid: { uf: 'sp', cargo: '1', busca: '', ordem: 'nome', aberta: null, lista: [], dados: {}, estado: null, chave: '', gen: 0, tmr: null, listaErro: false }
 };
+const UI={requestController:new AbortController(),view:'resultados',lastCargo:'1',toastTimer:null};
 const $ = (s) => document.querySelector(s);
 const esc = (t) => String(t ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const parseBR = (v) => { if (v === undefined || v === null || v === '') return 0; const n = parseFloat(String(v).replace(/\./g, '').replace(',', '.')); return Number.isFinite(n) ? n : 0; };
+const parseBR = (v) => { if (typeof v === 'number') return v; if (v === undefined || v === null || v === '') return 0; const n = parseFloat(String(v).replace(/\./g, '').replace(',', '.')); return Number.isFinite(n) ? n : 0; };
 const fmtInt = (n) => Math.round(n).toLocaleString('pt-BR');
 const fmtPct = (n, d = 1) => n.toLocaleString('pt-BR', { minimumFractionDigits: d, maximumFractionDigits: d }) + '%';
 const pad = (n, t = 4) => String(n).padStart(t, '0');
 const nomeUF = (id) => MAPA.estados.find((e) => e.id === id)?.nome || id.toUpperCase();
-const cargoAtual = () => CARGOS.find((c) => c.cd === S.cargo);
+const cargoAtual = () => CARGOS.find((c) => c.cd === S.cargo) || null;
 const iniciais = (nome) => String(nome || '?').split(/\s+/).filter(Boolean).slice(0, 2).map((p) => p[0]).join('').toUpperCase();
 
 /* --------------------------- Regras de cor ---------------------------- */
-const ehLula   = (c) => String(c.n) === '13' || /\bLULA\b/i.test(c.nome);
-const ehFlavio = (c) => String(c.n) === '22' || /FL[ÁA]VIO BOLSONARO/i.test(c.nome);
+const ehLula = (c) => /^(?:LULA|LUIZ IN[AÁ]CIO LULA DA SILVA)$/i.test((c.nome || '').trim());
+const ehFlavio = (c) => /^(?:(?:FL[AÁ]VIO|JAIR) )?BOLSONARO$/i.test((c.nome || '').trim());
 function corDe(c, cargo) {
   if (cargo === '1') return ehLula(c) ? 'lula' : ehFlavio(c) ? 'flavio' : 'outros';
   const p = String(c.partN);
@@ -254,13 +384,14 @@ async function buscarJson(url) {
   let real = url;
   if (S.proxy) real = amb().proxy + url.slice(amb().host.length);
   try {
-    const r = await fetch(real, { cache: 'no-store' });
+    const r = await fetch(real, { cache: 'no-store', signal: AbortSignal.any([AbortSignal.timeout(12000),UI.requestController.signal]) });
     if (!r.ok) return { erro: r.status };
-    return { dados: await r.json() };
+    return { dados: await r.json(), salvo:r.headers.get('X-Apuracao-Source')==='snapshot' };
   } catch (e) { return { erro: 'rede' }; }
 }
 
 async function descobrirCodigos() {
+  const fonteInicial=S.fonte;
   const base = CONFIG.padrao[S.fonte === 'demo' ? 'tse' : S.fonte];
   const cod = { fed: [...base.fed], est: [...base.est] };
   if (S.fonte !== 'demo') {
@@ -278,7 +409,7 @@ async function descobrirCodigos() {
       }
     } else if (r.erro === 'rede') { S.falhaRede = true; }
   }
-  S.codigos = cod;
+  if(S.fonte===fonteInicial) S.codigos = cod;
 }
 
 function normalizar(json, cargoCd) {
@@ -289,7 +420,7 @@ function normalizar(json, cargoCd) {
     const item = {
       sq: c.sqcand, n: c.n, nome: c.nmu || c.nm || '', nomeCompleto: c.nm || '',
       part: par.sg || '', partN: String(par.n ?? ''), votos: parseBR(c.vap),
-      pct: parseBR(c.pvapn ?? c.pvap), eleito: c.e === 's', st: c.st || '', sit: c.dvt || ''
+      pct: parseBR(c.pvapn ?? c.pvap), ...ElectionCore.candidateStatus(c), st: c.st || '', sit: c.dvt || ''
     };
     cands.push(item);
     if (item.eleito) { const p = (partidos[item.part] ||= { sg: item.part, n: item.partN, cadeiras: 0 }); p.cadeiras++; }
@@ -297,7 +428,7 @@ function normalizar(json, cargoCd) {
   const total = cands.reduce((s, c) => s + c.votos, 0);
   for (const c of cands) if (!c.pct && total) c.pct = (c.votos / total) * 100;
   cands.sort((a, b) => (b.votos - a.votos) || (Number(b.eleito) - Number(a.eleito)));
-  const mantem = cands.length > 250 ? cands.filter((c, i) => i < 250 || c.eleito) : cands;
+  const mantem = cands;
   return {
     cands: mantem, totalCands: cands.length, partidos: Object.values(partidos).sort((a, b) => b.cadeiras - a.cadeiras),
     apurado: parseBR(json.s?.pst), vagas: parseInt(carg.nv, 10) || 0, totalVotos: total, hg: json.hg || '', dg: json.dg || ''
@@ -305,12 +436,37 @@ function normalizar(json, cargoCd) {
 }
 
 const chave = (cargo, turno, uf) => `${cargo}|${turno}|${uf}`;
-function listaUfs(cargo) {
+function conservarMaisRecente(atual,recebido){
+ if(atual&&!atual.erro){
+  if(recebido.erro)return {...atual,salvo:true,erroAtualizacao:recebido.erro};
+  const a=HistoryCore.timestamp(atual.dg,atual.hg),b=HistoryCore.timestamp(recebido.dg,recebido.hg);
+  if(a!==null&&b!==null&&b<a)return {...atual,salvo:true};
+ }
+ return recebido;
+}
+function listaUfs(cargo,turno=S.turno) {
   const ids = MAPA.estados.map((e) => e.id);
+  if(cargo==='3'&&turno===2&&S.fonte==='tse')return ids.filter(uf=>situacaoGovernador(uf)==='runoff');
   return cargo === '1' ? ['br', ...ids] : ids;
 }
 
+function situacaoGovernador(uf){return ElectionCore.governorStatus(S.dados[chave('3',1,uf)],S.dados[chave('3',2,uf)]);}
+function classificados(cargo,uf){return ElectionCore.contenders(S.dados[chave(cargo,1,uf)],S.dados[chave(cargo,2,uf)]);}
+function semApuracaoSegundo(cargo=S.cargo,uf=S.uf){
+ if(S.turno!==2||S.fonte!=='tse')return false;
+ const ufs=uf?[uf]:listaUfs(cargo);return !ufs.some(u=>S.dados[chave(cargo,2,u)]?.totalVotos>0);
+}
+let classificacaoEm=0;
+async function atualizarClassificacao(){
+ if(S.fonte!=='tse'||S.turno!==2||Date.now()-classificacaoEm<600000)return;
+ classificacaoEm=Date.now();const run=S.run;
+ const jobs=[{cargo:'1',uf:'br'},...MAPA.estados.map(e=>({cargo:'3',uf:e.id}))];
+ await pool(jobs,6,async({cargo,uf})=>{if(run!==S.run)return;const d=await buscar(cargo,1,uf);if(run!==S.run)return;if(!d.erro){const k=chave(cargo,1,uf);S.dados[k]=conservarMaisRecente(S.dados[k],d);}});
+ if(run===S.run)renderTudo();
+}
+
 async function buscar(cargo, turno, uf) {
+  if(turno===2&&S.fonte==='tse'&&cargo==='3'&&situacaoGovernador(uf)==='decided')return {erro:'sem2'};
   const c = CARGOS.find((x) => x.cd === cargo);
   const cod = S.codigos[c.grupo][turno - 1];
   if (!cod) return { erro: 'sem2' };
@@ -320,6 +476,7 @@ async function buscar(cargo, turno, uf) {
   else r = await buscarJson(`${urlBase()}/${caminhoArquivo(cod, uf, cargoReal)}`);
   if (!r.dados) return { erro: r.erro };
   const n = normalizar(r.dados, cargoReal);
+  n.salvo=!!r.salvo;
   return n;
 }
 
@@ -336,29 +493,450 @@ function agendarRender() { if (renderPendente) return; renderPendente = true; re
 
 async function atualizar() {
   if (S.carregando) { S.refazer = true; return; }
-  S.carregando = true; setStatus('Atualizando…');
+  S.carregando = true; aplicarNavegacao();const run=S.run; setStatus('Atualizando…');
   if (!S.codigos) await descobrirCodigos();
-  const cargo = S.cargo, turno = S.turno;
+  if(run===S.run)await atualizarClassificacao();
+  if(run !== S.run) { S.carregando=false; S.refazer=false; return atualizar(); }
   if (S.fonte === 'demo') S.demoTick++;
   let ok = 0, falhas = 0, redes = 0;
-  await pool(listaUfs(cargo), 8, async (uf) => {
-    const r = await buscar(cargo, turno, uf);
-    S.dados[chave(cargo, turno, uf)] = r;
-    if (r.erro) { falhas++; if (r.erro === 'rede') redes++; } else ok++;
-    agendarRender();
-  });
+  if (S.cargo === 'cidades') {
+    const r = await atualizarCidades(); ok = r.ok; falhas = r.falhas; redes = r.redes;
+  } else {
+    const cargo = S.cargo, turno = S.turno;
+    await pool(listaUfs(cargo), 8, async (uf) => {
+      if(run !== S.run) return;
+      const r = await buscar(cargo, turno, uf);
+      if(run !== S.run) return;
+      const key=chave(cargo,turno,uf),old=S.dados[key];
+      S.dados[key] = conservarMaisRecente(old,r);
+      if (r.erro) { falhas++; if (r.erro === 'rede') redes++; } else ok++;
+      agendarRender();
+    });
+    if (cargo === '1' && run === S.run) { registrarHist(turno); carregarHistorico(); }
+  }
   S.carregando = false;
   S.statusRede = { ok, falhas, redes };
-  const hora = new Date().toLocaleTimeString('pt-BR');
-  setStatus(ok ? `Atualizado às ${hora}` : `Sem dados às ${hora}`);
+  const hora = new Date().toLocaleTimeString('pt-BR',{timeZone:'America/Sao_Paulo'});
+  const saved=S.cargo!=='cidades'&&listaUfs(S.cargo).some(uf=>dadoUF(uf)?.salvo);
+  setStatus(semApuracaoSegundo(S.cargo==='cidades'?S.cid.cargo:S.cargo,S.cargo==='cidades'?S.cid.uf:S.uf)?'2º turno · aguardando apuração':saved?`Resultados salvos disponíveis · consulta às ${hora}`:ok?`Atualizado às ${hora}`:`Sem dados às ${hora}`);
   renderTudo();
   reiniciarTemporizador();
   if (S.refazer) { S.refazer = false; atualizar(); }
 }
 
+
+/* ------------------------------ Gráficos ------------------------------ */
+const HEX = { lula: '#e5353f', flavio: '#2f7bff', outros: '#f4b81a' };
+const PALETA = { lula: ['#e5353f', '#ff7b82', '#a31f27', '#ffb3b7'], flavio: ['#2f7bff', '#7fb0ff', '#1e4fb0', '#b5d1ff'], outros: ['#f4b81a', '#ffd34d', '#c28a00', '#ffe28a', '#9c6f00', '#ffc933'] };
+const REGIOES = {
+  'Norte': ['ac', 'ap', 'am', 'pa', 'ro', 'rr', 'to'],
+  'Nordeste': ['al', 'ba', 'ce', 'ma', 'pb', 'pe', 'pi', 'rn', 'se'],
+  'Centro-Oeste': ['df', 'go', 'mt', 'ms'],
+  'Sudeste': ['es', 'mg', 'rj', 'sp'],
+  'Sul': ['pr', 'rs', 'sc']
+};
+const rotulosCor = (cargo) => cargo === '1' ? { lula: 'Lula', flavio: 'Flávio Bolsonaro', outros: 'Outros candidatos' } : { lula: 'PT, PCdoB ou PV', flavio: 'PL', outros: 'Outros partidos' };
+const fmtPP = (n) => n.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+
+function donut(fatias, titulo, sub) {
+  const R = 50, C = 2 * Math.PI * R, tot = fatias.reduce((s, f) => s + f.valor, 0);
+  let off = 0, arcos = '';
+  if (tot > 0) {
+    for (const f of fatias) {
+      if (f.valor <= 0) continue;
+      const len = f.valor / tot * C;
+      arcos += `<circle cx="70" cy="70" r="${R}" fill="none" stroke="${f.cor}" stroke-width="22" stroke-dasharray="${len} ${C - len}" stroke-dashoffset="${-off}" transform="rotate(-90 70 70)"><title>${esc(f.rotulo)}: ${fmtPct(f.valor / tot * 100)}</title></circle>`;
+      off += len;
+    }
+  } else arcos = `<circle cx="70" cy="70" r="${R}" fill="none" stroke="#2c2c2c" stroke-width="22"/>`;
+  const svg = `<svg viewBox="0 0 140 140" role="img" aria-label="${esc(titulo)}">${arcos}<text x="70" y="69" text-anchor="middle" font-size="17" font-weight="800">${esc(titulo)}</text><text x="70" y="84" text-anchor="middle" font-size="8.5" style="fill:#9aa9b9">${esc(sub || '')}</text></svg>`;
+  const leg = fatias.map((f) => `<div><i style="background:${f.cor}"></i><span>${esc(f.rotulo)}</span><b>${tot ? fmtPct(f.valor / tot * 100) : '–'}</b></div>`).join('');
+  return `<div class="donut-wrap">${svg}<div class="leg">${leg}</div></div>`;
+}
+function fatiasCands(cands, cargo, max = 6, valorDe = (c) => c.votos) {
+  const base = cands.filter((c) => valorDe(c) > 0);
+  const idx = { lula: 0, flavio: 0, outros: 0 };
+  const f = base.slice(0, max).map((c) => { const g = corDe(c, cargo); return { rotulo: c.nome, valor: valorDe(c), cor: corCandidato(c) }; });
+  const resto = base.slice(max).reduce((s, c) => s + valorDe(c), 0);
+  if (resto > 0) f.push({ rotulo: 'Demais', valor: resto, cor: '#6b6b6b' });
+  return f;
+}
+function barrasH(linhas) {
+  const max = Math.max(...linhas.map((l) => l.pct), 1);
+  return `<div class="hb">${linhas.map((l) => `<span class="r" title="${esc(l.rotulo)}">${esc(l.rotulo)}</span><span class="tr"><i style="width:${l.pct / max * 100}%;background:${l.cor}"></i></span><span class="v">${l.txt}</span>`).join('')}</div>`;
+}
+function empilhadas(linhas) {
+  return `<div class="emp">${linhas.map((l) => `<span title="${esc(l.rotulo)}">${esc(l.rotulo)}</span><span class="st"><i style="width:${l.p.lula}%;background:${HEX.lula}"></i><i style="width:${l.p.outros}%;background:${HEX.outros}"></i><i style="width:${l.p.flavio}%;background:${HEX.flavio}"></i></span><span class="v">${l.txt}</span>`).join('')}</div>`;
+}
+function margens(linhas, ufSel) {
+  const max = Math.max(...linhas.map((l) => Math.abs(l.m)), 1);
+  return `<div class="eixo-leg"><span>← vantagem do Lula</span><span>vantagem do Flávio →</span></div><div class="rolagem"><div class="mg">${linhas.map((l) => {
+    const w = Math.abs(l.m) / max * 50;
+    const est = l.m >= 0 ? `left:${50 - w}%;width:${w}%;background:${HEX.lula}` : `left:50%;width:${w}%;background:${HEX.flavio}`;
+    return `<span class="u ${l.uf === ufSel ? 'sel' : ''}">${l.uf.toUpperCase()}</span><span class="eixo"><i style="${est}"></i></span><span class="v">${l.m >= 0 ? '+' : '−'}${fmtPP(Math.abs(l.m))} pp</span>`;
+  }).join('')}</div></div>`;
+}
+const Timeline={range:'all',metric:'pct',scale:'auto',selected:null,hidden:new Set(),follow:true,time:null,status:new Map(),pending:new Set(),points:[],visible:[],series:[],geometry:null};
+const dataHoraBR=t=>new Date(t).toLocaleString('pt-BR',{timeZone:'America/Sao_Paulo',day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'});
+function inicioApuracao(turno) { return Date.parse(`2026-10-${turno === 2 ? '25' : '04'}T17:00:00-03:00`); }
+const horaBR = t => new Date(t).toLocaleTimeString('pt-BR',{timeZone:'America/Sao_Paulo',hour:'2-digit',minute:'2-digit'});
+function histChave(turno) { return 'v2|'+S.fonte+'|'+turno; }
+function lerHist(k) { if(k.includes('|demo|'))return [];try{return HistoryCore.merge(JSON.parse(localStorage.getItem('apuracao2026_hist_'+k)||'[]'));}catch{return [];} }
+function salvarHist(k,h){S.hist[k]=HistoryCore.merge(h);if(k.includes('|demo|'))return;try{localStorage.setItem('apuracao2026_hist_'+k,JSON.stringify(S.hist[k]));}catch{Timeline.status.set(k,'O navegador não conseguiu salvar o histórico local.');}}
+function registrarHist(turno) {
+ const d=S.dados[chave('1',turno,'br')];if(!d||d.erro||!d.totalVotos)return;
+ const k=histChave(turno),t=HistoryCore.timestamp(d.dg,d.hg);
+ salvarHist(k,HistoryCore.append(S.hist[k]||lerHist(k),{t:t??Date.now(),a:d.apurado,cands:d.cands,timeKind:t===null?'observed':'official'}));
+}
+const timestampTSE=d=>HistoryCore.timestamp(d.dg,d.hg);
+async function carregarHistorico(){
+ if(!S.proxy||S.fonte!=='tse')return;
+ const turno=S.turno,k=histChave(turno);if(Timeline.pending.has(k))return;
+ Timeline.pending.add(k);Timeline.status.set(k,'Sincronizando histórico…');
+ try{
+  const r=await fetch('/api/history?turno='+turno,{cache:'no-store',signal:AbortSignal.timeout(15000)});
+  if(!r.ok)throw Error();const data=await r.json();if(!Array.isArray(data.points))throw Error();
+  salvarHist(k,HistoryCore.merge(S.hist[k]||lerHist(k),data.points));
+  Timeline.status.set(k,data.points.length?'Histórico sincronizado com o servidor.':'Servidor ainda sem registros; exibindo a coleta disponível neste navegador.');
+ }catch{Timeline.status.set(k,'Servidor indisponível; exibindo o histórico salvo neste navegador.');}
+ finally{Timeline.pending.delete(k);if(S.cargo==='1'&&histChave(S.turno)===k)renderGraficos();}
+}
+function graficoLinhas(raw){
+ const h=HistoryCore.merge(raw),key=histChave(S.turno);
+ if(Timeline.selected!==key){Timeline.selected=key;Timeline.hidden=new Set();Timeline.follow=true;Timeline.time=null;Timeline.range='all';}
+ const status=Timeline.status.get(key)||(S.fonte==='demo'?'Demonstração: registros fictícios desta sessão.':S.proxy?'Coleta do servidor e histórico deste navegador.':'Histórico local: os registros são coletados enquanto esta página está aberta.');
+ if(!h.length)return `<section class="timeline timeline-empty" id="timeline"><div class="tl-head"><div><span class="tl-eyebrow">APURAÇÃO · BRASIL</span><h3>Evolução do placar nacional</h3></div><span class="tl-badge">Aguardando registros</span></div><div class="tl-empty-chart"><span>O primeiro registro aparecerá aqui</span><p>A curva será formada após duas atualizações diferentes. Não há votos históricos para exibir ainda.</p></div><p class="tl-note">${esc(status)}</p><button class="btn" data-tl-refresh>Sincronizar histórico</button></section>`;
+ const end=h.at(-1).t,cut=Timeline.range==='30m'?end-1800000:Timeline.range==='1h'?end-3600000:-Infinity;
+ let visible=h.filter(p=>p.t>=cut);if(!visible.length)visible=[h.at(-1)];
+ const all=[...new Map(h.flatMap(p=>p.cands).map(c=>[c.n,c])).values()].sort((a,b)=>b.votos-a.votos);
+ // Inicia pelos dois mais votados. As demais séries ficam acessíveis pela legenda.
+ if(Timeline.time===null){Timeline.hidden=new Set(all.slice(2).map(c=>c.n));Timeline.time=end;}
+ const series=all.filter(c=>!Timeline.hidden.has(c.n));
+ const compact=window.innerWidth<=640;
+ const W=compact?380:1000,H=compact?280:330,L=compact?53:65,R=compact?15:22,T=24,B=44;
+ let min=visible[0].t,max=end;
+ if(Timeline.range==='opening'&&S.fonte==='tse')min=Math.min(min,inicioApuracao(S.turno));
+ if(max-min<60000){const mid=(min+max)/2;min=mid-30000;max=mid+30000;}
+ const values=visible.flatMap(p=>p.cands.filter(c=>series.some(s=>s.n===c.n)).map(c=>c[Timeline.metric]));
+ let ymin=0,ymax=Timeline.metric==='pct'?100:Math.max(1,...values)*1.05;
+ if(Timeline.scale==='auto'&&values.length){const low=Math.min(...values),high=Math.max(...values),pad=Timeline.metric==='pct'?Math.max(.25,(high-low)*.15):Math.max(10,(high-low)*.15);ymin=Math.max(0,low-pad);ymax=Timeline.metric==='pct'?Math.min(100,high+pad):high+pad;}
+ if(ymax<=ymin)ymax=ymin+1;
+ const X=t=>L+(t-min)/(max-min)*(W-L-R),Y=v=>T+(ymax-v)/(ymax-ymin)*(H-T-B);
+ Timeline.points=h;Timeline.visible=visible;Timeline.series=series;Timeline.geometry={min,max,L,R,W,H,T,B,ymin,ymax};
+ if(Timeline.follow)Timeline.time=end;else Timeline.time=visible[HistoryCore.nearest(visible,Timeline.time)].t;
+ const formatAxis=v=>Timeline.metric==='pct'?fmtPct(v,ymax-ymin<5?2:1):new Intl.NumberFormat('pt-BR',{notation:'compact',maximumFractionDigits:1}).format(v);
+ const timeLabel=t=>new Date(t).toLocaleTimeString('pt-BR',{timeZone:'America/Sao_Paulo',hour:'2-digit',minute:'2-digit',...(max-min<300000?{second:'2-digit'}:{})});
+ let grid='';for(let i=0;i<=4;i++){const v=ymin+(ymax-ymin)*i/4;grid+=`<line x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="#26303e" stroke-dasharray="3 5"/><text x="${L-10}" y="${Y(v)+4}" text-anchor="end">${formatAxis(v)}</text>`;}
+ const ticks=compact?2:4;
+ for(let i=0;i<=ticks;i++){const t=min+(max-min)*i/ticks;grid+=`<text x="${X(t)}" y="${H-14}" text-anchor="${i===0?'start':i===ticks?'end':'middle'}">${timeLabel(t)}</text>`;}
+ let missing='';if(min<visible[0].t-60000)missing=`<rect x="${L}" y="${T}" width="${X(visible[0].t)-L}" height="${H-T-B}" fill="url(#tl-hatch)"/><text x="${(L+X(visible[0].t))/2}" y="${H/2}" text-anchor="middle">Sem registros</text>`;
+ for(let i=1;i<visible.length;i++){if(visible[i].t-visible[i-1].t>300000){const x=X(visible[i-1].t),width=X(visible[i].t)-x;missing+=`<rect x="${x}" y="${T}" width="${width}" height="${H-T-B}" fill="url(#tl-hatch)" opacity=".55"/>${width>110?`<text x="${x+width/2}" y="${H/2}" text-anchor="middle">Sem registros</text>`:''}`;}}
+ const paths=series.map(c=>{
+  let path='',previous=null;for(const p of visible){const x=p.cands.find(x=>x.n===c.n);if(!x){previous=null;continue;}const move=!previous||p.t-previous.t>300000;path+=`${move?'M':'L'}${X(p.t).toFixed(2)},${Y(x[Timeline.metric]).toFixed(2)} `;previous=p;}
+  const dots=visible.filter((p,i)=>visible.length<80||i===0||i===visible.length-1).map(p=>{const x=p.cands.find(x=>x.n===c.n);return x?`<circle cx="${X(p.t)}" cy="${Y(x[Timeline.metric])}" r="${visible.length===1?5:2.5}" fill="${corCandidato(c)}"/>`:'';}).join('');
+  return `<path d="${path}" fill="none" stroke="${corCandidato(c)}" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>${dots}`;
+ }).join('');
+ const options=[['all','Período coletado'],['30m','30 min'],['1h','1 hora'],...(S.fonte==='tse'?[['opening','Desde 17h']]:[])];
+ return `<section class="timeline" id="timeline"><div class="tl-head"><div><span class="tl-eyebrow">APURAÇÃO · BRASIL · ${S.turno}º TURNO</span><h3>Evolução do placar nacional</h3><p>Explore cada atualização · horário de Brasília</p></div><span class="tl-badge ${Timeline.follow?'live':''}" id="tl-mode">${Timeline.follow?'Último registro':'Consultando histórico'}</span></div>
+ <div class="tl-toolbar"><div class="tl-segments" role="group" aria-label="Período">${options.map(([v,n])=>`<button data-tl-range="${v}" aria-pressed="${Timeline.range===v}">${n}</button>`).join('')}</div><div class="tl-selects"><label>Medida <select id="tl-metric"><option value="pct" ${Timeline.metric==='pct'?'selected':''}>Percentual</option><option value="votos" ${Timeline.metric==='votos'?'selected':''}>Votos</option></select></label><label>Escala <select id="tl-scale"><option value="auto" ${Timeline.scale==='auto'?'selected':''}>Ajustada às séries</option><option value="full" ${Timeline.scale==='full'?'selected':''}>Desde zero</option></select></label></div></div>
+ <div class="tl-legend" role="group" aria-label="Candidatos exibidos">${all.map(c=>`<button data-tl-candidate="${c.n}" aria-pressed="${!Timeline.hidden.has(c.n)}" style="--candidate-color:${corCandidato(c)}"><i></i>${esc(c.nome)}</button>`).join('')}</div>
+ <div class="tl-chart-wrap"><svg id="tl-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Linha do tempo da apuração nacional, horário de Brasília"><defs><pattern id="tl-hatch" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M0 8L8 0" stroke="#283242" stroke-width="1"/></pattern><clipPath id="tl-clip"><rect x="${L-7}" y="${T-7}" width="${W-L-R+14}" height="${H-T-B+14}"/></clipPath></defs>${grid}${missing}<g clip-path="url(#tl-clip)">${paths}<g id="tl-cursor"></g></g></svg></div>
+ <p class="tl-hint">${visible.length===1?'Há apenas um registro neste período. A linha aparecerá quando chegar outra atualização.':'Passe o cursor pelo gráfico ou use a barra abaixo para consultar os valores.'} ${Timeline.scale==='auto'?'Escala vertical ajustada às séries selecionadas.':''}</p>
+ <div class="tl-scrub"><button class="btn" data-tl-step="-1" aria-label="Registro anterior">←</button><input id="tl-slider" type="range" min="0" max="${visible.length-1}" value="${HistoryCore.nearest(visible,Timeline.time)}" aria-label="Consultar registro da apuração" ${visible.length===1?'disabled':''}><button class="btn" data-tl-step="1" aria-label="Próximo registro">→</button><button class="btn" data-tl-live>Último registro</button></div><div class="tl-summary-head"><b id="tl-time"></b><span id="tl-progress"></span></div><div id="tl-summary" class="tl-summary" aria-live="polite"></div>
+ <div class="tl-footer"><p class="tl-note">${h.length} registros · ${dataHoraBR(h[0].t)} até ${dataHoraBR(end)}<br>${esc(status)} ${S.fonte==='tse'&&h[0].t>inicioApuracao(S.turno)+60000?'O período anterior ao primeiro registro não está disponível.':''} Intervalos maiores que 5 minutos ficam sem ligação.</p><button class="btn" data-tl-refresh ${Timeline.pending.has(key)?'disabled':''}>Sincronizar</button></div></section>`;
+}
+function atualizarCursorTimeline(){
+ const h=Timeline.visible,g=Timeline.geometry;if(!g||!h.length||!$('#tl-cursor'))return;
+ const index=HistoryCore.nearest(h,Timeline.time),p=h[index],prev=h[index-1];
+ const X=t=>g.L+(t-g.min)/(g.max-g.min)*(g.W-g.L-g.R),Y=v=>g.T+(g.ymax-v)/(g.ymax-g.ymin)*(g.H-g.T-g.B);
+ $('#tl-cursor').innerHTML=`<line x1="${X(p.t)}" x2="${X(p.t)}" y1="${g.T}" y2="${g.H-g.B}" stroke="#c0cbdc" stroke-dasharray="4 4"/>`+Timeline.series.map(c=>{const x=p.cands.find(x=>x.n===c.n);return x?`<circle cx="${X(p.t)}" cy="${Y(x[Timeline.metric])}" r="5" fill="${corCandidato(c)}" stroke="#fff" stroke-width="1.5"/>`:'';}).join('');
+ $('#tl-time').textContent=dataHoraBR(p.t)+(p.timeKind==='observed'?' · horário da coleta':p.timeKind==='official'?' · horário do TSE':' · horário do registro');
+ $('#tl-progress').textContent=fmtPct(p.a,2)+' das seções apuradas';
+ $('#tl-summary').innerHTML=Timeline.series.map(c=>{const x=p.cands.find(x=>x.n===c.n),before=prev?.cands.find(x=>x.n===c.n);const delta=x&&before?x[Timeline.metric]-before[Timeline.metric]:null;return `<div class="tl-stat" style="--candidate-color:${corCandidato(c)}"><span>${esc(c.nome)}</span><strong>${x?(Timeline.metric==='pct'?fmtPct(x.pct,2):fmtInt(x.votos)):'Sem registro'}</strong><small>${x?fmtInt(x.votos)+' votos':''}${delta!==null?' · '+(delta>0?'+':'')+(Timeline.metric==='pct'?fmtPP(delta)+' pp':fmtInt(delta)+' votos')+' vs. registro anterior':''}</small></div>`;}).join('');
+ $('#tl-slider').value=index;$('#tl-slider').setAttribute('aria-valuetext',dataHoraBR(p.t));
+ $('#tl-mode').textContent=Timeline.follow?'Último registro':'Consultando histórico';$('#tl-mode').classList.toggle('live',Timeline.follow);
+ document.querySelector('[data-tl-step="-1"]').disabled=index===0;document.querySelector('[data-tl-step="1"]').disabled=index===h.length-1;
+}
+document.addEventListener('click',ev=>{
+ const b=ev.target.closest('#timeline button');if(!b)return;
+ if(b.dataset.tlRange){Timeline.range=b.dataset.tlRange;renderGraficos();document.querySelector(`[data-tl-range="${Timeline.range}"]`)?.focus({preventScroll:true});}
+ else if(b.dataset.tlCandidate){const n=b.dataset.tlCandidate;if(Timeline.hidden.has(n))Timeline.hidden.delete(n);else if(Timeline.series.length>1)Timeline.hidden.add(n);renderGraficos();document.querySelector(`[data-tl-candidate="${n}"]`)?.focus({preventScroll:true});}
+ else if(b.hasAttribute('data-tl-live')){Timeline.follow=true;Timeline.time=Timeline.visible.at(-1)?.t;atualizarCursorTimeline();}
+ else if(b.dataset.tlStep){const h=Timeline.visible,index=Math.max(0,Math.min(h.length-1,HistoryCore.nearest(h,Timeline.time)+Number(b.dataset.tlStep)));Timeline.follow=false;Timeline.time=h[index].t;atualizarCursorTimeline();}
+ else if(b.hasAttribute('data-tl-refresh')){carregarHistorico();atualizar();}
+});
+document.addEventListener('change',ev=>{if(ev.target.id==='tl-metric')Timeline.metric=ev.target.value;else if(ev.target.id==='tl-scale')Timeline.scale=ev.target.value;else return;const id=ev.target.id;renderGraficos();document.getElementById(id)?.focus({preventScroll:true});});
+document.addEventListener('input',ev=>{if(ev.target.id==='tl-slider'){Timeline.follow=false;Timeline.time=Timeline.visible[Number(ev.target.value)].t;atualizarCursorTimeline();}});
+document.addEventListener('pointermove',ev=>{
+ const svg=ev.target.closest?.('#tl-svg');if(!svg||ev.pointerType==='touch')return;
+ const rect=svg.getBoundingClientRect(),g=Timeline.geometry,x=(ev.clientX-rect.left)/rect.width*g.W;
+ const t=g.min+Math.max(0,Math.min(1,(x-g.L)/(g.W-g.L-g.R)))*(g.max-g.min);Timeline.follow=false;Timeline.time=Timeline.visible[HistoryCore.nearest(Timeline.visible,t)].t;atualizarCursorTimeline();
+});
+
+let timelineCompact=window.innerWidth<=640;
+window.addEventListener('resize',()=>{const next=window.innerWidth<=640;if(next!==timelineCompact){timelineCompact=next;if(S.cargo==='1')renderGraficos();}});
+
+function renderGraficos() {
+  const el = $('#graficos'); const cargo = S.cargo, uf = S.uf, c = cargoAtual();
+  if(semApuracaoSegundo()){
+   el.innerHTML=(cargo==='1'?graficoLinhas(S.hist[histChave(2)]||lerHist(histChave(2))):'')+'<div class="cartao second-info"><span class="eyebrow">PRÓXIMA ETAPA</span><h3>Uma nova contagem de votos</h3><p>O segundo turno acontece em 25 de outubro. Os gráficos desta etapa serão preenchidos quando o TSE divulgar os votos.</p><p>A classificação dos candidatos vem dos resultados do primeiro turno. Esses votos não são somados à nova disputa.</p><button class="btn" data-first-round>Explorar resultados do 1º turno ↗</button></div>';return;
+  }
+  const card = (t, s, corpo) => `<div class="cartao"><h3>${t}</h3><p class="sub">${s}</p>${corpo}</div>`;
+  const vazio = (m) => `<p class="g-vazio">${m}</p>`;
+  const tem = (d) => d && !d.erro && d.totalVotos > 0;
+  const rot = rotulosCor(cargo);
+  let h = '';
+  if (cargo === '1') {
+    const br = dadoUF('br'), du = uf ? dadoUF(uf) : null;
+    const alvo = uf ? du : br, nome = uf ? nomeUF(uf) : 'Brasil';
+    h += card(`Votos válidos: ${esc(nome)}`, 'Participação de cada candidato no total de votos válidos',
+      tem(alvo) ? donut(fatiasCands(alvo.cands, '1'), fmtPct(alvo.apurado, 2), 'apurado') : vazio('Os gráficos aparecem assim que houver votos apurados.'));
+    if (uf && tem(du) && tem(br)) {
+      const linha = (d, nm) => { const p = partesPorCor(d.cands, '1'); return { rotulo: nm, p, txt: `Lula ${fmtPct(p.lula, 0)} · Flávio ${fmtPct(p.flavio, 0)}` }; };
+      h += card(`${esc(nome)} comparado ao Brasil`, 'Vermelho: Lula. Amarelo: outros. Azul: Flávio Bolsonaro', empilhadas([linha(du, nome), linha(br, 'Brasil')]));
+    }
+    const hist = S.hist[histChave(S.turno)] || (S.hist[histChave(S.turno)] = lerHist(histChave(S.turno)));
+    h += graficoLinhas(hist);
+    const reg = Object.entries(REGIOES).map(([nm, ufs]) => {
+      const v = { lula: 0, flavio: 0, outros: 0 }; let tot = 0;
+      for (const u of ufs) { const d = dadoUF(u); if (!tem(d)) continue; for (const x of d.cands) { v[corDe(x, '1')] += x.votos; tot += x.votos; } }
+      return tot ? { rotulo: nm, p: { lula: v.lula / tot * 100, outros: v.outros / tot * 100, flavio: v.flavio / tot * 100 }, txt: `Lula ${fmtPct(v.lula / tot * 100, 0)} · Flávio ${fmtPct(v.flavio / tot * 100, 0)}` } : null;
+    }).filter(Boolean);
+    h += card('Por região do país', 'Percentual de votos válidos em cada região (vermelho Lula, amarelo outros, azul Flávio)', reg.length ? empilhadas(reg) : vazio('Sem votos apurados nas regiões ainda.'));
+    const mg = MAPA.estados.map((e) => { const d = dadoUF(e.id); if (!tem(d)) return null; const lu = d.cands.find(ehLula), fl = d.cands.find(ehFlavio); return { uf: e.id, m: (lu ? lu.pct : 0) - (fl ? fl.pct : 0) }; }).filter(Boolean).sort((a, b) => b.m - a.m);
+    h += card('Diferença entre Lula e Flávio por estado', 'Em pontos percentuais de votos válidos', mg.length ? margens(mg, uf) : vazio('Sem votos apurados nos estados ainda.'));
+  } else if (c.majoritario) {
+    const d = uf ? dadoUF(uf) : null;
+    if (uf) {
+      h += card(`${c.rotulo}: ${esc(nomeUF(uf))}`, 'Participação de cada candidato no total de votos válidos',
+        tem(d) ? donut(fatiasCands(d.cands, cargo), fmtPct(d.apurado, 2), 'apurado') : vazio('Sem votos apurados neste estado ainda.'));
+      if (tem(d)) h += card('Percentual por candidato', 'Votos válidos em ' + esc(nomeUF(uf)),
+        barrasH(d.cands.slice(0, 10).map((x) => ({ rotulo: `${x.nome} (${x.part})`, pct: x.pct, cor: corCandidato(x), txt: fmtPct(x.pct) }))));
+    }
+    const lid = MAPA.estados.map(e => ({uf:e.id, l:lider(dadoUF(e.id))})).filter(x=>x.l).map(x=>({uf:x.uf,c:x.l.c,m:x.l.margem}));
+    const porPartido = new Map();
+    lid.forEach(x=>{ const k=x.c.part; const p=porPartido.get(k)||{rotulo:k,valor:0,cor:corCandidato(x.c)}; p.valor++; porPartido.set(k,p); });
+    h += card('Estados por partido do líder', 'Liderança parcial; não indica eleição confirmada', lid.length ? donut([...porPartido.values()],String(lid.length),'estados') : vazio('Sem votos apurados.'));
+    lid.sort((a, b) => b.m - a.m);
+    h += card('Vantagem do líder sobre o 2º colocado', 'Em pontos percentuais, estado por estado',
+      lid.length ? `<div class="rolagem">${barrasH(lid.map((x) => ({ rotulo: `${x.uf.toUpperCase()} · ${x.c.nome}`, pct: x.m, cor: corCandidato(x.c), txt: '+' + fmtPP(x.m) + ' pp' })))}</div>` : vazio('Sem votos apurados ainda.'));
+  } else {
+    const d = uf ? dadoUF(uf) : null;
+    if (!uf) h = card(`${c.rotulo}: gráficos por estado`, 'Escolha um estado no mapa ou nos botões das siglas', vazio('Ao escolher um estado, aparecem os gráficos de votos por partido e a divisão de cadeiras.'));
+    else if (!tem(d)) h = card(`${c.rotulo}: ${esc(nomeUF(uf))}`, 'Gráficos por partido', vazio('Sem votos apurados neste estado ainda.'));
+    else {
+      const porPart = {};
+      for (const x of d.cands) { const p = (porPart[x.part] = porPart[x.part] || { part: x.part, partN: x.partN, votos: 0, nome: x.part }); p.votos += x.votos; }
+      const partidos = Object.values(porPart).sort((a, b) => b.votos - a.votos);
+      const totV = partidos.reduce((s, p) => s + p.votos, 0);
+      h += card(`Votos por partido: ${esc(nomeUF(uf))}`, `${c.rotulo}, percentual dos votos nominais; não inclui votos de legenda`,
+        barrasH(partidos.slice(0, 12).map((p) => ({ rotulo: p.part, pct: p.votos / totV * 100, cor: corCandidato(p), txt: fmtPct(p.votos / totV * 100) }))));
+      const cad = d.partidos.filter((p) => p.cadeiras > 0);
+      h += card(`Cadeiras por partido: ${esc(nomeUF(uf))}`, `${d.vagas || ''} vagas. Conta só candidatos já marcados como eleitos pelo TSE`,
+        cad.length ? donut(fatiasCands(cad.map((p) => ({ nome: p.sg, partN: p.n, votos: p.cadeiras })), cargo, 8), String(cad.reduce((s, p) => s + p.cadeiras, 0)), 'eleitos') : vazio('O TSE ainda não marcou candidatos como eleitos neste estado.'));
+    }
+  }
+  el.innerHTML = h;
+  atualizarCursorTimeline();
+}
+
+/* ------------------------------ Por cidade ----------------------------- */
+function extrairMunicipios(json, uf) {
+  const out = [];
+  const coletar = (arr) => { for (const m of arr) if (m && typeof m === 'object' && m.cd != null && (m.nm || m.ds)) out.push({ cd: String(m.cd).padStart(5, '0'), nome: String(m.nm || m.ds) }); };
+  const visitar = (o) => {
+    if (Array.isArray(o)) { o.forEach(visitar); return; }
+    if (!o || typeof o !== 'object') return;
+    if (String(o.cd || '').toLowerCase() === uf) {
+      if (Array.isArray(o.mu)) { coletar(o.mu); return; }
+      for (const v of Object.values(o)) if (Array.isArray(v) && v.some((x) => x && typeof x === 'object' && x.cd != null && x.nm)) { coletar(v); return; }
+    }
+    Object.values(o).forEach(visitar);
+  };
+  visitar(json);
+  const vistos = new Set();
+  return out.filter((m) => !vistos.has(m.cd) && vistos.add(m.cd)).sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
+}
+
+async function listaMunicipios(uf) {
+  if (S.fonte === 'demo') return Demo.municipios(uf);
+  for (const cod of [S.codigos.est[0], S.codigos.fed[0]]) {
+    if (!cod) continue;
+    if (!S.cm[S.fonte + cod]) {
+      const r = await buscarJson(`${urlBase()}/ele2026/${cod}/config/mun-e${pad(cod, 6)}-cm.json`);
+      if (r.dados) S.cm[S.fonte + cod] = r.dados;
+    }
+    const json = S.cm[S.fonte + cod];
+    if (json) { const l = extrairMunicipios(json, uf); if (l.length) return l; }
+  }
+  return [];
+}
+
+async function buscarMun(cargo, turno, uf, cd) {
+  if (cargo === '7' && uf === 'df') cargo = '8';
+  const cod = S.codigos[cargo === '1' ? 'fed' : 'est'][turno - 1];
+  if (!cod) return { erro: 'sem2' };
+  const r = S.fonte === 'demo'
+    ? Demo.arquivo(cargo, uf, turno, cd)
+    : await buscarJson(`${urlBase()}/ele2026/${cod}/dados/${uf}/${uf}${cd}-c${pad(cargo)}-e${pad(cod, 6)}-u.json`);
+  if (!r.dados) return { erro: r.erro };
+  return normalizar(r.dados, cargo);
+}
+
+async function atualizarCidades() {
+  const C = S.cid, cargo = C.cargo, turno = S.turno, uf = C.uf, gen = C.gen;
+  const chv = [S.fonte, uf, cargo, turno].join('|');
+  if (C.chave !== chv) { C.chave = chv; C.dados = {}; C.estado = null; C.lista = []; C.aberta = null; C.listaErro = false; }
+  let ok = 0, falhas = 0, redes = 0;
+  const conta = (r) => { if (r && r.erro) { falhas++; if (r.erro === 'rede') redes++; } else ok++; };
+  renderCidades();
+  const consulta = await buscar(cargo, turno, uf);
+  const anterior=S.dados[chave(cargo,turno,uf)];
+  const est=conservarMaisRecente(anterior,consulta);
+  if (gen !== C.gen) return { ok, falhas, redes };
+  C.estado = est; conta(est); renderCidades(); renderAvisos();
+  if (est.erro) return { ok, falhas, redes };           // o TSE ainda não publicou: nem as cidades existem
+  if (!C.lista.length) {
+    C.lista = await listaMunicipios(uf);
+    if (gen !== C.gen) return { ok, falhas, redes };
+    C.listaErro = !C.lista.length; renderCidades();
+  }
+  const pend = C.lista;
+  await pool(pend, 6, async (m) => {
+    if (gen !== C.gen) return;
+    const r = await buscarMun(cargo, turno, uf, m.cd);
+    if (gen !== C.gen) return;
+    const old=C.dados[m.cd];C.dados[m.cd] = r.erro&&old&&!old.erro?{...old,salvo:true}:r; conta(r); agendarRenderCidades();
+  });
+  if (gen === C.gen) renderCidades();
+  return { ok, falhas, redes };
+}
+
+const semAcento = (x) => String(x || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+function agendarRenderCidades() {
+  if (S.cid.tmr) return;
+  S.cid.tmr = setTimeout(() => { S.cid.tmr = null; if (S.cargo === 'cidades') renderCidades(); }, 500);
+}
+function partesPorCor(cands, cargo) {
+  const p = { lula: 0, flavio: 0, outros: 0 };
+  for (const c of cands) p[corDe(c, cargo)] += c.pct;
+  const s = p.lula + p.flavio + p.outros || 1;
+  return { lula: p.lula / s * 100, flavio: p.flavio / s * 100, outros: p.outros / s * 100 };
+}
+const miniBarra = (cands) => { const total=cands.reduce((n,c)=>n+c.votos,0), cores=new Map(); for(const c of cands){const cor=corCandidato(c);cores.set(cor,(cores.get(cor)||0)+c.votos);} return `<div class="mini" aria-hidden="true">${[...cores].filter(([,v])=>v).map(([cor,v])=>`<i style="width:${total ? v/total*100 : 0}%;background:${cor}"></i>`).join('')}</div>`; };
+
+function renderCidades() {
+  const C = S.cid, cargo = C.cargo;
+  const restricted=S.turno===2&&S.fonte==='tse'&&cargo==='3';
+  [...$('#cidUf').options].forEach(o=>{o.disabled=restricted&&situacaoGovernador(o.value)!=='runoff';});
+  $('#cidUf').value = C.uf;
+  if ($('#cidBusca').value !== C.busca) $('#cidBusca').value = C.busca;
+  document.querySelectorAll('#cidCargos button').forEach((b) => { b.setAttribute('aria-pressed', b.dataset.cidcargo === cargo); b.disabled = S.turno === 2 && ['5','6','7'].includes(b.dataset.cidcargo); b.hidden=b.disabled; });
+  if(semApuracaoSegundo(cargo,C.uf)){
+   $('#cidResumo').innerHTML=`<h2>${esc(nomeUF(C.uf))} · ${cargo==='3'?'Governador':'Presidente'}</h2><p class="nota">2º turno · 25 de outubro</p><div class="runoff-wait"><b>Os resultados municipais serão exibidos após o início da apuração.</b><p>Enquanto isso, consulte os candidatos da disputa ou os resultados de 4 de outubro.</p><button class="btn" data-first-round>Ver primeiro turno</button></div>`;
+   $('#cidGraficos').innerHTML='';$('#cidCab').innerHTML='';$('#cidCorpo').innerHTML='';$('#cidCsv').disabled=true;$('.table-hint').hidden=true;return;
+  }
+  $('#cidCsv').disabled=false;$('.table-hint').hidden=false;
+  const ops = [['nome', 'Ordem alfabética'], ['votos', 'Mais votos válidos primeiro'], ['menos', 'Menos apuradas primeiro']];
+  if (cargo === '1') ops.push(['lula', 'Mais votos do Lula'], ['flavio', 'Mais votos do Flávio']);
+  if (!ops.some((o) => o[0] === C.ordem)) C.ordem = 'nome';
+  const sig = ops.map((o) => o[0]).join();
+  const selO = $('#cidOrdem');
+  if (selO.dataset.sig !== sig) { selO.innerHTML = ops.map(([v, tx]) => `<option value="${v}">${tx}</option>`).join(''); selO.dataset.sig = sig; }
+  selO.value = C.ordem;
+
+  const rotuloCargo = CID_CARGOS.find((x) => x[0] === cargo)[1];
+  const est = C.estado, rot = rotulosCor(cargo);
+  const total = C.lista.length;
+  const vals = Object.values(C.dados);
+  const carregadas = vals.filter((d) => d && !d.erro).length;
+  const comVotos = vals.filter((d) => d && !d.erro && d.totalVotos > 0);
+  let r = `<h2>${esc(nomeUF(C.uf))}: ${rotuloCargo}${S.turno === 2 ? ' (2º turno)' : ''}</h2>`;
+  let graf = '';
+  if (!est) r += '<div class="meta">Carregando…</div>';
+  else if (est.erro) r += `<div class="meta">${est.erro === 'sem2' || (S.turno === 2 && est.erro === 404) ? 'Este estado não tem 2º turno para este cargo.' : 'Não foi possível consultar o TSE. Confira a conexão e execute o site pelo servidor.'}</div>`;
+  else {
+    r += `<div class="meta">${fmtPct(est.apurado, 2)} das seções apuradas no estado. ${total ? `Cidades: ${fmtInt(carregadas)} de ${fmtInt(total)} carregadas, ${fmtInt(comVotos.length)} já com votos.` : (C.listaErro ? 'Não consegui carregar a lista de cidades deste estado.' : 'Carregando a lista de cidades…')}</div>`;
+    if (est.totalVotos) {
+      graf += `<div class="g"><h3>Votos válidos no estado</h3><p class="sub">Participação de cada candidato</p>${donut(fatiasCands(est.cands, cargo), fmtPct(est.apurado, 2), 'apurado')}</div>`;
+      if (comVotos.length) {
+        const cont = new Map();
+        for (const d of comVotos) { const c=d.cands[0], k=String(c.n); const x=cont.get(k)||{rotulo:c.nome,valor:0,cor:corCandidato(c)}; x.valor++; cont.set(k,x); }
+        graf += `<div class="g"><h3>Cidades por líder</h3><p class="sub">Resultados parciais nas cidades carregadas</p>${donut([...cont.values()].sort((a,b)=>b.valor-a.valor).slice(0,10),fmtInt(comVotos.length),'cidades')}</div>`;
+
+      }
+    }
+  }
+  if(total)r+=`<progress class="cid-progress" value="${Math.min(total,vals.length)}" max="${total}" aria-label="Progresso da consulta municipal"></progress><p class="cid-loading">${carregadas} municípios com dados · ${vals.filter(d=>d?.erro).length} indisponíveis · ${Math.max(0,total-vals.length)} pendentes</p>`;
+  $('#cidResumo').innerHTML = r;
+  $('#cidGraficos').innerHTML = graf;
+
+  const pres = cargo === '1';
+  const ncol = pres ? 7 : 6;
+  $('#cidCab').innerHTML = pres
+    ? '<tr><th>Cidade</th><th class="dir">Apurado</th><th class="t-lula dir">Lula</th><th class="t-flavio dir">Flávio Bolsonaro</th><th class="t-outros dir esconde-m">Outros</th><th class="esconde-m">Distribuição</th><th class="dir">Votos válidos</th></tr>'
+    : '<tr><th>Cidade</th><th class="dir">Apurado</th><th>1º colocado</th><th class="esconde-m">2º colocado</th><th class="esconde-m">Distribuição</th><th class="dir">Votos válidos</th></tr>';
+
+  const q = semAcento(C.busca.trim());
+  const linhas = C.lista.filter((m) => !q || semAcento(m.nome).includes(q));
+  const dd = (m) => C.dados[m.cd];
+  const okd = (m) => { const d = dd(m); return d && !d.erro && d.cands ? d : null; };
+  const votosDe = (d, fn) => { const c = d.cands.find(fn); return c ? c.votos : 0; };
+  if (C.ordem === 'votos') linhas.sort((a, b) => ((okd(b) || {}).totalVotos || 0) - ((okd(a) || {}).totalVotos || 0));
+  else if (C.ordem === 'menos') linhas.sort((a, b) => (okd(a) ? okd(a).apurado : -1) - (okd(b) ? okd(b).apurado : -1));
+  else if (C.ordem === 'lula') linhas.sort((a, b) => (okd(b) ? votosDe(okd(b), ehLula) : -1) - (okd(a) ? votosDe(okd(a), ehLula) : -1));
+  else if (C.ordem === 'flavio') linhas.sort((a, b) => (okd(b) ? votosDe(okd(b), ehFlavio) : -1) - (okd(a) ? votosDe(okd(a), ehFlavio) : -1));
+
+  const celV = (v, tot, g, lider) => `<td class="cel dir${lider ? ' lider' : ''}"><span class="v" style="color:${HEX[g]}">${fmtInt(v)}</span><span class="p">${fmtPct(tot ? v / tot * 100 : 0)}</span></td>`;
+  let h = '';
+  for (const m of linhas) {
+    const d = okd(m); const raw = dd(m);
+    const nome = `<td class="nome"><button class="city-open" aria-expanded="${C.aberta===m.cd}">${esc(m.nome)}</button></td>`;
+    if (!d) {
+      h += `<tr class="linha" data-cid="${m.cd}">${nome}<td class="dir mudo">–</td><td class="mudo" colspan="${ncol - 3}">${raw ? 'aguardando o TSE' : 'carregando…'}</td><td class="dir mudo">–</td></tr>`;
+      continue;
+    }
+    const apur = `<td class="dir num">${fmtPct(d.apurado, 2)}</td>`;
+    if (!d.totalVotos) { h += `<tr class="linha" data-cid="${m.cd}">${nome}${apur}<td class="mudo" colspan="${ncol - 3}">sem votos ainda</td><td class="dir mudo">–</td></tr>`; continue; }
+    if (pres) {
+      const vL = votosDe(d, ehLula), vF = votosDe(d, ehFlavio), vO = Math.max(0, d.totalVotos - vL - vF);
+      const g0 = corDe(d.cands[0], '1');
+      h += `<tr class="linha" data-cid="${m.cd}">${nome}${apur}${celV(vL, d.totalVotos, 'lula', g0 === 'lula')}${celV(vF, d.totalVotos, 'flavio', g0 === 'flavio')}${celV(vO, d.totalVotos, 'outros', g0 === 'outros').replace('cel dir', 'cel dir esconde-m')}<td class="esconde-m">${miniBarra(d.cands, cargo)}</td><td class="dir num">${fmtInt(d.totalVotos)}</td></tr>`;
+    } else {
+      const cel = (x, lider) => { const g = corDe(x, cargo); return `<td class="cel${lider ? ' lider' : ''}"><span class="ponto" style="background:${corCandidato(x)}"></span>${esc(x.nome)} <span class="p">${esc(x.part)}</span><span class="v" style="color:${corCandidato(x)}">${fmtInt(x.votos)}</span><span class="p">${fmtPct(x.pct)}</span></td>`; };
+      const b = d.cands[1];
+      h += `<tr class="linha" data-cid="${m.cd}">${nome}${apur}${cel(d.cands[0], true)}${b ? cel(b, false).replace('<td class="cel', '<td class="cel esconde-m') : '<td class="esconde-m"></td>'}<td class="esconde-m">${miniBarra(d.cands, cargo)}</td><td class="dir num">${fmtInt(d.totalVotos)}</td></tr>`;
+    }
+    if (C.aberta === m.cd) {
+      const pasta = pres ? 'br' : C.uf; const max = d.cands[0].pct;
+      h += `<tr class="detalhe"><td colspan="${ncol}"><div class="det">${donut(fatiasCands(d.cands, cargo), fmtInt(d.totalVotos), 'votos válidos')}<div class="grade">${d.cands.map((x) => candHTML(x, d, pasta, max, cargo)).join('')}</div></div></td></tr>`;
+    }
+  }
+  if (!h) h = `<tr><td colspan="${ncol}" class="vazio">${total ? 'Nenhuma cidade encontrada com esse nome.' : 'A lista de cidades aparece aqui assim que o TSE publicar os resultados.'}</td></tr>`;
+  $('#cidCorpo').innerHTML = h;
+}
+
+function baixarCsv() {
+  const C = S.cid, est = C.estado;
+  if (!est || est.erro || !C.lista.length) return;
+  const cands = est.cands;
+  const asp = (v) => '"' + String(v).replace(/^[=+@-]/, "'$&").replace(/"/g, '""') + '"';
+  const head = ['Cidade', 'Seções apuradas (%)', 'Votos válidos', ...cands.map((c) => `${c.nome} (${c.part || c.n})`)];
+  const rows = C.lista.map((m) => {
+    const d = C.dados[m.cd]; const ok = d && !d.erro && d.cands;
+    const porSq = {}; if (ok) for (const c of d.cands) porSq[c.sq || c.n] = c.votos;
+    return [m.nome, ok ? d.apurado.toFixed(2).replace('.', ',') : '', ok ? Math.round(d.totalVotos) : '', ...cands.map((c) => (ok ? Math.round(porSq[c.sq || c.n] || 0) : ''))];
+  });
+  const csv = '\ufeff' + [head, ...rows].map((l) => l.map((v) => (typeof v === 'number' ? v : asp(v))).join(';')).join('\r\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+  a.download = `votos-por-cidade-${C.uf}-cargo${C.cargo}-${S.turno}turno.csv`;
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+
 function reiniciarTemporizador() {
   clearTimeout(S.timer);
-  const seg = S.fonte === 'demo' ? CONFIG.intervaloDemoSegundos : CONFIG.intervaloSegundos;
+  const seg = S.fonte === 'demo' ? CONFIG.intervaloDemoSegundos : (S.cargo === 'cidades' ? CONFIG.intervaloCidadesSegundos : CONFIG.intervaloSegundos);
   S.timer = setTimeout(() => { if (document.hidden) { reiniciarTemporizador(); } else atualizar(); }, seg * 1000);
 }
 function setStatus(t) { $('#status').textContent = t; }
@@ -393,7 +971,9 @@ function moverDica(ev) {
   if (!p) { dica.hidden = true; return; }
   const uf = p.dataset.uf, d = dadoUF(uf), l = lider(d);
   let h = `<b>${esc(nomeUF(uf))}</b>`;
-  if (!d) h += 'Carregando…';
+  if(S.turno===2&&S.fonte==='tse'&&S.cargo==='3'&&situacaoGovernador(uf)!=='runoff')h+=situacaoGovernador(uf)==='decided'?'Governador definido no 1º turno':'Classificação ainda não confirmada';
+  else if(semApuracaoSegundo(S.cargo,uf))h+='2º turno · 25 de outubro<br>Aguardando apuração';
+  else if (!d) h += 'Carregando…';
   else if (d.erro) h += 'Aguardando dados do TSE';
   else {
     h += `${fmtPct(d.apurado, 2)} das seções apuradas`;
@@ -411,8 +991,13 @@ function pintarMapa() {
   const svg = $('#mapa');
   for (const e of MAPA.estados) {
     const p = svg.querySelector('#uf-' + e.id); const l = lider(dadoUF(e.id));
-    if (l) { p.dataset.cor = corDe(l.c, S.cargo); p.style.fillOpacity = (0.55 + 0.45 * Math.min(Math.max(l.margem, 0), 20) / 20).toFixed(2); }
-    else { delete p.dataset.cor; p.style.fillOpacity = ''; }
+    const segundo=S.turno===2&&S.fonte==='tse',status=segundo&&S.cargo==='3'?situacaoGovernador(e.id):'runoff';
+    p.dataset.runoff=segundo?status:'';
+    if(segundo&&status!=='runoff'){delete p.dataset.cor;p.style.fill='#28333f';p.style.fillOpacity='1';}
+    else if (l) { p.dataset.cor = corDe(l.c, S.cargo); p.style.fill = corCandidato(l.c); p.style.fillOpacity = (0.55 + 0.45 * Math.min(Math.max(l.margem, 0), 20) / 20).toFixed(2); }
+    else if(segundo){p.dataset.cor='runoff';p.style.fill='#9bc477';p.style.fillOpacity='1';}
+    else { delete p.dataset.cor; p.style.fill = ''; p.style.fillOpacity = ''; }
+    p.setAttribute('aria-label',`${e.nome}${segundo?status==='runoff'?' · Com segundo turno':status==='decided'?' · Definido no primeiro turno':' · Aguardando confirmação':''}`);
     p.classList.toggle('sel', S.uf === e.id);
   }
 }
@@ -420,72 +1005,84 @@ function pintarMapa() {
 function renderUfs() {
   $('#ufs').innerHTML = MAPA.estados.slice().sort((a, b) => a.id.localeCompare(b.id)).map((e) => {
     const l = lider(dadoUF(e.id));
-    return `<button data-uf="${e.id}" ${l ? `data-cor="${corDe(l.c, S.cargo)}"` : ''} aria-pressed="${S.uf === e.id}" title="${esc(e.nome)}">${e.id.toUpperCase()}</button>`;
+    const segundo=S.turno===2&&S.fonte==='tse',active=!segundo||S.cargo!=='3'||situacaoGovernador(e.id)==='runoff';
+    const color=active?(l?corCandidato(l.c):segundo?'#9bc477':null):null;
+    return `<button data-uf="${e.id}" ${color?`style="border-color:${color};color:${color}"`:''} aria-pressed="${S.uf === e.id}" title="${esc(e.nome)}${segundo&&!active?' · Sem disputa confirmada no 2º turno':''}">${e.id.toUpperCase()}</button>`;
   }).join('');
 }
 
 function renderLegenda() {
-  const pres = S.cargo === '1';
-  const itens = pres
-    ? [['lula', 'Lula'], ['flavio', 'Flávio Bolsonaro'], ['outros', 'Outros candidatos']]
-    : [['lula', 'Candidato do PT, PCdoB ou PV'], ['flavio', 'Candidato do PL'], ['outros', 'Outros partidos']];
-  $('#legenda').innerHTML = itens.map(([c, t]) => `<span><i style="background:var(--${c})"></i>${t}</span>`).join('') + '<span><i style="background:var(--sem)"></i>Sem dados</span>';
+  if(S.turno===2&&S.fonte==='tse'&&semApuracaoSegundo()){
+   $('#legenda').innerHTML='<span><i style="background:#9bc477"></i>Com segundo turno</span>'+(S.cargo==='3'?'<span><i style="background:#28333f"></i>Sem disputa de 2º turno confirmada</span>':'');return;
+  }
+  const vistos = new Map();
+  for (const uf of listaUfs(S.cargo)) for (const c of dadoUF(uf)?.cands || []) {
+    const rot = ehLula(c) || ehFlavio(c) ? c.nome : c.part || 'Sem partido';
+    vistos.set(rot, corCandidato(c));
+  }
+  $('#legenda').innerHTML = [...vistos].map(([rot, cor]) => `<span><i style="background:${cor}"></i>${esc(rot)}</span>`).join('') + '<span><i style="background:#777"></i>Sem dados</span>';
 }
 
 function renderTabs() {
-  $('#tabs').innerHTML = CARGOS.map((c) => {
+  $('#tabs').innerHTML = CARGOS.filter(c=>S.turno===1||c.doisTurnos).map((c) => {
     const off = S.turno === 2 && !c.doisTurnos;
     return `<button data-cargo="${c.cd}" aria-pressed="${S.cargo === c.cd}" ${off ? 'disabled title="Este cargo não tem 2º turno"' : ''}>${c.rotulo}</button>`;
-  }).join('');
+  }).join('') + `<button data-cargo="cidades" aria-pressed="${S.cargo === 'cidades'}">Por cidade</button>`;
 }
 
-function avatarHTML(c, pasta, cls = 'foto') {
-  const cod = S.codigos ? S.codigos[cargoAtual().grupo][S.turno - 1] : 0;
+function avatarHTML(c, pasta, cls = 'foto', cargoCd) {
+  const grp = (CARGOS.find((x) => x.cd === (cargoCd || S.cargo)) || CARGOS[1]).grupo;
+  const cod = S.codigos ? S.codigos[grp][S.turno - 1] : 0;
   if (S.fonte === 'demo' || !c.sq || !cod) return `<span class="avatar">${esc(iniciais(c.nome))}</span>`;
   const src = `${urlBase()}/ele2026/${cod}/fotos/${pasta}/${c.sq}.jpeg`;
   return `<img class="${cls}" loading="lazy" alt="" src="${esc(src)}" data-ini="${esc(iniciais(c.nome))}">`;
 }
 
+function painelDisputa(cargo,uf){
+ const first=S.dados[chave(cargo,1,uf)],status=cargo==='3'?situacaoGovernador(uf):'runoff';
+ if(status!=='runoff')return `<h2>${esc(nomeUF(uf))}</h2><div class="empty-state"><h3>${status==='decided'?'Governo definido no primeiro turno':'Aguardando a definição da disputa'}</h3><p>${status==='decided'?'Este estado não terá nova votação para governador.':'A lista de classificados ainda não está disponível nos dados recebidos.'}</p><button class="btn" data-first-round>Consultar primeiro turno</button></div>`;
+ const candidates=classificados(cargo,uf);
+ return `<span class="eyebrow">${cargo==='1'?'PRESIDENTE · BRASIL':`GOVERNADOR · ${esc(uf.toUpperCase())}`}</span><h2>${uf==='br'?'A decisão nacional':esc(nomeUF(uf))}</h2><p class="nota">Candidatos classificados para 25 de outubro.</p><div class="runoff-candidates">${candidates.map(c=>`<article class="runoff-candidate" style="--candidate-color:${corCandidato(c)}"><span class="runoff-avatar">${esc(iniciais(c.nome))}</span><div><h3>${esc(c.nome)}</h3><p>${esc(c.part)} · ${esc(c.n)}</p><span class="runoff-tag">No segundo turno</span></div></article>`).join('')||'<p>Lista de candidatos aguardando confirmação do TSE.</p>'}</div><div class="runoff-wait"><b>Aguardando a apuração do 2º turno</b><p>Os votos desta etapa serão exibidos após a divulgação do TSE. Os resultados do primeiro turno permanecem disponíveis no botão “1º turno”.</p></div>${first?`<p class="source-date">Classificação do TSE · ${esc(first.dg)} ${esc(first.hg)} · Brasília</p>`:''}`;
+}
+function renderPlacarSegundo(){
+ const pres=S.cargo==='1',uf=pres?'br':S.uf;
+ if(!uf){const active=listaUfs('3').length,decided=MAPA.estados.filter(e=>situacaoGovernador(e.id)==='decided').length;$('#placar').innerHTML=`<article class="score-card"><span class="score-rank">GOVERNOS EM DISPUTA</span><div class="score-value">${active}<small> UFs</small></div><div class="score-votes">Destacadas em verde no mapa</div></article><article class="score-card"><span class="score-rank">DEFINIDOS NO PRIMEIRO TURNO</span><div class="score-value">${decided}<small> UFs</small></div><div class="score-votes">Sem nova votação para governador</div></article><article class="score-card progress-card"><span class="score-rank">PRÓXIMA VOTAÇÃO</span><div class="score-value">25<small> out</small></div><div class="score-votes">Domingo · segundo turno</div></article>`;return;}
+ const candidates=classificados(S.cargo,uf);
+ if(!candidates.length){$('#placar').innerHTML='<div class="score-empty"><b>Consulte a situação deste estado no painel.</b></div>';return;}
+ $('#placar').innerHTML=candidates.slice(0,2).map(c=>`<article class="score-card" style="--candidate-color:${corCandidato(c)}"><div class="score-top"><span class="score-rank">NO SEGUNDO TURNO</span><span class="score-party">${esc(c.part)} · ${esc(c.n)}</span></div><h2>${esc(c.nome)}</h2><div class="score-value">—</div><div class="score-votes">Aguardando votos do 2º turno</div></article>`).join('')+'<article class="score-card progress-card"><span class="score-rank">PRÓXIMA VOTAÇÃO</span><div class="score-value">25<small> out</small></div><div class="score-votes">Apuração ainda não iniciada</div></article>';
+}
 function renderPlacar() {
-  const el = $('#placar');
-  if (S.cargo === '1') {
-    const d = dadoUF('br'); const l = lider(d);
-    if (!d || d.erro || !d.cands) { el.innerHTML = `<div class="lado lula"><span class="nome">Lula</span><span class="grande num">–</span></div><div class="centro">Aguardando apuração</div><div class="lado dir flavio"><span class="nome">Flávio Bolsonaro</span><span class="grande num">–</span></div><div class="barra"></div>`; return; }
-    const lu = d.cands.find(ehLula), fl = d.cands.find(ehFlavio);
-    const pl = lu ? lu.pct : 0, pf = fl ? fl.pct : 0, po = d.totalVotos ? Math.max(0, 100 - pl - pf) : 0;
-    const nm = (c, padrao) => esc(c ? c.nome : padrao);
-    el.innerHTML = `
-      <div class="lado lula"><span class="nome">${nm(lu, 'Lula')}</span><span class="grande num">${d.totalVotos ? fmtPct(pl) : '–'}</span><span class="sub">${lu ? fmtInt(lu.votos) + ' votos' : ''}</span></div>
-      <div class="centro"><b class="num">${fmtPct(d.apurado, 2)}</b>das seções apuradas<br>${po ? 'Outros: ' + fmtPct(po) : ''}</div>
-      <div class="lado dir flavio"><span class="nome">${nm(fl, 'Flávio Bolsonaro')}</span><span class="grande num">${d.totalVotos ? fmtPct(pf) : '–'}</span><span class="sub">${fl ? fmtInt(fl.votos) + ' votos' : ''}</span></div>
-      <div class="barra" aria-hidden="true"><i class="seg-lula" style="width:${pl}%"></i><i class="seg-outros" style="width:${po}%"></i><i class="seg-flavio" style="width:${pf}%"></i></div>`;
-  } else {
-    const cont = { lula: 0, flavio: 0, outros: 0, sem: 0 };
-    for (const e of MAPA.estados) { const l = lider(dadoUF(e.id)); cont[l ? corDe(l.c, S.cargo) : 'sem']++; }
-    const t = 27, c = cargoAtual();
-    el.innerHTML = `
-      <div class="lado lula"><span class="nome">Candidatos do PT, PCdoB ou PV</span><span class="grande num">${cont.lula}</span><span class="sub">estados na frente</span></div>
-      <div class="centro"><b class="num">${cont.outros}</b>estados com outros partidos<br>${cont.sem ? cont.sem + ' sem votos ainda' : ''}</div>
-      <div class="lado dir flavio"><span class="nome">Candidatos do PL</span><span class="grande num">${cont.flavio}</span><span class="sub">estados na frente</span></div>
-      <div class="barra" aria-hidden="true"><i class="seg-lula" style="width:${cont.lula / t * 100}%"></i><i class="seg-outros" style="width:${cont.outros / t * 100}%"></i><i class="seg-flavio" style="width:${cont.flavio / t * 100}%"></i><i class="seg-sem" style="width:${cont.sem / t * 100}%"></i></div>`;
-  }
+ if(semApuracaoSegundo()){renderPlacarSegundo();return;}
+ const el=$('#placar'),pres=S.cargo==='1',uf=pres?'br':S.uf,cargo=cargoAtual();
+ const d=uf?dadoUF(uf):null;
+ if(!d||d.erro||!d.cands?.length){
+  const ds=listaUfs(S.cargo).map(u=>dadoUF(u)).filter(d=>d&&!d.erro);
+  el.innerHTML=`<div class="score-empty"><b>${esc(cargo?.rotulo||'Resultados')}</b><p>${ds.length?`${ds.length} abrangências com dados. Selecione um estado para comparar os candidatos.`:'Aguardando resultados deste cargo. Os dados aparecerão assim que houver uma consulta disponível.'}</p></div>`;return;
+ }
+ const leads=d.cands.slice(0,2);
+ const cards=leads.map((c,i)=>`<article class="score-card" style="--candidate-color:${corCandidato(c)}"><div class="score-top"><span class="score-rank">${i+1}º MAIS VOTADO</span><span class="score-party">${esc(c.part)} · ${esc(c.n)}</span></div><h2>${esc(c.nome)}</h2><div class="score-value">${fmtPct(c.pct,2)}</div><div class="score-votes">${fmtInt(c.votos)} votos nominais</div><div class="score-line"><i style="width:${Math.min(100,c.pct)}%"></i></div></article>`).join('');
+ el.innerHTML=cards+`<article class="score-card progress-card"><span class="score-rank">${pres?'PRESIDENTE · BRASIL':esc(cargo.rotulo.toUpperCase())+' · '+esc(uf.toUpperCase())}</span><div class="score-value">${fmtPct(d.apurado,2)}</div><div class="score-votes">das seções apuradas</div><div class="score-line"><i style="width:${d.apurado}%;background:var(--accent)"></i></div><div class="score-context"><span>${fmtInt(d.totalVotos)} votos nominais</span><span>${d.salvo?'Cópia salva':'Consulta TSE'}</span></div></article>`;
 }
 
-function candHTML(c, d, pasta, maxPct) {
-  const cor = corDe(c, S.cargo);
+function candHTML(c, d, pasta, maxPct, cargoCd = S.cargo) {
+  const cor = corDe(c, cargoCd);
   const selos = (c.eleito ? '<span class="selo">Eleito</span>' : '') + (!c.eleito && /2[ºo] turno/i.test(c.st) ? '<span class="selo seg2">2º turno</span>' : '') + (/sub judice/i.test(c.sit) ? '<span class="selo jud">sub judice</span>' : '');
-  return `<div class="cand c-${cor}">
-    ${avatarHTML(c, pasta)}
+  return `<div class="cand" style="border-left:3px solid ${corCandidato(c)};--cor-candidato:${corCandidato(c)}">
+    ${avatarHTML(c, pasta, 'foto', cargoCd)}
     <div>
       <div class="linha1"><span class="nome">${esc(c.nome)}${selos}</span><span class="pct num">${d.totalVotos ? fmtPct(c.pct) : '–'}</span></div>
       <div class="linha1"><span class="part">${esc(c.part)} ${esc(c.n)}</span><span class="votos">${fmtInt(c.votos)} votos</span></div>
-      <div class="trilho"><i style="width:${maxPct ? Math.min(100, c.pct / maxPct * 100) : 0}%;background:var(--${cor})"></i></div>
+      <div class="trilho"><i style="width:${maxPct ? Math.min(100, c.pct / maxPct * 100) : 0}%;background:${corCandidato(c)}"></i></div>
     </div></div>`;
 }
 
 function renderPainel() {
   const el = $('#painel'); const c = cargoAtual();
   const uf = S.uf, pres = S.cargo === '1';
+  if(semApuracaoSegundo()){
+   if(pres||uf){el.innerHTML=(uf?'<button class="btn voltar" data-acao="brasil">← Voltar ao Brasil</button>':'')+painelDisputa(S.cargo,uf||'br');}
+   else{const active=listaUfs('3');el.innerHTML=`<div class="section-heading"><div><span class="eyebrow">DISPUTAS CONFIRMADAS</span><h2>${active.length} UFs voltam às urnas</h2></div></div><p class="nota">Classificação informada pelo TSE no primeiro turno. Selecione uma disputa.</p><div class="runoff-list">${active.map(u=>`<button data-runoff-uf="${u}" class="runoff-state"><span class="runoff-uf">${u.toUpperCase()}</span><span><b>${esc(nomeUF(u))}</b><small>${classificados('3',u).map(c=>esc(c.nome)).join(' × ')}</small></span><span aria-hidden="true">↗</span></button>`).join('')}</div><p class="nota">Os demais estados estão em cinza no mapa. Esta lista acompanha a classificação do TSE.</p>`;}return;
+  }
   if (!uf) {
     if (pres) {
       const d = dadoUF('br');
@@ -499,7 +1096,7 @@ function renderPainel() {
       const d = dadoUF(e.id), l = lider(d);
       const cor = l ? corDe(l.c, S.cargo) : 'sem';
       const foto = l ? avatarHTML(l.c, e.id) : '<span class="avatar" style="width:32px;height:32px;border-radius:50%">–</span>';
-      return `<tr data-uf="${e.id}"><td class="uf">${e.id.toUpperCase()}</td><td>${foto}</td><td><span class="ponto ${cor}"></span>${l ? esc(l.c.nome) + ' <span class="part">' + esc(l.c.part) + '</span>' : '<span class="part">' + (d && d.erro ? 'aguardando TSE' : 'sem votos ainda') + '</span>'}</td><td class="dir num">${l ? fmtPct(l.c.pct) : ''}</td></tr>`;
+      return `<tr data-uf="${e.id}"><td class="uf">${e.id.toUpperCase()}</td><td>${foto}</td><td><span class="ponto" style="background:${l ? corCandidato(l.c) : '#777'}"></span>${l ? esc(l.c.nome) + ' <span class="part">' + esc(l.c.part) + '</span>' : '<span class="part">' + (d && d.erro ? 'aguardando TSE' : 'sem votos ainda') + '</span>'}</td><td class="dir num">${l ? fmtPct(l.c.pct) : ''}</td></tr>`;
     }).join('');
     el.innerHTML = `<h2>${c.rotulo}: líder em cada estado</h2><div class="meta">${c.majoritario ? 'Clique em um estado para ver todos os candidatos com foto.' : 'Mostra o candidato mais votado em cada estado. Clique para ver os eleitos e os mais votados.'}</div>
       <table class="lideres"><tbody>${linhas}</tbody></table>`;
@@ -510,7 +1107,7 @@ function renderPainel() {
   if (!d) { el.innerHTML = cabBase + `<h2>${esc(nomeUF(uf))}</h2><p class="vazio">Carregando…</p>`; return; }
   const l = lider(d); const cor = l ? corDe(l.c, S.cargo) : 'sem';
   const b = bbox[uf]; const m = Math.max(b.width, b.height) * 0.06;
-  const mini = `<svg viewBox="${b.x - m} ${b.y - m} ${b.width + 2 * m} ${b.height + 2 * m}" aria-hidden="true"><path d="${MAPA.estados.find((e) => e.id === uf).d}" style="fill:var(--${cor === 'sem' ? 'sem' : cor});fill-opacity:${l ? 0.9 : 1}"></path></svg>`;
+  const mini = `<svg viewBox="${b.x - m} ${b.y - m} ${b.width + 2 * m} ${b.height + 2 * m}" aria-hidden="true"><path d="${MAPA.estados.find((e) => e.id === uf).d}" style="fill:${l ? corCandidato(l.c) : '#777'};fill-opacity:${l ? 0.9 : 1}"></path></svg>`;
   let head = `${cabBase}<div class="cab-estado">${mini}<div><h2>${esc(nomeUF(uf))}</h2><div class="meta">${c.rotulo}${d.vagas && !c.majoritario || (S.cargo === '5' && d.vagas) ? ', ' + d.vagas + ' vaga' + (d.vagas > 1 ? 's' : '') : ''}<br>${d.erro ? '' : fmtPct(d.apurado, 2) + ' das seções apuradas'}</div></div></div>`;
   if (d.erro) {
     const msg = d.erro === 'sem2' || (S.turno === 2 && d.erro === 404) ? 'Este estado não tem 2º turno para este cargo.' : 'O TSE ainda não publicou este arquivo. Os resultados aparecem aqui assim que a apuração começar.';
@@ -521,7 +1118,7 @@ function renderPainel() {
     el.innerHTML = head + `<div class="lista">${d.cands.map((x) => candHTML(x, d, pasta, max)).join('')}</div>`;
   } else {
     const lim = S.maisCandidatos; const vis = d.cands.slice(0, lim);
-    const bancada = d.partidos.length ? `<div class="bancada" title="Cadeiras já definidas">${d.partidos.map((p) => `<span class="c-${corDe({ partN: p.n }, S.cargo)}"><b>${esc(p.sg)}</b> ${p.cadeiras}</span>`).join('')}</div>` : '';
+    const bancada = d.partidos.length ? `<div class="bancada" title="Cadeiras já definidas">${d.partidos.map((p) => `<span style="border-left-color:${corCandidato({partN:p.n})}"><b>${esc(p.sg)}</b> ${p.cadeiras}</span>`).join('')}</div>` : '';
     el.innerHTML = head + bancada + `<div class="grade">${vis.map((x) => candHTML(x, d, uf, d.cands[0]?.pct || 0)).join('')}</div>` +
       (d.cands.length > lim ? `<button class="btn mais" data-acao="mais">Mostrar mais (${Math.min(24, d.cands.length - lim)})</button>` : '') +
       (d.totalCands > d.cands.length ? `<p class="nota">Exibindo os ${d.cands.length} primeiros de ${fmtInt(d.totalCands)} candidatos.</p>` : '');
@@ -532,13 +1129,20 @@ function renderAvisos() {
   $('#avisoDemo').hidden = S.fonte !== 'demo';
   const st = S.statusRede, esp = $('#avisoEspera'), err = $('#avisoErro');
   esp.hidden = true; err.hidden = true;
+  const ds=S.cargo==='cidades'?[S.cid.estado]:listaUfs(S.cargo).map(u=>dadoUF(u));
+  const saved=ds.filter(d=>d&&!d.erro&&d.salvo);
+  const pack=$('#avisoPacote');pack.hidden=S.fonte!=='tse'||!saved.length;
+  if(S.turno===2&&S.fonte==='tse'&&semApuracaoSegundo(S.cargo==='cidades'?S.cid.cargo:S.cargo,S.cargo==='cidades'?S.cid.uf:S.uf)){
+   pack.hidden=true;esp.hidden=false;esp.textContent='SEGUNDO TURNO · 25 DE OUTUBRO — Ainda sem votos desta etapa. Candidatos e estados em disputa seguem a classificação recebida do TSE; o primeiro turno está disponível para consulta.';return;
+  }
+  if(!pack.hidden){const dates=[...new Set(saved.map(d=>`${d.dg} ${d.hg}`))].sort();pack.textContent=`Exibindo resultados salvos do TSE (${dates[0]}${dates.length>1?' até '+dates.at(-1):''}, Brasília). A consulta online continua; estes valores não são apresentados como atualização ao vivo.`;}
   if (!st || S.fonte === 'demo') return;
-  if (st.ok === 0 && st.redes > 0) {
+  if (st.ok === 0 && st.redes > 0 && !saved.length) {
     err.hidden = false;
-    err.innerHTML = 'Não consegui acessar o TSE a partir deste navegador (provavelmente bloqueio de CORS ou sem internet). Rode <code>node server.js</code> nesta pasta e abra <code>http://localhost:8080</code>: o servidor faz a ponte com o TSE.';
-  } else if (st.ok === 0) {
+    err.textContent = 'Não foi possível consultar os resultados agora. Verifique sua conexão e tente atualizar novamente.' + (location.protocol==='file:'?' Para habilitar as consultas, inicie o servidor com INICIAR.bat ou siga o arquivo LEIA-ME.':'');
+  } else if (st.ok === 0 && !saved.length) {
     esp.hidden = false;
-    esp.textContent = 'O TSE ainda não publicou os resultados deste cargo. A divulgação começa às 17h (horário de Brasília) do dia 4 de outubro; esta página atualiza sozinha.';
+    esp.textContent = 'Nenhum resultado recebido para este cargo e turno. A página voltará a consultar a fonte automaticamente.';
   } else if (S.cargo === '1') {
     const d = dadoUF('br');
     if (d && !d.erro && !d.totalVotos) { esp.hidden = false; esp.textContent = 'Os arquivos já existem, mas ainda não há votos apurados. Os números aparecem assim que as primeiras urnas forem totalizadas.'; }
@@ -547,10 +1151,22 @@ function renderAvisos() {
 
 function renderTudo() {
   if (!mapaPronto) montarMapa();
-  renderTabs(); renderLegenda(); renderPlacar(); pintarMapa(); renderUfs(); renderPainel(); renderAvisos();
+  const cid = S.cargo === 'cidades';
+  $('main').hidden = cid; $('#placar').hidden = cid; $('#graficos').hidden = cid; $('#cidadesWrap').hidden = !cid;
+  $('#estadoControle').hidden=cid||S.cargo==='1';
+  [...$('#estadoResultado').options].forEach(o=>{o.disabled=!!o.value&&S.turno===2&&S.fonte==='tse'&&S.cargo==='3'&&situacaoGovernador(o.value)!=='runoff';});
+  $('#estadoResultado').value=S.uf||'';
+  if(UI.view==='candidatos')renderBusca();
+  if (cid) {
+    renderTabs(); renderCidades(); renderAvisos();
+    $('#t1').setAttribute('aria-pressed', S.turno === 1); $('#t2').setAttribute('aria-pressed', S.turno === 2);
+    aplicarNavegacao();return;
+  }
+  renderTabs(); renderLegenda(); renderPlacar(); pintarMapa(); renderUfs(); renderPainel(); renderGraficos(); renderAvisos();
   $('#t1').setAttribute('aria-pressed', S.turno === 1); $('#t2').setAttribute('aria-pressed', S.turno === 2);
   const hg = dadoUF('br')?.hg || '';
   if (hg && S.fonte !== 'demo') $('#status').title = 'Arquivo do TSE gerado às ' + hg;
+  aplicarNavegacao();
 }
 
 /* ------------------------------ Interação ----------------------------- */
@@ -559,30 +1175,42 @@ function escolherUF(uf) {
   if (S.uf === uf) { S.uf = null; guardarHash(); renderTudo(); return; }   // clicou de novo: volta ao Brasil inteiro
   S.uf = uf; guardarHash(); renderTudo(); $('#painel').scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 }
-function guardarHash() { const p = new URLSearchParams({ cargo: S.cargo, turno: S.turno, fonte: S.fonte }); if (S.uf) p.set('uf', S.uf); history.replaceState(null, '', '#' + p.toString()); }
+function guardarHash() { const p = new URLSearchParams({ cargo: S.cargo, turno: S.turno, fonte: S.fonte, pagina:UI.view }); if (S.uf) p.set('uf', S.uf); if (S.cargo === 'cidades') { p.set('cuf', S.cid.uf); p.set('ccargo', S.cid.cargo); } if(UI.view==='candidatos'){p.set('q',$('#buscaCandidato').value);p.set('bcargo',$('#buscaCargo').value);p.set('buf',$('#buscaUF').value);} history.replaceState(null, '', '#' + p.toString()); }
 function lerHash() {
   const p = new URLSearchParams(location.hash.slice(1));
-  if (CARGOS.some((c) => c.cd === p.get('cargo'))) S.cargo = p.get('cargo');
-  if (p.get('turno') === '2') S.turno = 2;
+  if(['resultados','cidades','candidatos','noticias','metodo'].includes(p.get('pagina')))UI.view=p.get('pagina');else UI.view=p.get('cargo')==='cidades'?'cidades':'resultados';
+  if (CARGOS.some((c) => c.cd === p.get('cargo')) || p.get('cargo') === 'cidades') S.cargo = p.get('cargo');
+  if (MAPA.estados.some((e) => e.id === p.get('cuf'))) S.cid.uf = p.get('cuf');
+  if (CID_CARGOS.some((x) => x[0] === p.get('ccargo'))) S.cid.cargo = p.get('ccargo');
+  S.turno=p.get('turno')==='1'?1:2;
+  if(p.has('q'))$('#buscaCandidato').value=p.get('q');
+  if(p.has('bcargo'))$('#buscaCargo').value=p.get('bcargo');
+  if(p.has('buf'))$('#buscaUF').value=p.get('buf');
   if (['tse', 'sim', 'demo'].includes(p.get('fonte'))) S.fonte = p.get('fonte');
   if (MAPA.estados.some((e) => e.id === p.get('uf'))) S.uf = p.get('uf');
-  if (!cargoAtual().doisTurnos) S.turno = 1;
+  if (cargoAtual() && !cargoAtual().doisTurnos) S.turno = 1;
+  if (S.turno === 2 && ['5','6','7'].includes(S.cid.cargo)) S.cid.cargo = '1';
 }
-function mudar(fn) { fn(); guardarHash(); renderTudo(); atualizar(); }
+function mudar(fn) { UI.requestController.abort();UI.requestController=new AbortController();S.run++; S.cid.gen++; fn(); if(S.turno===2&&S.fonte==='tse'){if(S.cargo==='3'&&S.uf&&situacaoGovernador(S.uf)!=='runoff')S.uf=null;if(S.cid.cargo==='3'&&situacaoGovernador(S.cid.uf)!=='runoff')S.cid.uf=listaUfs('3')[0]||S.cid.uf;} guardarHash(); renderTudo(); atualizar(); }
 
 document.addEventListener('click', (ev) => {
   const t = ev.target.closest('button, tr[data-uf]'); if (!t) return;
-  if (t.dataset.cargo) mudar(() => { S.cargo = t.dataset.cargo; S.maisCandidatos = 24; });
+  if(t.hasAttribute('data-first-round'))mudar(()=>{S.turno=1;});
+  else if(t.dataset.runoffUf)escolherUF(t.dataset.runoffUf);
+  else if (t.dataset.cargo) mudar(() => { S.cargo = t.dataset.cargo; UI.view=S.cargo==='cidades'?'cidades':'resultados'; if(S.turno===1&&!['1','cidades'].includes(S.cargo)&&!S.uf)S.uf=S.cid.uf; S.maisCandidatos = 24; });
   else if (t.closest('#ufs') && t.dataset.uf) escolherUF(t.dataset.uf);
   else if (t.matches('tr[data-uf]')) escolherUF(t.dataset.uf);
   else if (t.dataset.acao === 'brasil') { S.uf = null; guardarHash(); renderTudo(); }
   else if (t.dataset.acao === 'mais') { S.maisCandidatos += 24; renderPainel(); }
   else if (t.id === 't1') mudar(() => { S.turno = 1; });
-  else if (t.id === 't2') mudar(() => { S.turno = 2; if (!cargoAtual().doisTurnos) S.cargo = '1'; });
+  else if (t.id === 't2') mudar(() => { S.turno = 2; if (S.cargo !== 'cidades' && !cargoAtual().doisTurnos) S.cargo = '1'; if (['5','6','7'].includes(S.cid.cargo)) S.cid.cargo = '1'; });
+  else if (t.dataset.cidcargo) mudar(() => { S.cid.cargo = t.dataset.cidcargo; });
+  else if (t.id === 'cidCsv') baixarCsv();
   else if (t.id === 'atualizar') atualizar();
 });
 $('#fonte').addEventListener('change', async (ev) => {
-  S.fonte = ev.target.value; S.dados = {}; S.codigos = null; S.statusRede = null; S.demoTick = 0; guardarHash();
+  UI.requestController.abort();UI.requestController=new AbortController();S.run++; S.cid.gen++; S.cid.chave = ''; S.cm = {};
+  S.fonte = ev.target.value; S.dados = {}; S.codigos = null; S.statusRede = null; S.demoTick = 0; carregarPacote(); guardarHash();
   await verificarProxy(); renderTudo(); await atualizar();
 });
 document.addEventListener('error', (ev) => {
@@ -592,6 +1220,14 @@ document.addEventListener('error', (ev) => {
     s.style.cssText = `width:${im.width || 44}px;height:${im.height || 44}px;border-radius:inherit`; im.replaceWith(s);
   }
 }, true);
+$('#cidUf').innerHTML = MAPA.estados.slice().sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR')).map((e) => `<option value="${e.id}">${esc(e.nome)}</option>`).join('');
+$('#cidUf').addEventListener('change', (ev) => mudar(() => { S.cid.uf = ev.target.value; }));
+$('#cidOrdem').addEventListener('change', (ev) => { S.cid.ordem = ev.target.value; renderCidades(); });
+$('#cidBusca').addEventListener('input', (ev) => { S.cid.busca = ev.target.value; renderCidades(); });
+$('#cidCorpo').addEventListener('click', (ev) => {
+  const tr = ev.target.closest('tr.linha'); if (!tr) return;
+  S.cid.aberta = S.cid.aberta === tr.dataset.cid ? null : tr.dataset.cid; renderCidades();
+});
 document.addEventListener('visibilitychange', () => { if (!document.hidden) atualizar(); });
 
 /* ------------------------ Modo demonstração (fictício) ---------------- */
@@ -616,18 +1252,19 @@ const Demo = (() => {
     const votos = Math.floor(total * prog * share);
     return { n: String(n), sqcand: 'demo' + seq, nm: nome, nmu: nome, dvt: 'Válido', seq: String(seq), e, st, vap: String(votos), pvap: '0', pvapn: '0' };
   }
-  function arquivo(cargo, uf, turno) {
+  function arquivo(cargo, uf, turno, mun) {
     const hg = new Date().toLocaleTimeString('pt-BR');
     const seats = cadeirasFed[uf] || 8, valid = (uf === 'br' ? 27 : 1) * 1;
     const totalUf = (u) => (cadeirasFed[u] || 8) * 370000;
-    const total = uf === 'br' ? Object.keys(cadeirasFed).reduce((s, u) => s + totalUf(u), 0) : totalUf(uf);
-    let prog = progresso(uf, turno);
+    const total = uf === 'br' ? Object.keys(cadeirasFed).reduce((s, u) => s + totalUf(u), 0) : (mun ? 2500 + (hash(uf + mun) % 90000) : totalUf(uf));
+    let prog = progresso(uf + (mun || ''), turno);
     if (uf === 'br') { const ps = Object.keys(cadeirasFed).map((u) => progresso(u, turno)); prog = ps.reduce((a, b) => a + b, 0) / ps.length; }
-    const R = rnd(hash(cargo + uf + 'x') + turno);
+    const R = rnd(hash(cargo + uf + (mun || '') + 'x') + turno);
+    const RN = rnd(hash(cargo + uf + 'n') + turno);
     const ruido = (S.demoTick % 7) * 0.004;
     let lista = [];
     if (cargo === '1') {
-      let shares; const inc = uf === 'br' ? 0.02 : (inclinacao[uf] || 0);
+      let shares; const inc = (uf === 'br' ? 0.02 : (inclinacao[uf] || 0)) + (mun ? (R() - .5) * .35 : 0);
       const base = turno === 2 ? [0.5 + inc * 0.5 + (R() - .5) * ruido, 0.5 - inc * 0.5, 0, 0, 0, 0, 0, 0] : (() => { const outros = [.055, .04, .004, .003, .003, .002]; const so = outros.reduce((a, b) => a + b, 0); const resto = 1 - so; const l = resto * (0.5 + inc / 2 + (R() - .5) * (1 - prog) * .1); return [l, resto - l, ...outros]; })();
       shares = base;
       const quem = turno === 2 ? presidenciaveis.slice(0, 2) : presidenciaveis;
@@ -643,7 +1280,7 @@ const Demo = (() => {
       const qtd = turno === 2 ? 2 : 3 + (hash(uf + cargo) % 3) + (cargo === '5' ? 2 : 0);
       const pesos = Array.from({ length: qtd }, (_, i) => Math.pow(R() + .3, 2) * (qtd - i)); const so = pesos.reduce((a, b) => a + b, 0);
       const usados = new Set();
-      lista = pesos.map((p, i) => { let k; do { k = Math.floor(R() * partidos.length); } while (usados.has(k)); usados.add(k); const [sg, n] = partidos[k]; return { sg, n, c: cand(`${nomes[Math.floor(R() * nomes.length)]} ${sobren[Math.floor(R() * sobren.length)]}`, n * (cargo === '5' ? 100 : 1000) + 7 + i, prog, p / so * 0.96, total * (cargo === '5' ? 1.6 : 0.82), 'n', 'Não eleito', i + 1) }; });
+      lista = pesos.map((p, i) => { let k; do { k = Math.floor(RN() * partidos.length); } while (usados.has(k)); usados.add(k); const [sg, n] = partidos[k]; return { sg, n, c: cand(`${nomes[Math.floor(RN() * nomes.length)]} ${sobren[Math.floor(RN() * sobren.length)]}`, n * (cargo === '5' ? 100 : 1000) + 7 + i, prog, p / so * 0.96, total * (cargo === '5' ? 1.6 : 0.82), 'n', 'Não eleito', i + 1) }; });
     } else {
       const nv = cargo === '6' ? seats : (seats <= 12 ? seats * 3 : 36 + (seats - 12));
       const qtd = Math.min(160, Math.round(nv * 2.4)); const z = Array.from({ length: qtd }, (_, i) => 1 / Math.pow(i + 1, .85)); const sz = z.reduce((a, b) => a + b, 0);
@@ -666,9 +1303,162 @@ const Demo = (() => {
     const porPar = {}; lista.forEach((x) => { (porPar[x.sg] ||= { n: String(x.n), sg: x.sg, nm: x.sg, cand: [] }).cand.push(x.c); });
     return arquivoEstrutura(cargo, nvag, Object.values(porPar).map((p) => ({ n: p.n, nm: p.nm, tp: 'i', par: [p] })), prog, hg);
   }
-  return { arquivo };
+  const nMun = { ac: 22, al: 102, ap: 16, am: 62, ba: 417, ce: 184, df: 1, es: 78, go: 246, ma: 217, mt: 142, ms: 79, mg: 853, pa: 144, pb: 223, pr: 399, pe: 185, pi: 224, rj: 92, rn: 167, rs: 497, ro: 52, rr: 15, sc: 295, se: 75, sp: 645, to: 139 };
+  const pre = ['São', 'Santa', 'Nova', 'Vila', 'Porto', 'Campo', 'Alto', 'Boa', 'Bela', 'Monte'];
+  const suf = ['Esperança', 'Aurora', 'Horizonte', 'Vitória', 'Ouro Verde', 'Palmeiras', 'Cachoeira', 'Planalto', 'Riacho', 'Lagoa', 'Serra Azul', 'Estrela'];
+  function municipios(uf) {
+    const r = rnd(hash('mun' + uf));
+    return Array.from({ length: nMun[uf] || 50 }, (_, i) => ({ cd: String(1000 + i * 7).padStart(5, '0'), nome: `${pre[Math.floor(r() * pre.length)]} ${suf[Math.floor(r() * suf.length)]} ${String(i + 1).padStart(3, '0')}` }))
+      .sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
+  }
+  return { arquivo, municipios };
 })();
 
+/* Cores de identidade visual por partido; exceções pessoais solicitadas. */
+const CORES_PARTIDOS = {'10':'#1788b8','11':'#1a75bb','12':'#ed4138','13':'#b93858','15':'#20a66a','16':'#dc5353','18':'#35b777','19':'#25a9ce','20':'#35a5ac','21':'#a65375','22':'#4676b5','23':'#a856ad','25':'#30a281','27':'#58b478','28':'#a04ca8','29':'#99384b','30':'#f18b27','33':'#e07438','35':'#ed6843','40':'#f3ad30','43':'#37a16c','44':'#23a9ca','45':'#3da6c4','50':'#e6b733','55':'#56aa71','65':'#a85161','70':'#39a5b2','77':'#a878c3','80':'#995263'};
+function corCandidato(c) { if(ehLula(c))return '#e5353f'; if(ehFlavio(c))return '#2f7bff'; return CORES_PARTIDOS[String(c.partN)] || '#a0a8b2'; }
+const Busca = {limit:24,indexKey:'',index:[],selected:null,items:[],busy:false,gen:0,geoGen:0,geo:null,context:'',message:''};
+function candidatosIndex() {
+ const list=[];
+ for(const cargo of CARGOS) {
+  if(S.turno===2&&!cargo.doisTurnos)continue;
+  const ufs=cargo.cd==='1'?['br']:MAPA.estados.map(e=>e.id);
+  for(const uf of ufs) {let d=S.dados[chave(cargo.cd,S.turno,uf)],referenceTurn=S.turno;
+   const preview=S.turno===2&&S.fonte==='tse'&&(!d||d.erro||!d.totalVotos);
+   if(preview){d=S.dados[chave(cargo.cd,1,uf)];referenceTurn=1;}
+   if(!d||d.erro)continue;
+   d.cands.forEach((c,i)=>{if(preview&&!c.segundoTurno)return;list.push({c,uf,cargo:cargo.cd,d,referenceTurn,preview,rank:i+1,key:`${cargo.cd}|${uf}|${c.n}`});});
+  }
+ }
+ return list;
+}
+function renderBusca() {
+ $('#buscaScope').textContent=S.turno===2?'2 cargos · segundo turno':'5 cargos · 27 UFs';
+ const context=S.fonte+'|'+S.turno;
+ if(Busca.context!==context) {Busca.context=context;Busca.gen++;Busca.geoGen++;Busca.busy=false;Busca.selected=null;Busca.geo=null;Busca.message='';}
+ [...$('#buscaCargo').options].forEach(o=>{o.disabled=S.turno===2&&['5','6','7'].includes(o.value);o.hidden=o.disabled;});
+ if(S.turno===2&&['5','6','7'].includes($('#buscaCargo').value))$('#buscaCargo').value='';
+ const q=semAcento($('#buscaCandidato').value.trim()), cargo=$('#buscaCargo').value, uf=$('#buscaUF').value;
+ const signature=S.fonte+'|'+S.turno+'|'+Object.values(S.dados).map(d=>`${d.hg||''}:${d.totalVotos||0}:${d.totalCands||0}`).join(',');
+ if(signature!==Busca.indexKey){Busca.indexKey=signature;Busca.index=candidatosIndex();}
+ Busca.items=Busca.index;
+ const encontrados=Busca.items.filter(x=>(!cargo||x.cargo===cargo)&&(!uf||x.uf===uf||x.uf==='br')&&(!q||semAcento(`${x.c.nome} ${x.c.nomeCompleto} ${x.c.n} ${x.c.part}`).includes(q)));
+ $('#buscaStatus').textContent=Busca.busy?'Carregando os cargos e estados…':Busca.message||`${fmtInt(Busca.items.length)} candidaturas disponíveis nesta sessão. Use “Atualizar todos os cargos” para consultar o TSE novamente.`;
+ $('#buscaLista').innerHTML=encontrados.slice(0,Busca.limit).map(x=>`<button class="resultado-cand" data-candidato="${esc(x.key)}" style="--candidate-color:${corCandidato(x.c)}"><b>${esc(x.c.nome)}</b><span>${esc(x.c.part)} · ${esc(x.c.n)} · ${CARGOS.find(c=>c.cd===x.cargo).rotulo} · ${x.uf.toUpperCase()}</span><strong>${fmtInt(x.c.votos)} votos ${x.preview?'no 1º turno':''} · ${fmtPct(x.c.pct)}</strong>${x.preview?'<span class="preview-label">Classificado · aguardando apuração do 2º turno</span>':''}</button>`).join('') || '<p>Nenhum candidato encontrado nos dados carregados. Confira o cargo, a UF e a fonte.</p>';
+ $('#buscaContagem').textContent=`${fmtInt(encontrados.length)} candidaturas encontradas · exibindo ${Math.min(encontrados.length,Busca.limit)}`;
+ $('#buscaMais').hidden=encontrados.length<=Busca.limit;
+ renderPerfil();
+}
+async function carregarBusca() {
+ if(Busca.context!==S.fonte+'|'+S.turno)renderBusca();
+ if(Busca.busy)return;
+ const gen=++Busca.gen, fonte=S.fonte, turno=S.turno; Busca.busy=true;renderBusca();
+ if(!S.codigos)await descobrirCodigos();
+ let ok=0,erro=0;
+ const jobs=CARGOS.filter(c=>turno===1||c.doisTurnos).flatMap(c=>listaUfs(c.cd).map(uf=>({cargo:c.cd,uf})));
+ await pool(jobs,4,async x=>{if(gen!==Busca.gen||S.fonte!==fonte)return;const d=await buscar(x.cargo,turno,x.uf);if(gen!==Busca.gen||S.fonte!==fonte)return;const k=chave(x.cargo,turno,x.uf);S.dados[k]=conservarMaisRecente(S.dados[k],d);d.erro?erro++:ok++;});
+ if(gen!==Busca.gen)return;
+ Busca.busy=false;Busca.message=`${ok} recortes carregados; ${erro} indisponíveis. Consulta concluída às ${horaBR(Date.now())} (Brasília).`;renderTudo();
+}
+function renderPerfil() {
+ const x=Busca.items.find(x=>x.key===Busca.selected), el=$('#perfilCandidato');if(!x){el.innerHTML='';return;}
+ const {c,d,cargo,uf}=x;
+ let regionais='';
+ if(cargo==='1') {
+  const linhas=Object.entries(REGIOES).map(([nome,ufs])=>{let votos=0,total=0,loaded=0;ufs.forEach(u=>{const dd=S.dados[chave('1',x.referenceTurn,u)];if(dd&&!dd.erro){loaded++;total+=dd.totalVotos;votos+=dd.cands.find(cc=>String(cc.n)===String(c.n))?.votos||0;}});return {nome,votos,pct:total?votos/total*100:0,loaded,expected:ufs.length};}).sort((a,b)=>b.votos-a.votos);
+  const best=linhas[0];
+  regionais=`<h3>Votação por região${x.preview?' · primeiro turno':''}</h3><p>${best.votos?`Maior volume nos dados carregados: <b>${best.nome}</b>, ${fmtInt(best.votos)} votos.`:'Carregue todos os cargos para consultar as regiões.'} Votos no exterior não entram nas cinco regiões.</p>`+barrasH(linhas.map(l=>({rotulo:`${l.nome} (${l.loaded}/${l.expected} UFs)`,pct:l.votos,cor:corCandidato(c),txt:`${fmtInt(l.votos)} · ${fmtPct(l.pct)}`})));
+ } else regionais=`<p>Candidatura restrita a ${esc(nomeUF(uf))} (${Object.entries(REGIOES).find(([,ufs])=>ufs.includes(uf))?.[0]}). Compare as cidades abaixo.</p>`;
+ const selUf=$('#perfilUF')?.value || (uf==='br'?'sp':uf);
+ el.innerHTML=`<div class="cartao"><button class="btn close-profile" data-close-profile aria-label="Fechar perfil">Fechar ×</button><h2 style="color:${corCandidato(c)}">${esc(c.nome)}</h2><p>${esc(c.nomeCompleto)} · ${esc(c.part)} ${esc(c.n)} · ${CARGOS.find(cc=>cc.cd===cargo).rotulo} · ${uf.toUpperCase()}</p><div class="perfil-metricas"><div><b>${fmtInt(c.votos)}</b><span>votos nominais · ${x.referenceTurn}º turno</span></div><div><b>${fmtPct(c.pct)}</b><span>percentual informado</span></div><div><b>${x.rank}º</b><span>na ordenação por votos</span></div><div><b>${fmtPct(d.apurado,2)}</b><span>seções apuradas</span></div></div>${x.preview?'<p class="preview-banner">Referência do 1º turno. Ainda não há votos do segundo turno; as comparações abaixo consultam a votação de 4 de outubro.</p>':''}<p class="source-date">${d.salvo?'Dados salvos':'Arquivo do TSE'} · ${esc(d.dg||'')} ${esc(d.hg||'')} · Brasília</p><p>Situação: ${esc(c.st||'Não informada pelo TSE')}${c.eleito?' · Eleito':''}. A posição por votos não determina sozinha a eleição de deputados.</p>${regionais}<h3>Onde recebeu mais votos</h3><label>Estado <select id="perfilUF" ${uf!=='br'?'disabled':''}>${MAPA.estados.map(e=>`<option value="${e.id}" ${e.id===selUf?'selected':''}>${esc(e.nome)}</option>`).join('')}</select></label> <button class="btn" id="carregarPerfil">Comparar municípios</button><div id="perfilMunicipios" aria-live="polite"></div></div>`;
+ if(Busca.geo?.key===x.key) renderGeo();
+}
+function renderGeo() {
+ const geo=Busca.geo,el=$('#perfilMunicipios');if(!el||!geo)return;
+ el.innerHTML=`<p>${esc(geo.status)}</p>`;
+ if(!geo.rows?.length)return;
+ const total=geo.rows.reduce((s,r)=>s+r.votos,0);
+ const maiorPct=[...geo.rows].sort((a,b)=>b.pct-a.pct)[0];
+ el.innerHTML+=`<p>Maior volume: <b>${esc(geo.rows[0].nome)}</b>. Maior percentual local: <b>${esc(maiorPct.nome)}</b> (${fmtPct(maiorPct.pct)}). ${fmtInt(total)} votos do candidato nas cidades carregadas.</p><div class="tabela-wrap"><table class="cidades"><thead><tr><th>Cidade</th><th>Votos</th><th>% local</th><th>Apurado</th></tr></thead><tbody>${geo.rows.slice(0,30).map(r=>`<tr><td>${esc(r.nome)}</td><td>${fmtInt(r.votos)}</td><td>${fmtPct(r.pct)}</td><td>${fmtPct(r.apurado)}</td></tr>`).join('')}</tbody></table></div><p class="nota">Top 30 por votos absolutos. Percentual relativo aos votos nominais carregados do cargo em cada cidade.</p>`;
+}
+async function carregarPerfil() {
+ const x=Busca.items.find(x=>x.key===Busca.selected);if(!x)return;
+ const uf=$('#perfilUF').value,gen=++Busca.geoGen,fonte=S.fonte,turno=x.referenceTurn||S.turno;
+ Busca.geo={key:x.key,rows:[],status:'Carregando cidades de '+nomeUF(uf)+'…'};renderGeo();
+ const lista=await listaMunicipios(uf);let ok=0,fail=0;const rows=[];
+ await pool(lista,4,async m=>{if(gen!==Busca.geoGen||fonte!==S.fonte)return;const d=await buscarMun(x.cargo,turno,uf,m.cd);if(gen!==Busca.geoGen||fonte!==S.fonte)return;if(d.erro){fail++;return;}ok++;const c=d.cands.find(c=>String(c.n)===String(x.c.n));rows.push({nome:m.nome,votos:c?.votos||0,pct:c?.pct||0,apurado:d.apurado});});
+ if(gen!==Busca.geoGen||fonte!==S.fonte)return;
+ Busca.geo={key:x.key,rows:rows.sort((a,b)=>b.votos-a.votos),status:`${turno}º turno · ${nomeUF(uf)} · ${ok}/${lista.length} cidades carregadas · ${fail} indisponíveis · ${horaBR(Date.now())} (Brasília).${!lista.length?' Lista municipal indisponível.':''}`};renderGeo();
+}
+function renderNoticias(data,failed=false){
+ const status=$('#noticiasStatus');
+ if(!data||!Array.isArray(data.items)){status.textContent='Nenhuma consulta de notícias disponível.';$('#noticiasLista').innerHTML='<div class="empty-state"><h3>O radar está temporariamente indisponível</h3><p>As fontes podem estar sem resposta. Tente novamente em alguns minutos; o painel de resultados continua disponível.</p><button class="btn" data-news-retry>Tentar novamente</button></div>';return;}
+ const date=new Date(data.updatedAt);status.textContent=`${failed||data.stale?'Cópia salva · ':''}Última consulta: ${date.toLocaleString('pt-BR',{timeZone:'America/Sao_Paulo'})} (Brasília). Atualização automática a cada hora.${data.unavailableSources?.length?' Algumas fontes estão temporariamente indisponíveis.':''}`;
+ const items=data.items.filter(n=>{try{const u=new URL(n.url);return u.protocol==='https:'&&['g1.globo.com','agenciabrasil.ebc.com.br'].includes(u.hostname);}catch{return false;}});
+ $('#noticiasLista').innerHTML=items.map(n=>`<article><small>${esc(n.source)}<br>${esc(new Date(n.publishedAt).toLocaleString('pt-BR',{timeZone:'America/Sao_Paulo',day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}))}</small><h3><a href="${esc(n.url)}" target="_blank" rel="noopener noreferrer">${esc(n.title)}</a></h3><a class="article-link" href="${esc(n.url)}" target="_blank" rel="noopener noreferrer">Ler na fonte original ↗</a></article>`).join('')||'<div class="empty-state"><h3>Nenhuma manchete eleitoral nesta consulta</h3><p>O painel será atualizado novamente em uma hora.</p></div>';
+}
+async function carregarNoticias(){
+ if(UI.newsBusy)return;UI.newsBusy=true;$('#recarregarNoticias').disabled=true;
+ let cached=window.APURACAO_SNAPSHOT?.news;try{const local=JSON.parse(localStorage.getItem('apuracao-news')||'null');if(local&&(!cached||Date.parse(local.updatedAt)>Date.parse(cached.updatedAt)))cached=local;}catch{}
+ if(cached)renderNoticias(cached,true);else $('#noticiasStatus').textContent='Consultando as fontes de notícias…';
+ try{if(location.protocol==='file:')throw Error();const r=await fetch('/api/news',{signal:AbortSignal.timeout(20000)});if(!r.ok)throw Error();const data=await r.json();if(!Array.isArray(data.items))throw Error();renderNoticias(data);try{localStorage.setItem('apuracao-news',JSON.stringify(data));}catch{}}
+ catch{renderNoticias(cached,true);}finally{UI.newsBusy=false;$('#recarregarNoticias').disabled=false;}
+}
+$('#noticiasLista').addEventListener('click',e=>{if(e.target.closest('[data-news-retry]'))carregarNoticias();});
+
+$('#buscaCargo').innerHTML='<option value="">Todos os cargos</option>'+CARGOS.map(c=>`<option value="${c.cd}">${c.rotulo}</option>`).join('');
+$('#buscaUF').innerHTML='<option value="">Todas as UFs</option>'+MAPA.estados.map(e=>`<option value="${e.id}">${esc(e.nome)}</option>`).join('');
+let buscaDebounce;$('#buscaCandidato').addEventListener('input',()=>{Busca.limit=24;clearTimeout(buscaDebounce);buscaDebounce=setTimeout(renderBusca,140);});
+$('#buscaCargo').addEventListener('change',()=>{Busca.limit=24;renderBusca();});$('#buscaUF').addEventListener('change',()=>{Busca.limit=24;renderBusca();});
+$('#carregarBusca').addEventListener('click',carregarBusca);
+$('#buscaLista').addEventListener('click',e=>{const b=e.target.closest('[data-candidato]');if(b){Busca.selected=b.dataset.candidato;Busca.geoGen++;Busca.geo=null;renderPerfil();$('#perfilCandidato').scrollIntoView({behavior:'smooth',block:'start'});}});
+$('#perfilCandidato').addEventListener('click',e=>{if(e.target.closest('#carregarPerfil'))carregarPerfil();});
+$('#perfilCandidato').addEventListener('change',e=>{if(e.target.id==='perfilUF'){Busca.geoGen++;Busca.geo=null;$('#perfilMunicipios').innerHTML='';}});
+$('#recarregarNoticias').addEventListener('click',carregarNoticias);
+carregarNoticias();setInterval(carregarNoticias,3600000);
+
+function aplicarNavegacao(){
+ const view=UI.view,overview=view==='resultados',city=view==='cidades';
+ renderAvisos();
+ const text={resultados:['PANORAMA ELEITORAL','O Brasil, voto a voto.','Acompanhe a apuração. Explore o resultado de cada região.'],cidades:['UM OLHAR MAIS PERTO','Cada município importa.','Compare a votação local, explore candidatos e exporte os resultados.'],candidatos:['QUEM RECEBEU SEU VOTO','Nomes, números e território.','Encontre candidatos e descubra onde seus votos se concentram.'],noticias:['RADAR ELEITORAL','A notícia, com contexto.','Acompanhe as manchetes e consulte as publicações originais.'],metodo:['FONTES E METODOLOGIA','Transparência em primeiro lugar.','Entenda de onde vêm os dados e como eles são apresentados.']}[view];
+ if(overview&&S.turno===2){text[0]='ELEIÇÕES 2026 · SEGUNDO TURNO';text[1]=S.cargo==='3'?'A decisão, estado por estado.':'O Brasil volta às urnas.';text[2]=S.cargo==='3'?'Explore as disputas confirmadas para governador em 25 de outubro.':'Lula e Flávio Bolsonaro disputam a Presidência em 25 de outubro.';}
+ $('#pageEyebrow').textContent=text[0];$('#pageTitle').textContent=text[1];$('#pageSubtitle').textContent=text[2];
+ document.querySelectorAll('[data-page]').forEach(b=>b.setAttribute('aria-current',b.dataset.page===view?'page':'false'));
+ $('#placar').hidden=!overview;$('#tabs').hidden=!overview;$('#overviewMain').hidden=!overview;$('#graficos').hidden=!overview;$('#analyticsHeading').hidden=!overview;$('#estadoControle').hidden=!overview||S.cargo==='1';
+ if(['noticias','metodo'].includes(view)){['avisoPacote','avisoErro','avisoEspera'].forEach(id=>document.getElementById(id).hidden=true);}
+ $('#cidadesWrap').hidden=!city;$('#centralCandidatos').hidden=view!=='candidatos';$('#canalNoticias').hidden=view!=='noticias';$('#sobreDados').hidden=view!=='metodo';
+ $('#topTurno').textContent=S.turno===1?'1º turno · 04 de outubro':'2º turno · 25 de outubro';
+ $('#mapScope').textContent=S.uf?nomeUF(S.uf):S.turno===2&&S.cargo==='3'?listaUfs('3').length+' UFs em disputa':'Brasil · 27 UFs';
+ $('.map-note').textContent=S.turno===2&&S.fonte==='tse'?(S.cargo==='3'?'Somente os estados com segundo turno confirmado estão coloridos. Antes da apuração, o verde indica participação, sem apontar liderança. Clique para conhecer os candidatos.':'A disputa presidencial acontece em todas as UFs. O verde indica participação; as cores dos candidatos aparecem quando houver votos do segundo turno.'):'A cor de cada estado mostra quem lidera a apuração; quanto mais forte, maior a vantagem. Clique em um estado para consultar os resultados.';
+ $('#atualizar').disabled=S.carregando;$('#atualizar').textContent=S.carregando?'Atualizando…':'Atualizar';
+ $('#compartilhar').hidden=view==='metodo'||view==='noticias';
+}
+function navegar(view){
+ if(!['resultados','cidades','candidatos','noticias','metodo'].includes(view))return;
+ UI.view=view;
+ if(view==='cidades'&&S.cargo!=='cidades'){UI.lastCargo=S.cargo;mudar(()=>{S.cid.cargo=S.cargo;S.cargo='cidades';});}
+ else {if(view!=='cidades'&&S.cargo==='cidades'){mudar(()=>{S.cargo=UI.lastCargo||'1';});}else {if(view==='candidatos')renderBusca();aplicarNavegacao();}}
+ guardarHash();window.scrollTo({top:0,behavior:'smooth'});
+}
+function mostrarToast(text){$('#toast').textContent=text;$('#toast').hidden=false;clearTimeout(UI.toastTimer);UI.toastTimer=setTimeout(()=>$('#toast').hidden=true,4000);}
+document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>navegar(b.dataset.page)));
+$('[data-home]').addEventListener('click',e=>{e.preventDefault();navegar('resultados');});
+$('#compartilhar').addEventListener('click',async()=>{
+ guardarHash();try{await navigator.clipboard.writeText(location.href);mostrarToast(location.protocol==='file:'?'Endereço local copiado. Para compartilhar com outra pessoa, envie o ZIP.':'Link da consulta copiado.');}catch{mostrarToast('Copie o endereço da barra do navegador para compartilhar esta consulta.');}
+});
+$('#buscaMais').addEventListener('click',()=>{Busca.limit+=24;renderBusca();});
+$('#centralCandidatos').addEventListener('click',e=>{if(e.target.closest('[data-close-profile]')){Busca.selected=null;Busca.geoGen++;Busca.geo=null;renderPerfil();$('#buscaCandidato').focus();}});
+
+function carregarPacote(){
+ if(S.fonte!=='tse'||!window.APURACAO_SNAPSHOT)return;
+ const p=window.APURACAO_SNAPSHOT;
+ for(const x of p.results||[])S.dados[chave(x.cargo,x.turno,x.uf)]={...x.data,salvo:true};
+ for(const [cod,data] of Object.entries(p.municipios||{}))S.cm['tse'+cod]=data;
+ if(p.history?.length)salvarHist('v2|tse|1',HistoryCore.merge(p.history,lerHist('v2|tse|1')));
+ S.codigos={fed:[6257,6258],est:[6259,6260]};
+}
+$('#estadoResultado').innerHTML+=[...MAPA.estados].sort((a,b)=>a.nome.localeCompare(b.nome,'pt-BR')).map(e=>`<option value="${e.id}">${esc(e.nome)}</option>`).join('');
+$('#estadoResultado').addEventListener('change',e=>{S.uf=e.target.value||null;guardarHash();renderTudo();});
 /* ------------------------------- Início ------------------------------- */
 async function verificarProxy() {
   S.proxy = false;
@@ -677,12 +1467,14 @@ async function verificarProxy() {
 }
 async function iniciar() {
   lerHash();
+  carregarPacote();
   $('#fonte').value = S.fonte;
-  await verificarProxy();
   montarMapa(); renderTudo();
+  await verificarProxy();
+  carregarHistorico();
   await atualizar();
 }
-window.addEventListener('hashchange', () => { lerHash(); renderTudo(); atualizar(); });
+window.addEventListener('hashchange', () => { if(!location.hash.includes('='))return; UI.requestController.abort();UI.requestController=new AbortController();S.run++; S.cid.gen++; lerHash(); renderTudo(); atualizar(); });
 iniciar();
 })();
 </script>

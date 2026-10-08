@@ -1,0 +1,6 @@
+const {test}=require('node:test');const assert=require('node:assert/strict');const H=require('../history-core');
+const cand={n:'13',nome:'Lula',partN:'13',part:'PT',votos:100,pct:50};const p=(t,v=100)=>({t,a:20,cands:[{...cand,votos:v}]});
+test('valida horários e respeita Brasília mesmo em outro fuso',()=>{assert.equal(H.timestamp('04/10/2026','17:01'),Date.parse('2026-10-04T20:01:00Z'));assert.equal(H.timestamp('31/02/2026','17:00:00'),null);assert.equal(H.timestamp('04/10/2026','25:00:00'),null);});
+test('corrige o registro no mesmo horário, ordena e ignora dados inválidos',()=>{const h=H.merge([p(200),p(100),null,{t:10,cands:[{...cand,pct:200}]}],[p(200,150)]);assert.deepEqual(h.map(x=>x.t),[100,200]);assert.equal(h[1].cands[0].votos,150);});
+test('sem horário oficial: polling sem mudança não inventa novos registros',()=>{let h=H.append([],{...p(100),timeKind:'observed'});h=H.append(h,{...p(200),timeKind:'observed'});assert.equal(h.length,1);h=H.append(h,{...p(300,110),timeKind:'observed'});assert.equal(h.length,2);});
+test('busca o registro mais próximo inclusive nos limites',()=>{const h=[p(100),p(200),p(500)];assert.equal(H.nearest(h,-1),0);assert.equal(H.nearest(h,999),2);assert.equal(H.nearest(h,220),1);assert.equal(H.nearest([],220),-1);});

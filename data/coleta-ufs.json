@@ -1,0 +1,1392 @@
+[
+  {
+    "path": "oficial/ele2026/6257/dados/ce/ce-c0001-e006257-u.json",
+    "cargo": "1",
+    "uf": "ce",
+    "date": "04/10/2026",
+    "time": "22:10:15",
+    "size": 9252,
+    "consultadoEm": "2026-10-07T16:16:00.053786+00:00",
+    "bytes": 9355
+  },
+  {
+    "path": "oficial/ele2026/6257/dados/br/br-c0001-e006257-u.json",
+    "cargo": "1",
+    "uf": "br",
+    "date": "04/10/2026",
+    "time": "22:10:45",
+    "size": 9247,
+    "consultadoEm": "2026-10-07T16:16:00.012375+00:00",
+    "bytes": 9349
+  },
+  {
+    "path": "oficial/ele2026/6257/dados/al/al-c0001-e006257-u.json",
+    "cargo": "1",
+    "uf": "al",
+    "date": "04/10/2026",
+    "time": "22:11:12",
+    "size": 9219,
+    "consultadoEm": "2026-10-07T16:16:00.046988+00:00",
+    "bytes": 9324
+  },
+  {
+    "path": "oficial/ele2026/6257/dados/ba/ba-c0001-e006257-u.json",
+    "cargo": "1",
+    "uf": "ba",
+    "date": "04/10/2026",
+    "time": "22:09:28",
+    "size": 9262,
+    "consultadoEm": "2026-10-07T16:16:00.024395+00:00",
+    "bytes": 9365
+  },
+  {
+    "path": "oficial/ele2026/6257/dados/ac/ac-c0001-e006257-u.json",
+    "cargo": "1",
+    "uf": "ac",
+    "date": "04/10/2026",
+    "time": "22:10:11",
+    "size": 9148,
+    "consultadoEm": "2026-10-07T16:16:00.038723+00:00",
+    "bytes": 9293
+  },
+  {
+    "path": "oficial/ele2026/6257/dados/df/df-c0001-e006257-u.json",
+    "cargo": "1",
+    "uf": "df",
+    "date": "04/10/2026",
+    "time": "22:11:10",
+    "size": 9179,
+    "consultadoEm": "2026-10-07T16:16:00.003328+00:00",
+    "bytes": 9324
+  },
+  {
+    "path": "oficial/ele2026/6257/dados/ap/ap-c0001-e006257-u.json",
+    "cargo": "1",
+    "uf": "ap",
+    "date": "04/10/2026",
+    "time": "22:10:10",
+    "size": 9149,
+    "consultadoEm": "2026-10-07T16:16:00.045316+00:00",
+    "bytes": 9294
+  },
+  {
+    "path": "oficial/ele2026/6257/dados/am/am-c0001-e006257-u.json",
+    "cargo": "1",
+    "uf": "am",
+    "date": "04/10/2026",
+    "time": "22:11:11",
+    "size": 9225,
+    "consultadoEm": "2026-10-07T16:16:00.025228+00:00",
+    "bytes": 9329
+  },
+  {
+    "path": "oficial/ele2026/6257/dados/es/es-c0001-e006257-u.json",
+    "cargo": "1",
+    "uf": "es",
+    "date": "04/10/2026",
+    "time": "22:10:41",
+    "size": 9183,
+    "consultadoEm": "2026-10-07T16:16:06.109660+00:00",
+    "bytes": 9328
+  },
+  {
+    "path": "oficial/ele2026/6257/dados/pb/pb-c0001-e006257-u.json",
+    "cargo": "1",
+    "uf": "pb",
+    "date": "04/10/2026",
+    "time": "22:11:15",
+    "size": 9228,
+    "consultadoEm": "2026-10-07T16:16:06.162762+00:00",
+    "bytes": 9335
+  },
+  {
+    "path": "oficial/ele2026/6257/dados/go/go-c0001-e006257-u.json",
+    "cargo": "1",
+    "uf": "go",
+    "date": "04/10/2026",
+    "time": "22:10:46",
+    "size": 9236,
+    "consultadoEm": "2026-10-07T16:16:06.127223+00:00",
+    "bytes": 9343
+  },
+  {
+    "path": "oficial/ele2026/6257/dados/ma/ma-c0001-e006257-u.json",
+    "cargo": "1",
+    "uf": "ma",
+    "date": "04/10/2026",
+    "time": "22:10:17",
+    "size": 9239,
+    "consultadoEm": "2026-10-07T16:16:06.087061+00:00",
+    "bytes": 9343
+  },
+  {
+    "path": "oficial/ele2026/6257/dados/mt/mt-c0001-e006257-u.json",
+    "cargo": "1",
+    "uf": "mt",
+    "date": "04/10/2026",
+    "time": "22:10:42",
+    "size": 9185,
+    "consultadoEm": "2026-10-07T16:16:06.094086+00:00",
+    "bytes": 9330
+  },
+  {
+    "path": "oficial/ele2026/6257/dados/ms/ms-c0001-e006257-u.json",
+    "cargo": "1",
+    "uf": "ms",
+    "date": "04/10/2026",
+    "time": "22:10:41",
+    "size": 9179,
+    "consultadoEm": "2026-10-07T16:16:06.095538+00:00",
+    "bytes": 9324
+  },
+  {
+    "path": "oficial/ele2026/6257/dados/mg/mg-c0001-e006257-u.json",
+    "cargo": "1",
+    "uf": "mg",
+    "date": "04/10/2026",
+    "time": "22:09:36",
+    "size": 9278,
+    "consultadoEm": "2026-10-07T16:16:06.121317+00:00",
+    "bytes": 9382
+  },
+  {
+    "path": "oficial/ele2026/6257/dados/pa/pa-c0001-e006257-u.json",
+    "cargo": "1",
+    "uf": "pa",
+    "date": "04/10/2026",
+    "time": "22:10:45",
+    "size": 9247,
+    "consultadoEm": "2026-10-07T16:16:06.148552+00:00",
+    "bytes": 9351
+  },
+  {
+    "path": "oficial/ele2026/6257/dados/pe/pe-c0001-e006257-u.json",
+    "cargo": "1",
+    "uf": "pe",
+    "date": "04/10/2026",
+    "time": "22:10:14",
+    "size": 9244,
+    "consultadoEm": "2026-10-07T16:16:12.824273+00:00",
+    "bytes": 9349
+  },
+  {
+    "path": "oficial/ele2026/6257/dados/rs/rs-c0001-e006257-u.json",
+    "cargo": "1",
+    "uf": "rs",
+    "date": "04/10/2026",
+    "time": "22:10:51",
+    "size": 9222,
+    "consultadoEm": "2026-10-07T16:16:12.915474+00:00",
+    "bytes": 9367
+  },
+  {
+    "path": "oficial/ele2026/6257/dados/rn/rn-c0001-e006257-u.json",
+    "cargo": "1",
+    "uf": "rn",
+    "date": "04/10/2026",
+    "time": "22:11:14",
+    "size": 9222,
+    "consultadoEm": "2026-10-07T16:16:12.784611+00:00",
+    "bytes": 9329
+  },
+  {
+    "path": "oficial/ele2026/6257/dados/ro/ro-c0001-e006257-u.json",
+    "cargo": "1",
+    "uf": "ro",
+    "date": "04/10/2026",
+    "time": "22:11:11",
+    "size": 9164,
+    "consultadoEm": "2026-10-07T16:16:12.822843+00:00",
+    "bytes": 9309
+  },
+  {
+    "path": "oficial/ele2026/6257/dados/pr/pr-c0001-e006257-u.json",
+    "cargo": "1",
+    "uf": "pr",
+    "date": "04/10/2026",
+    "time": "22:10:19",
+    "size": 9257,
+    "consultadoEm": "2026-10-07T16:16:12.850932+00:00",
+    "bytes": 9364
+  },
+  {
+    "path": "oficial/ele2026/6257/dados/pi/pi-c0001-e006257-u.json",
+    "cargo": "1",
+    "uf": "pi",
+    "date": "04/10/2026",
+    "time": "22:10:46",
+    "size": 9228,
+    "consultadoEm": "2026-10-07T16:16:12.794745+00:00",
+    "bytes": 9333
+  },
+  {
+    "path": "oficial/ele2026/6257/dados/rj/rj-c0001-e006257-u.json",
+    "cargo": "1",
+    "uf": "rj",
+    "date": "04/10/2026",
+    "time": "22:10:45",
+    "size": 9232,
+    "consultadoEm": "2026-10-07T16:16:12.829779+00:00",
+    "bytes": 9377
+  },
+  {
+    "path": "oficial/ele2026/6257/dados/rr/rr-c0001-e006257-u.json",
+    "cargo": "1",
+    "uf": "rr",
+    "date": "04/10/2026",
+    "time": "22:11:10",
+    "size": 9132,
+    "consultadoEm": "2026-10-07T16:16:12.805083+00:00",
+    "bytes": 9277
+  },
+  {
+    "path": "oficial/ele2026/6257/dados/sp/sp-c0001-e006257-u.json",
+    "cargo": "1",
+    "uf": "sp",
+    "date": "04/10/2026",
+    "time": "22:09:33",
+    "size": 9291,
+    "consultadoEm": "2026-10-07T16:16:18.829884+00:00",
+    "bytes": 9396
+  },
+  {
+    "path": "oficial/ele2026/6257/dados/se/se-c0001-e006257-u.json",
+    "cargo": "1",
+    "uf": "se",
+    "date": "04/10/2026",
+    "time": "22:11:12",
+    "size": 9176,
+    "consultadoEm": "2026-10-07T16:16:18.843779+00:00",
+    "bytes": 9321
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/al/al-c0003-e006259-u.json",
+    "cargo": "3",
+    "uf": "al",
+    "date": "04/10/2026",
+    "time": "22:02:49",
+    "size": 4450,
+    "consultadoEm": "2026-10-07T16:16:18.827715+00:00",
+    "bytes": 4466
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/ap/ap-c0003-e006259-u.json",
+    "cargo": "3",
+    "uf": "ap",
+    "date": "04/10/2026",
+    "time": "21:04:28",
+    "size": 5109,
+    "consultadoEm": "2026-10-07T16:16:18.855269+00:00",
+    "bytes": 5109
+  },
+  {
+    "path": "oficial/ele2026/6257/dados/to/to-c0001-e006257-u.json",
+    "cargo": "1",
+    "uf": "to",
+    "date": "04/10/2026",
+    "time": "22:11:13",
+    "size": 9161,
+    "consultadoEm": "2026-10-07T16:16:18.839636+00:00",
+    "bytes": 9306
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/am/am-c0003-e006259-u.json",
+    "cargo": "3",
+    "uf": "am",
+    "date": "04/10/2026",
+    "time": "22:08:29",
+    "size": 6562,
+    "consultadoEm": "2026-10-07T16:16:18.879696+00:00",
+    "bytes": 6611
+  },
+  {
+    "path": "oficial/ele2026/6257/dados/sc/sc-c0001-e006257-u.json",
+    "cargo": "1",
+    "uf": "sc",
+    "date": "04/10/2026",
+    "time": "22:10:47",
+    "size": 9210,
+    "consultadoEm": "2026-10-07T16:16:18.882213+00:00",
+    "bytes": 9355
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/ac/ac-c0003-e006259-u.json",
+    "cargo": "3",
+    "uf": "ac",
+    "date": "04/10/2026",
+    "time": "21:08:18",
+    "size": 5854,
+    "consultadoEm": "2026-10-07T16:16:18.866350+00:00",
+    "bytes": 5854
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/mg/mg-c0003-e006259-u.json",
+    "cargo": "3",
+    "uf": "mg",
+    "date": "04/10/2026",
+    "time": "22:09:43",
+    "size": 8958,
+    "consultadoEm": "2026-10-07T16:16:24.471745+00:00",
+    "bytes": 9050
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/ma/ma-c0003-e006259-u.json",
+    "cargo": "3",
+    "uf": "ma",
+    "date": "04/10/2026",
+    "time": "22:11:10",
+    "size": 7086,
+    "consultadoEm": "2026-10-07T16:16:24.462304+00:00",
+    "bytes": 7145
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/ba/ba-c0003-e006259-u.json",
+    "cargo": "3",
+    "uf": "ba",
+    "date": "04/10/2026",
+    "time": "22:10:11",
+    "size": 6012,
+    "consultadoEm": "2026-10-07T16:16:24.472442+00:00",
+    "bytes": 6048
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/ms/ms-c0003-e006259-u.json",
+    "cargo": "3",
+    "uf": "ms",
+    "date": "04/10/2026",
+    "time": "21:06:39",
+    "size": 7434,
+    "consultadoEm": "2026-10-07T16:16:24.452199+00:00",
+    "bytes": 7434
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/ce/ce-c0003-e006259-u.json",
+    "cargo": "3",
+    "uf": "ce",
+    "date": "04/10/2026",
+    "time": "22:11:10",
+    "size": 7070,
+    "consultadoEm": "2026-10-07T16:16:24.463376+00:00",
+    "bytes": 7128
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/go/go-c0003-e006259-u.json",
+    "cargo": "3",
+    "uf": "go",
+    "date": "04/10/2026",
+    "time": "21:52:09",
+    "size": 5981,
+    "consultadoEm": "2026-10-07T16:16:24.459212+00:00",
+    "bytes": 6021
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/df/df-c0003-e006259-u.json",
+    "cargo": "3",
+    "uf": "df",
+    "date": "04/10/2026",
+    "time": "20:23:38",
+    "size": 8630,
+    "consultadoEm": "2026-10-07T16:16:24.482180+00:00",
+    "bytes": 8630
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/es/es-c0003-e006259-u.json",
+    "cargo": "3",
+    "uf": "es",
+    "date": "04/10/2026",
+    "time": "20:57:08",
+    "size": 5157,
+    "consultadoEm": "2026-10-07T16:16:24.505237+00:00",
+    "bytes": 5157
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/pr/pr-c0003-e006259-u.json",
+    "cargo": "3",
+    "uf": "pr",
+    "date": "04/10/2026",
+    "time": "21:46:30",
+    "size": 6924,
+    "consultadoEm": "2026-10-07T16:16:30.464348+00:00",
+    "bytes": 6986
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/mt/mt-c0003-e006259-u.json",
+    "cargo": "3",
+    "uf": "mt",
+    "date": "04/10/2026",
+    "time": "21:32:09",
+    "size": 5654,
+    "consultadoEm": "2026-10-07T16:16:30.473438+00:00",
+    "bytes": 5654
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/pe/pe-c0003-e006259-u.json",
+    "cargo": "3",
+    "uf": "pe",
+    "date": "04/10/2026",
+    "time": "22:10:11",
+    "size": 6420,
+    "consultadoEm": "2026-10-07T16:16:30.506211+00:00",
+    "bytes": 6469
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/rn/rn-c0003-e006259-u.json",
+    "cargo": "3",
+    "uf": "rn",
+    "date": "04/10/2026",
+    "time": "22:07:29",
+    "size": 7082,
+    "consultadoEm": "2026-10-07T16:16:30.489461+00:00",
+    "bytes": 7145
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/pb/pb-c0003-e006259-u.json",
+    "cargo": "3",
+    "uf": "pb",
+    "date": "04/10/2026",
+    "time": "22:02:09",
+    "size": 5111,
+    "consultadoEm": "2026-10-07T16:16:30.514550+00:00",
+    "bytes": 5140
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/pa/pa-c0003-e006259-u.json",
+    "cargo": "3",
+    "uf": "pa",
+    "date": "04/10/2026",
+    "time": "22:10:10",
+    "size": 5767,
+    "consultadoEm": "2026-10-07T16:16:30.466143+00:00",
+    "bytes": 5804
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/pi/pi-c0003-e006259-u.json",
+    "cargo": "3",
+    "uf": "pi",
+    "date": "04/10/2026",
+    "time": "22:02:10",
+    "size": 8742,
+    "consultadoEm": "2026-10-07T16:16:30.483163+00:00",
+    "bytes": 8829
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/rj/rj-c0003-e006259-u.json",
+    "cargo": "3",
+    "uf": "rj",
+    "date": "04/10/2026",
+    "time": "22:04:49",
+    "size": 7626,
+    "consultadoEm": "2026-10-07T16:16:30.446710+00:00",
+    "bytes": 7738
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/se/se-c0003-e006259-u.json",
+    "cargo": "3",
+    "uf": "se",
+    "date": "04/10/2026",
+    "time": "22:08:19",
+    "size": 4532,
+    "consultadoEm": "2026-10-07T16:16:36.468888+00:00",
+    "bytes": 4532
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/ac/ac-c0005-e006259-u.json",
+    "cargo": "5",
+    "uf": "ac",
+    "date": "04/10/2026",
+    "time": "21:08:18",
+    "size": 8309,
+    "consultadoEm": "2026-10-07T16:16:36.470383+00:00",
+    "bytes": 8309
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/ro/ro-c0003-e006259-u.json",
+    "cargo": "3",
+    "uf": "ro",
+    "date": "04/10/2026",
+    "time": "20:51:22",
+    "size": 5989,
+    "consultadoEm": "2026-10-07T16:16:36.469356+00:00",
+    "bytes": 5989
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/rs/rs-c0003-e006259-u.json",
+    "cargo": "3",
+    "uf": "rs",
+    "date": "04/10/2026",
+    "time": "21:12:40",
+    "size": 6494,
+    "consultadoEm": "2026-10-07T16:16:36.487927+00:00",
+    "bytes": 6494
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/to/to-c0003-e006259-u.json",
+    "cargo": "3",
+    "uf": "to",
+    "date": "04/10/2026",
+    "time": "21:18:59",
+    "size": 6045,
+    "consultadoEm": "2026-10-07T16:16:36.570395+00:00",
+    "bytes": 6045
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/rr/rr-c0003-e006259-u.json",
+    "cargo": "3",
+    "uf": "rr",
+    "date": "04/10/2026",
+    "time": "21:09:58",
+    "size": 5283,
+    "consultadoEm": "2026-10-07T16:16:36.510964+00:00",
+    "bytes": 5283
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/sc/sc-c0003-e006259-u.json",
+    "cargo": "3",
+    "uf": "sc",
+    "date": "04/10/2026",
+    "time": "21:56:30",
+    "size": 7121,
+    "consultadoEm": "2026-10-07T16:16:36.453321+00:00",
+    "bytes": 7121
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/sp/sp-c0003-e006259-u.json",
+    "cargo": "3",
+    "uf": "sp",
+    "date": "04/10/2026",
+    "time": "21:51:23",
+    "size": 5176,
+    "consultadoEm": "2026-10-07T16:16:36.476042+00:00",
+    "bytes": 5203
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/al/al-c0005-e006259-u.json",
+    "cargo": "5",
+    "uf": "al",
+    "date": "04/10/2026",
+    "time": "22:02:49",
+    "size": 6966,
+    "consultadoEm": "2026-10-07T16:16:42.960061+00:00",
+    "bytes": 7022
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/am/am-c0005-e006259-u.json",
+    "cargo": "5",
+    "uf": "am",
+    "date": "04/10/2026",
+    "time": "22:11:09",
+    "size": 8306,
+    "consultadoEm": "2026-10-07T16:16:42.967192+00:00",
+    "bytes": 8372
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/es/es-c0005-e006259-u.json",
+    "cargo": "5",
+    "uf": "es",
+    "date": "04/10/2026",
+    "time": "20:57:09",
+    "size": 10150,
+    "consultadoEm": "2026-10-07T16:16:42.937352+00:00",
+    "bytes": 10150
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/ap/ap-c0005-e006259-u.json",
+    "cargo": "5",
+    "uf": "ap",
+    "date": "04/10/2026",
+    "time": "21:04:28",
+    "size": 8317,
+    "consultadoEm": "2026-10-07T16:16:42.959448+00:00",
+    "bytes": 8317
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/df/df-c0005-e006259-u.json",
+    "cargo": "5",
+    "uf": "df",
+    "date": "04/10/2026",
+    "time": "20:23:38",
+    "size": 9988,
+    "consultadoEm": "2026-10-07T16:16:42.995791+00:00",
+    "bytes": 9988
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/ce/ce-c0005-e006259-u.json",
+    "cargo": "5",
+    "uf": "ce",
+    "date": "04/10/2026",
+    "time": "22:12:10",
+    "size": 7872,
+    "consultadoEm": "2026-10-07T16:16:42.932797+00:00",
+    "bytes": 7937
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/ba/ba-c0005-e006259-u.json",
+    "cargo": "5",
+    "uf": "ba",
+    "date": "04/10/2026",
+    "time": "22:10:11",
+    "size": 9107,
+    "consultadoEm": "2026-10-07T16:16:42.940585+00:00",
+    "bytes": 9194
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/go/go-c0005-e006259-u.json",
+    "cargo": "5",
+    "uf": "go",
+    "date": "04/10/2026",
+    "time": "21:52:10",
+    "size": 10104,
+    "consultadoEm": "2026-10-07T16:16:43.001652+00:00",
+    "bytes": 10206
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/pa/pa-c0005-e006259-u.json",
+    "cargo": "5",
+    "uf": "pa",
+    "date": "04/10/2026",
+    "time": "22:10:10",
+    "size": 10843,
+    "consultadoEm": "2026-10-07T16:16:48.460544+00:00",
+    "bytes": 10953
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/pe/pe-c0005-e006259-u.json",
+    "cargo": "5",
+    "uf": "pe",
+    "date": "04/10/2026",
+    "time": "22:10:11",
+    "size": 10928,
+    "consultadoEm": "2026-10-07T16:16:48.464282+00:00",
+    "bytes": 11039
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/ms/ms-c0005-e006259-u.json",
+    "cargo": "5",
+    "uf": "ms",
+    "date": "04/10/2026",
+    "time": "21:06:39",
+    "size": 8758,
+    "consultadoEm": "2026-10-07T16:16:48.510940+00:00",
+    "bytes": 8758
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/mg/mg-c0005-e006259-u.json",
+    "cargo": "5",
+    "uf": "mg",
+    "date": "04/10/2026",
+    "time": "22:09:44",
+    "size": 13546,
+    "consultadoEm": "2026-10-07T16:16:48.515235+00:00",
+    "bytes": 13700
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/pi/pi-c0005-e006259-u.json",
+    "cargo": "5",
+    "uf": "pi",
+    "date": "04/10/2026",
+    "time": "22:02:10",
+    "size": 13379,
+    "consultadoEm": "2026-10-07T16:16:48.508062+00:00",
+    "bytes": 13534
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/pb/pb-c0005-e006259-u.json",
+    "cargo": "5",
+    "uf": "pb",
+    "date": "04/10/2026",
+    "time": "22:02:10",
+    "size": 8750,
+    "consultadoEm": "2026-10-07T16:16:48.445455+00:00",
+    "bytes": 8841
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/mt/mt-c0005-e006259-u.json",
+    "cargo": "5",
+    "uf": "mt",
+    "date": "04/10/2026",
+    "time": "21:32:09",
+    "size": 8859,
+    "consultadoEm": "2026-10-07T16:16:48.424604+00:00",
+    "bytes": 8859
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/ma/ma-c0005-e006259-u.json",
+    "cargo": "5",
+    "uf": "ma",
+    "date": "04/10/2026",
+    "time": "22:11:10",
+    "size": 10409,
+    "consultadoEm": "2026-10-07T16:16:48.453513+00:00",
+    "bytes": 10508
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/rs/rs-c0005-e006259-u.json",
+    "cargo": "5",
+    "uf": "rs",
+    "date": "04/10/2026",
+    "time": "21:12:41",
+    "size": 11205,
+    "consultadoEm": "2026-10-07T16:16:56.283871+00:00",
+    "bytes": 11205
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/pr/pr-c0005-e006259-u.json",
+    "cargo": "5",
+    "uf": "pr",
+    "date": "04/10/2026",
+    "time": "21:46:30",
+    "size": 8252,
+    "consultadoEm": "2026-10-07T16:16:56.326734+00:00",
+    "bytes": 8332
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/rn/rn-c0005-e006259-u.json",
+    "cargo": "5",
+    "uf": "rn",
+    "date": "04/10/2026",
+    "time": "22:07:30",
+    "size": 10947,
+    "consultadoEm": "2026-10-07T16:16:56.370989+00:00",
+    "bytes": 11071
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/sc/sc-c0005-e006259-u.json",
+    "cargo": "5",
+    "uf": "sc",
+    "date": "04/10/2026",
+    "time": "21:56:30",
+    "size": 11273,
+    "consultadoEm": "2026-10-07T16:16:56.377866+00:00",
+    "bytes": 11273
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/ro/ro-c0005-e006259-u.json",
+    "cargo": "5",
+    "uf": "ro",
+    "date": "04/10/2026",
+    "time": "20:51:22",
+    "size": 9338,
+    "consultadoEm": "2026-10-07T16:16:56.311416+00:00",
+    "bytes": 9338
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/rr/rr-c0005-e006259-u.json",
+    "cargo": "5",
+    "uf": "rr",
+    "date": "04/10/2026",
+    "time": "21:09:59",
+    "size": 11544,
+    "consultadoEm": "2026-10-07T16:16:56.314395+00:00",
+    "bytes": 11544
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/rj/rj-c0005-e006259-u.json",
+    "cargo": "5",
+    "uf": "rj",
+    "date": "04/10/2026",
+    "time": "22:04:50",
+    "size": 12568,
+    "consultadoEm": "2026-10-07T16:16:56.276296+00:00",
+    "bytes": 12752
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/se/se-c0005-e006259-u.json",
+    "cargo": "5",
+    "uf": "se",
+    "date": "04/10/2026",
+    "time": "22:08:19",
+    "size": 9256,
+    "consultadoEm": "2026-10-07T16:16:56.364720+00:00",
+    "bytes": 9256
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/ce/ce-c0006-e006259-u.json",
+    "cargo": "6",
+    "uf": "ce",
+    "date": "04/10/2026",
+    "time": "22:12:14",
+    "size": 74696,
+    "consultadoEm": "2026-10-07T16:17:02.484240+00:00",
+    "bytes": 77300
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/to/to-c0005-e006259-u.json",
+    "cargo": "5",
+    "uf": "to",
+    "date": "04/10/2026",
+    "time": "21:18:59",
+    "size": 11418,
+    "consultadoEm": "2026-10-07T16:17:02.506224+00:00",
+    "bytes": 11418
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/ba/ba-c0006-e006259-u.json",
+    "cargo": "6",
+    "uf": "ba",
+    "date": "04/10/2026",
+    "time": "22:10:17",
+    "size": 131626,
+    "consultadoEm": "2026-10-07T16:17:02.509013+00:00",
+    "bytes": 136311
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/al/al-c0006-e006259-u.json",
+    "cargo": "6",
+    "uf": "al",
+    "date": "04/10/2026",
+    "time": "22:02:50",
+    "size": 32177,
+    "consultadoEm": "2026-10-07T16:17:02.505516+00:00",
+    "bytes": 33214
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/am/am-c0006-e006259-u.json",
+    "cargo": "6",
+    "uf": "am",
+    "date": "04/10/2026",
+    "time": "22:11:10",
+    "size": 41960,
+    "consultadoEm": "2026-10-07T16:17:02.527728+00:00",
+    "bytes": 43105
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/sp/sp-c0005-e006259-u.json",
+    "cargo": "5",
+    "uf": "sp",
+    "date": "04/10/2026",
+    "time": "21:51:22",
+    "size": 11206,
+    "consultadoEm": "2026-10-07T16:17:02.611306+00:00",
+    "bytes": 11328
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/ap/ap-c0006-e006259-u.json",
+    "cargo": "6",
+    "uf": "ap",
+    "date": "04/10/2026",
+    "time": "21:04:29",
+    "size": 27961,
+    "consultadoEm": "2026-10-07T16:17:02.516155+00:00",
+    "bytes": 27961
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/ac/ac-c0006-e006259-u.json",
+    "cargo": "6",
+    "uf": "ac",
+    "date": "04/10/2026",
+    "time": "21:08:19",
+    "size": 30025,
+    "consultadoEm": "2026-10-07T16:17:02.509443+00:00",
+    "bytes": 30025
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/df/df-c0006-e006259-u.json",
+    "cargo": "6",
+    "uf": "df",
+    "date": "04/10/2026",
+    "time": "20:23:38",
+    "size": 51511,
+    "consultadoEm": "2026-10-07T16:17:08.978928+00:00",
+    "bytes": 51511
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/pa/pa-c0006-e006259-u.json",
+    "cargo": "6",
+    "uf": "pa",
+    "date": "04/10/2026",
+    "time": "22:10:13",
+    "size": 71159,
+    "consultadoEm": "2026-10-07T16:17:09.023464+00:00",
+    "bytes": 73652
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/ms/ms-c0006-e006259-u.json",
+    "cargo": "6",
+    "uf": "ms",
+    "date": "04/10/2026",
+    "time": "21:06:40",
+    "size": 38537,
+    "consultadoEm": "2026-10-07T16:17:08.989705+00:00",
+    "bytes": 38537
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/ma/ma-c0006-e006259-u.json",
+    "cargo": "6",
+    "uf": "ma",
+    "date": "04/10/2026",
+    "time": "22:11:16",
+    "size": 74969,
+    "consultadoEm": "2026-10-07T16:17:09.052844+00:00",
+    "bytes": 77578
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/es/es-c0006-e006259-u.json",
+    "cargo": "6",
+    "uf": "es",
+    "date": "04/10/2026",
+    "time": "20:57:09",
+    "size": 40731,
+    "consultadoEm": "2026-10-07T16:17:08.970946+00:00",
+    "bytes": 40731
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/mt/mt-c0006-e006259-u.json",
+    "cargo": "6",
+    "uf": "mt",
+    "date": "04/10/2026",
+    "time": "21:32:10",
+    "size": 41752,
+    "consultadoEm": "2026-10-07T16:17:09.018457+00:00",
+    "bytes": 41752
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/mg/mg-c0006-e006259-u.json",
+    "cargo": "6",
+    "uf": "mg",
+    "date": "04/10/2026",
+    "time": "22:08:59",
+    "size": 183522,
+    "consultadoEm": "2026-10-07T16:17:09.149183+00:00",
+    "bytes": 190010
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/go/go-c0006-e006259-u.json",
+    "cargo": "6",
+    "uf": "go",
+    "date": "04/10/2026",
+    "time": "21:52:14",
+    "size": 68928,
+    "consultadoEm": "2026-10-07T16:17:09.012406+00:00",
+    "bytes": 71352
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/rn/rn-c0006-e006259-u.json",
+    "cargo": "6",
+    "uf": "rn",
+    "date": "04/10/2026",
+    "time": "22:07:30",
+    "size": 32401,
+    "consultadoEm": "2026-10-07T16:17:14.687075+00:00",
+    "bytes": 33451
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/pe/pe-c0006-e006259-u.json",
+    "cargo": "6",
+    "uf": "pe",
+    "date": "04/10/2026",
+    "time": "22:10:17",
+    "size": 98302,
+    "consultadoEm": "2026-10-07T16:17:14.877734+00:00",
+    "bytes": 101349
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/pi/pi-c0006-e006259-u.json",
+    "cargo": "6",
+    "uf": "pi",
+    "date": "04/10/2026",
+    "time": "22:02:12",
+    "size": 47223,
+    "consultadoEm": "2026-10-07T16:17:14.723626+00:00",
+    "bytes": 48814
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/pb/pb-c0006-e006259-u.json",
+    "cargo": "6",
+    "uf": "pb",
+    "date": "04/10/2026",
+    "time": "22:02:13",
+    "size": 48841,
+    "consultadoEm": "2026-10-07T16:17:14.701352+00:00",
+    "bytes": 50496
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/ro/ro-c0006-e006259-u.json",
+    "cargo": "6",
+    "uf": "ro",
+    "date": "04/10/2026",
+    "time": "20:51:23",
+    "size": 40243,
+    "consultadoEm": "2026-10-07T16:17:14.849852+00:00",
+    "bytes": 40243
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/pr/pr-c0006-e006259-u.json",
+    "cargo": "6",
+    "uf": "pr",
+    "date": "04/10/2026",
+    "time": "21:46:51",
+    "size": 107516,
+    "consultadoEm": "2026-10-07T16:17:14.769436+00:00",
+    "bytes": 111447
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/rr/rr-c0006-e006259-u.json",
+    "cargo": "6",
+    "uf": "rr",
+    "date": "04/10/2026",
+    "time": "21:09:59",
+    "size": 32138,
+    "consultadoEm": "2026-10-07T16:17:14.773905+00:00",
+    "bytes": 32138
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/rj/rj-c0006-e006259-u.json",
+    "cargo": "6",
+    "uf": "rj",
+    "date": "04/10/2026",
+    "time": "22:04:59",
+    "size": 197639,
+    "consultadoEm": "2026-10-07T16:17:14.927789+00:00",
+    "bytes": 204969
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/rs/rs-c0006-e006259-u.json",
+    "cargo": "6",
+    "uf": "rs",
+    "date": "04/10/2026",
+    "time": "21:13:15",
+    "size": 119453,
+    "consultadoEm": "2026-10-07T16:17:21.076397+00:00",
+    "bytes": 119453
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/ac/ac-c0007-e006259-u.json",
+    "cargo": "7",
+    "uf": "ac",
+    "date": "04/10/2026",
+    "time": "21:08:28",
+    "size": 64284,
+    "consultadoEm": "2026-10-07T16:17:20.985554+00:00",
+    "bytes": 64284
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/am/am-c0007-e006259-u.json",
+    "cargo": "7",
+    "uf": "am",
+    "date": "04/10/2026",
+    "time": "22:11:10",
+    "size": 75351,
+    "consultadoEm": "2026-10-07T16:17:20.957728+00:00",
+    "bytes": 77919
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/to/to-c0006-e006259-u.json",
+    "cargo": "6",
+    "uf": "to",
+    "date": "04/10/2026",
+    "time": "21:19:00",
+    "size": 29317,
+    "consultadoEm": "2026-10-07T16:17:21.072751+00:00",
+    "bytes": 29317
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/al/al-c0007-e006259-u.json",
+    "cargo": "7",
+    "uf": "al",
+    "date": "04/10/2026",
+    "time": "22:02:50",
+    "size": 36202,
+    "consultadoEm": "2026-10-07T16:17:20.873707+00:00",
+    "bytes": 37395
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/sc/sc-c0006-e006259-u.json",
+    "cargo": "6",
+    "uf": "sc",
+    "date": "04/10/2026",
+    "time": "21:56:38",
+    "size": 65845,
+    "consultadoEm": "2026-10-07T16:17:20.908384+00:00",
+    "bytes": 65845
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/sp/sp-c0006-e006259-u.json",
+    "cargo": "6",
+    "uf": "sp",
+    "date": "04/10/2026",
+    "time": "21:51:32",
+    "size": 265725,
+    "consultadoEm": "2026-10-07T16:17:20.963743+00:00",
+    "bytes": 275259
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/se/se-c0006-e006259-u.json",
+    "cargo": "6",
+    "uf": "se",
+    "date": "04/10/2026",
+    "time": "22:08:20",
+    "size": 39115,
+    "consultadoEm": "2026-10-07T16:17:21.037073+00:00",
+    "bytes": 39115
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/mg/mg-c0007-e006259-u.json",
+    "cargo": "7",
+    "uf": "mg",
+    "date": "04/10/2026",
+    "time": "22:09:39",
+    "size": 242197,
+    "consultadoEm": "2026-10-07T16:17:26.550882+00:00",
+    "bytes": 250696
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/df/df-c0008-e006259-u.json",
+    "cargo": "7",
+    "uf": "df",
+    "date": "04/10/2026",
+    "time": "20:23:38",
+    "size": 115186,
+    "consultadoEm": "2026-10-07T16:17:26.573160+00:00",
+    "bytes": 115186
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/ap/ap-c0007-e006259-u.json",
+    "cargo": "7",
+    "uf": "ap",
+    "date": "04/10/2026",
+    "time": "21:04:29",
+    "size": 52711,
+    "consultadoEm": "2026-10-07T16:17:26.650524+00:00",
+    "bytes": 52711
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/ba/ba-c0007-e006259-u.json",
+    "cargo": "7",
+    "uf": "ba",
+    "date": "04/10/2026",
+    "time": "22:12:39",
+    "size": 157676,
+    "consultadoEm": "2026-10-07T16:17:26.745678+00:00",
+    "bytes": 163240
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/ma/ma-c0007-e006259-u.json",
+    "cargo": "7",
+    "uf": "ma",
+    "date": "04/10/2026",
+    "time": "22:12:45",
+    "size": 74189,
+    "consultadoEm": "2026-10-07T16:17:26.627188+00:00",
+    "bytes": 76806
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/es/es-c0007-e006259-u.json",
+    "cargo": "7",
+    "uf": "es",
+    "date": "04/10/2026",
+    "time": "20:57:10",
+    "size": 107941,
+    "consultadoEm": "2026-10-07T16:17:27.100840+00:00",
+    "bytes": 107941
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/ce/ce-c0007-e006259-u.json",
+    "cargo": "7",
+    "uf": "ce",
+    "date": "04/10/2026",
+    "time": "22:12:15",
+    "size": 95207,
+    "consultadoEm": "2026-10-07T16:17:26.509418+00:00",
+    "bytes": 98460
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/go/go-c0007-e006259-u.json",
+    "cargo": "7",
+    "uf": "go",
+    "date": "04/10/2026",
+    "time": "21:52:18",
+    "size": 144928,
+    "consultadoEm": "2026-10-07T16:17:26.656956+00:00",
+    "bytes": 149858
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/ms/ms-c0007-e006259-u.json",
+    "cargo": "7",
+    "uf": "ms",
+    "date": "04/10/2026",
+    "time": "21:06:40",
+    "size": 67882,
+    "consultadoEm": "2026-10-07T16:17:32.822397+00:00",
+    "bytes": 67882
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/pa/pa-c0007-e006259-u.json",
+    "cargo": "7",
+    "uf": "pa",
+    "date": "04/10/2026",
+    "time": "22:10:16",
+    "size": 105678,
+    "consultadoEm": "2026-10-07T16:17:32.720925+00:00",
+    "bytes": 109246
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/pr/pr-c0007-e006259-u.json",
+    "cargo": "7",
+    "uf": "pr",
+    "date": "04/10/2026",
+    "time": "21:46:59",
+    "size": 153626,
+    "consultadoEm": "2026-10-07T16:17:32.809781+00:00",
+    "bytes": 159246
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/mt/mt-c0007-e006259-u.json",
+    "cargo": "7",
+    "uf": "mt",
+    "date": "04/10/2026",
+    "time": "21:32:11",
+    "size": 71719,
+    "consultadoEm": "2026-10-07T16:17:33.162251+00:00",
+    "bytes": 71719
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/pe/pe-c0007-e006259-u.json",
+    "cargo": "7",
+    "uf": "pe",
+    "date": "04/10/2026",
+    "time": "22:10:18",
+    "size": 129730,
+    "consultadoEm": "2026-10-07T16:17:32.806328+00:00",
+    "bytes": 134196
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/pb/pb-c0007-e006259-u.json",
+    "cargo": "7",
+    "uf": "pb",
+    "date": "04/10/2026",
+    "time": "22:02:13",
+    "size": 53992,
+    "consultadoEm": "2026-10-07T16:17:33.107684+00:00",
+    "bytes": 55844
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/rj/rj-c0007-e006259-u.json",
+    "cargo": "7",
+    "uf": "rj",
+    "date": "04/10/2026",
+    "time": "22:05:03",
+    "size": 291142,
+    "consultadoEm": "2026-10-07T16:17:32.807538+00:00",
+    "bytes": 301517
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/pi/pi-c0007-e006259-u.json",
+    "cargo": "7",
+    "uf": "pi",
+    "date": "04/10/2026",
+    "time": "22:02:11",
+    "size": 41148,
+    "consultadoEm": "2026-10-07T16:17:32.810335+00:00",
+    "bytes": 42572
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/rn/rn-c0007-e006259-u.json",
+    "cargo": "7",
+    "uf": "rn",
+    "date": "04/10/2026",
+    "time": "22:07:31",
+    "size": 43586,
+    "consultadoEm": "2026-10-07T16:17:38.692880+00:00",
+    "bytes": 45007
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/rr/rr-c0007-e006259-u.json",
+    "cargo": "7",
+    "uf": "rr",
+    "date": "04/10/2026",
+    "time": "21:09:59",
+    "size": 64910,
+    "consultadoEm": "2026-10-07T16:17:38.589949+00:00",
+    "bytes": 64910
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/ro/ro-c0007-e006259-u.json",
+    "cargo": "7",
+    "uf": "ro",
+    "date": "04/10/2026",
+    "time": "20:51:24",
+    "size": 70472,
+    "consultadoEm": "2026-10-07T16:17:38.651417+00:00",
+    "bytes": 70472
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/to/to-c0007-e006259-u.json",
+    "cargo": "7",
+    "uf": "to",
+    "date": "04/10/2026",
+    "time": "21:19:01",
+    "size": 56501,
+    "consultadoEm": "2026-10-07T16:17:38.885836+00:00",
+    "bytes": 56501
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/sc/sc-c0007-e006259-u.json",
+    "cargo": "7",
+    "uf": "sc",
+    "date": "04/10/2026",
+    "time": "21:56:42",
+    "size": 108458,
+    "consultadoEm": "2026-10-07T16:17:38.634726+00:00",
+    "bytes": 108458
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/se/se-c0007-e006259-u.json",
+    "cargo": "7",
+    "uf": "se",
+    "date": "04/10/2026",
+    "time": "22:08:20",
+    "size": 60510,
+    "consultadoEm": "2026-10-07T16:17:38.569572+00:00",
+    "bytes": 60510
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/sp/sp-c0007-e006259-u.json",
+    "cargo": "7",
+    "uf": "sp",
+    "date": "04/10/2026",
+    "time": "21:52:10",
+    "size": 341159,
+    "consultadoEm": "2026-10-07T16:17:38.607772+00:00",
+    "bytes": 353309
+  },
+  {
+    "path": "oficial/ele2026/6259/dados/rs/rs-c0007-e006259-u.json",
+    "cargo": "7",
+    "uf": "rs",
+    "date": "04/10/2026",
+    "time": "21:12:27",
+    "size": 136727,
+    "consultadoEm": "2026-10-07T16:17:38.665833+00:00",
+    "bytes": 141412
+  },
+  {
+    "path": "oficial/comum/config/ele-c.json",
+    "cargo": null,
+    "uf": null,
+    "date": "02/10/2026",
+    "time": "18:30:57",
+    "size": 22749,
+    "consultadoEm": "2026-10-07T16:17:45.335924+00:00",
+    "bytes": 22749
+  },
+  {
+    "path": "oficial/ele2026/6257/config/mun-e006257-cm.json",
+    "cargo": null,
+    "uf": null,
+    "date": "02/10/2026",
+    "time": "18:30:22",
+    "size": 534025,
+    "consultadoEm": "2026-10-07T16:17:45.367241+00:00",
+    "bytes": 534025
+  },
+  {
+    "path": "oficial/ele2026/6259/config/mun-e006259-cm.json",
+    "cargo": null,
+    "uf": null,
+    "date": "02/10/2026",
+    "time": "18:30:18",
+    "size": 518899,
+    "consultadoEm": "2026-10-07T16:17:45.309499+00:00",
+    "bytes": 518899
+  }
+]

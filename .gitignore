@@ -1,0 +1,11 @@
+node_modules/
+storage/
+.env
+.env.*
+*.log
+.DS_Store
+Thumbs.db
+
+# Gerados automaticamente pelo build a partir do template e dos dados
+/index.html
+/snapshot-data.js

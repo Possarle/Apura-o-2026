@@ -1,0 +1,25 @@
+# Configuração paga: revise o custo no Render antes de confirmar a criação.
+# O disco preserva a coleta e o histórico entre reinicializações e publicações.
+services:
+  - type: web
+    name: apuracao-2026
+    runtime: node
+    plan: 0.5c-512mb
+    region: virginia
+    branch: main
+    autoDeployTrigger: "off"
+    buildCommand: npm ci --omit=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /healthz
+    numInstances: 1
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: NODE_ENV
+        value: production
+      - key: DATA_DIR
+        value: /opt/render/project/src/storage
+    disk:
+      name: apuracao-dados
+      mountPath: /opt/render/project/src/storage
+      sizeGB: 1
