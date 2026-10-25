@@ -1032,21 +1032,21 @@ function renderUfs() {
   $('#ufs').innerHTML = MAPA.estados.slice().sort((a, b) => a.id.localeCompare(b.id)).map((e) => {
     const l = lider(dadoUF(e.id));
     const segundo=S.turno===2&&S.fonte==='tse',active=!segundo||S.cargo!=='3'||situacaoGovernador(e.id)==='runoff';
-    const color=active?(l?corCandidato(l.c):segundo?'#12a64a':null):null;
+    const color=active?(l?corCandidato(l.c):segundo?'#a8a8a8':null):null;
     return `<button data-uf="${e.id}" ${color?`style="border-color:${color};color:${color}"`:''} aria-pressed="${S.uf === e.id}" title="${esc(e.nome)}${segundo&&!active?' · Sem disputa confirmada no 2º turno':''}">${e.id.toUpperCase()}</button>`;
   }).join('');
 }
 
 function renderLegenda() {
   if(S.turno===2&&S.fonte==='tse'&&semApuracaoSegundo()){
-   $('#legenda').innerHTML='<span><i style="background:#12a64a"></i>Com segundo turno</span>'+(S.cargo==='3'?'<span><i style="background:#2d2d2d"></i>Sem disputa de 2º turno confirmada</span>':'');return;
+   $('#legenda').innerHTML=`<span><i style="background:${SEM_COR}"></i>Aguardando votos</span>`+(S.cargo==='3'?`<span><i style="background:${COR_SEM_DISPUTA};outline:1px solid #3a3a3a"></i>Sem 2º turno para governador</span>`:'');return;
   }
   const vistos = new Map();
   for (const uf of listaUfs(S.cargo)) for (const c of dadoUF(uf)?.cands || []) {
     const rot = ehLula(c) || ehFlavio(c) ? c.nome : c.part || 'Sem partido';
     vistos.set(rot, corCandidato(c));
   }
-  $('#legenda').innerHTML = [...vistos].map(([rot, cor]) => `<span><i style="background:${cor}"></i>${esc(rot)}</span>`).join('') + '<span><i style="background:#777"></i>Sem dados</span>';
+  $('#legenda').innerHTML = [...vistos].map(([rot, cor]) => `<span><i style="background:${cor}"></i>${esc(rot)}</span>`).join('') + '<span><i style="background:'+SEM_COR+'"></i>Aguardando votos</span>';
 }
 
 function renderTabs() {
@@ -1072,7 +1072,7 @@ function painelDisputa(cargo,uf){
 }
 function renderPlacarSegundo(){
  const pres=S.cargo==='1',uf=pres?'br':S.uf;
- if(!uf){const active=listaUfs('3').length,decided=MAPA.estados.filter(e=>situacaoGovernador(e.id)==='decided').length;$('#placar').innerHTML=`<article class="score-card"><span class="score-rank">GOVERNOS EM DISPUTA</span><div class="score-value">${active}<small> UFs</small></div><div class="score-votes">Destacadas em verde no mapa</div></article><article class="score-card"><span class="score-rank">DEFINIDOS NO PRIMEIRO TURNO</span><div class="score-value">${decided}<small> UFs</small></div><div class="score-votes">Sem nova votação para governador</div></article><article class="score-card progress-card"><span class="score-rank">PRÓXIMA VOTAÇÃO</span><div class="score-value">25<small> out</small></div><div class="score-votes">Domingo · segundo turno</div></article>`;return;}
+ if(!uf){const active=listaUfs('3').length,decided=MAPA.estados.filter(e=>situacaoGovernador(e.id)==='decided').length;$('#placar').innerHTML=`<article class="score-card"><span class="score-rank">GOVERNOS EM DISPUTA</span><div class="score-value">${active}<small> UFs</small></div><div class="score-votes">Em cinza claro no mapa até a apuração</div></article><article class="score-card"><span class="score-rank">DEFINIDOS NO PRIMEIRO TURNO</span><div class="score-value">${decided}<small> UFs</small></div><div class="score-votes">Sem nova votação para governador</div></article><article class="score-card progress-card"><span class="score-rank">PRÓXIMA VOTAÇÃO</span><div class="score-value">25<small> out</small></div><div class="score-votes">Domingo · segundo turno</div></article>`;return;}
  const candidates=classificados(S.cargo,uf);
  if(!candidates.length){$('#placar').innerHTML='<div class="score-empty"><b>Consulte a situação deste estado no painel.</b></div>';return;}
  $('#placar').innerHTML=candidates.slice(0,2).map(c=>`<article class="score-card" style="--candidate-color:${corCandidato(c)}"><div class="score-top"><span class="score-rank">NO SEGUNDO TURNO</span><span class="score-party">${esc(c.part)} · ${esc(c.n)}</span></div><h2>${esc(c.nome)}</h2><div class="score-value">—</div><div class="score-votes">Aguardando votos do 2º turno</div></article>`).join('')+'<article class="score-card progress-card"><span class="score-rank">PRÓXIMA VOTAÇÃO</span><div class="score-value">25<small> out</small></div><div class="score-votes">Apuração ainda não iniciada</div></article>';
@@ -1201,7 +1201,8 @@ function renderTudo() {
    consulta diretamente os arquivos do estado aberto (ou do exterior). */
 const Terr={modo:'municipios',geo:null,geoPromise:null,erroGeo:false,montado:false,els:new Map(),dados:{},carregando:{},paisAberto:null,todosPaises:false,vb:null,anim:0,nomes:null,nomesTam:-1};
 const CARGOS_MUN=['1','3','5'];
-const SEM_COR='#343434';
+const SEM_COR='#585858';      // ainda sem votos apurados: cinza mais claro que o fundo
+const COR_SEM_DISPUTA='#1c1c1c'; // UF sem 2º turno para o cargo
 const muniDisponivel=(cargo=S.cargo)=>CARGOS_MUN.includes(cargo);
 function modoMapa(){if(Terr.modo==='exterior'&&S.cargo==='1')return 'exterior';if(Terr.modo!=='estados'&&muniDisponivel())return 'municipios';return 'estados';}
 const chaveTerr=(cargo,turno=S.turno)=>[S.fonte,cargo,turno].join('|');
@@ -1345,10 +1346,10 @@ function liderVotos(votos,cands){
 }
 function estiloEstado(uf){
  const l=lider(dadoUF(uf)),segundo=S.turno===2&&S.fonte==='tse',status=segundo&&S.cargo==='3'?situacaoGovernador(uf):'runoff';
- if(segundo&&status!=='runoff')return {fill:'#2d2d2d',op:1,status,segundo};
+ if(segundo&&status!=='runoff')return {fill:COR_SEM_DISPUTA,op:1,status,segundo};
  if(l)return {fill:corCandidato(l.c),op:+(0.55+0.45*Math.min(Math.max(l.margem,0),20)/20).toFixed(2),cor:corDe(l.c,S.cargo),status,segundo};
- if(segundo)return {fill:'#12a64a',op:1,cor:'runoff',status,segundo};
- return {fill:null,op:null,status,segundo};
+ if(segundo)return {fill:SEM_COR,op:1,cor:'runoff',status,segundo};
+ return {fill:SEM_COR,op:1,cor:'aguardando',status,segundo};
 }
 function pintarMunicipios(){
  if(!Terr.montado)return;
@@ -1356,11 +1357,11 @@ function pintarMunicipios(){
  for(const e of MAPA.estados)porUF[e.id]=estiloEstado(e.id);
  for(const [cdi,el] of Terr.els){
   const uf=el.dataset.uf,st=porUF[uf];let fill,op;
-  if(st.segundo&&st.status!=='runoff'){fill='#262626';op=1;}
+  if(st.segundo&&st.status!=='runoff'){fill=COR_SEM_DISPUTA;op=1;}
   else{
    const r=d?.porCdi.get(cdi),l=r&&liderVotos(r.votos,d.cands);
    if(l){fill=corCandidato(l.c);op=(0.38+0.62*Math.min(l.margem,40)/40).toFixed(2);}
-   else if(!d?.ufsComVotos.has(uf)&&st.fill){fill=st.fill;op=(st.op*0.75).toFixed(2);}  // estado ainda sem dados municipais: cor do estado
+   else if(!d?.ufsComVotos.has(uf)&&st.fill&&st.fill!==SEM_COR){fill=st.fill;op=(st.op*0.75).toFixed(2);}  // estado ainda sem dados municipais: cor do estado
    else{fill=SEM_COR;op=1;}
   }
   const f=fill+'|'+op;if(el._f!==f){el.style.fill=fill;el.style.fillOpacity=op;el._f=f;}
@@ -2108,7 +2109,7 @@ function aplicarNavegacao(){
  $('#cidadesWrap').hidden=!city;$('#centralCandidatos').hidden=view!=='candidatos';$('#canalNoticias').hidden=view!=='noticias';$('#sobreDados').hidden=view!=='metodo';
  $('#topTurno').textContent=S.turno===1?'1º turno · 04 de outubro':'2º turno · 25 de outubro';
  $('#mapScope').textContent=modoMapa()==='exterior'?'Exterior · presidente':S.uf?nomeUF(S.uf):(S.turno===2&&S.cargo==='3'?listaUfs('3').length+' UFs em disputa':'Brasil · 27 UFs')+(modoMapa()==='municipios'?' · 5.571 municípios':'');
- $('.map-note').textContent=textoNotaMapa()||(S.turno===2&&S.fonte==='tse'?(S.cargo==='3'?'Somente os estados com segundo turno confirmado estão coloridos. Antes da apuração, o verde indica participação, sem apontar liderança. Clique para conhecer os candidatos.':'A disputa presidencial acontece em todas as UFs. O verde indica participação; as cores dos candidatos aparecem quando houver votos do segundo turno.'):'A cor de cada estado mostra quem lidera a apuração; quanto mais forte, maior a vantagem. Clique em um estado para consultar os resultados.');
+ $('.map-note').textContent=textoNotaMapa()||(S.turno===2&&S.fonte==='tse'?(S.cargo==='3'?'Somente os estados com segundo turno confirmado estão coloridos. Antes dos votos, o cinza claro indica disputa ainda não apurada. Clique para conhecer os candidatos.':'A disputa presidencial acontece em todas as UFs. O cinza claro indica que ainda não há votos apurados; as cores dos candidatos aparecem conforme a apuração avança.'):'A cor de cada estado mostra quem lidera a apuração; quanto mais forte, maior a vantagem. Clique em um estado para consultar os resultados.');
  $('#atualizar').disabled=S.carregando;$('#atualizar').textContent=S.carregando?'Atualizando…':'Atualizar';
  $('#compartilhar').hidden=view==='metodo'||view==='noticias';
  if(typeof ativarGlobo==='function')ativarGlobo(modoMapa()==='exterior'&&view==='resultados');
