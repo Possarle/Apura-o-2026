@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Apuração 2026 · Central de resultados</title>
 <meta name="description" content="Resultados das Eleições 2026: votos por estado e município, perfis de candidatos, evolução da apuração e notícias, com dados do TSE.">
-<meta name="theme-color" content="#0b1017">
+<meta name="theme-color" content="#050505">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +14,7 @@
 <style>
 :root{
   --fundo:#000; --painel:#000; --painel2:#141414; --linha:#2a2a2a;
-  --texto:#eaf0f6; --suave:#9aa9b9;
+  --texto:#f6f6f6; --suave:#b9b9b9;
   --lula:#e5353f; --flavio:#2f7bff; --outros:#f4b81a; --sem:#2c2c2c;
   --fonte:'Archivo',system-ui,'Segoe UI',Arial,sans-serif;
 }
@@ -85,7 +85,7 @@ main{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);gap
 #mapa .estado[data-cor=flavio]{fill:var(--flavio)}
 #mapa .estado[data-cor=outros]{fill:var(--outros)}
 #mapa text{font-size:10px;font-weight:700;fill:#fff;paint-order:stroke;stroke:#0009;stroke-width:2.5px;pointer-events:none;font-stretch:80%}
-.dica{position:absolute;pointer-events:none;background:#0b0f14;border:1px solid var(--linha);border-radius:8px;padding:8px 10px;font-size:13px;max-width:240px;z-index:5;box-shadow:0 8px 24px #0008}
+.dica{position:absolute;pointer-events:none;background:#020202;border:1px solid var(--linha);border-radius:8px;padding:8px 10px;font-size:13px;max-width:240px;z-index:5;box-shadow:0 8px 24px #0008}
 .dica b{display:block;font-size:15px}
 .legenda{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:10px;font-size:13px;color:var(--suave)}
 .legenda span{display:inline-flex;align-items:center;gap:6px}
@@ -207,12 +207,12 @@ table.cidades td.lider{background:#ffffff10}
 .det .grade{max-height:520px;overflow:auto} table.cidades th.t-lula{color:var(--lula)} table.cidades th.t-flavio{color:var(--flavio)} table.cidades th.t-outros{color:var(--outros)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
-.extras{max-width:1400px;margin:24px auto;padding:24px}.extras input,.extras select,#perfilUF{padding:12px;background:#171717;color:#eee;border:1px solid #444;border-radius:8px;font:inherit}.extras input{flex:1;min-width:200px}.extras a{color:#9ac4ff}.extras p{line-height:1.6}#buscaLista{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;max-height:400px;overflow:auto}.resultado-cand{display:flex;flex-direction:column;gap:8px;text-align:left;padding:14px;border:1px solid #333;border-radius:8px;background:#191919;color:#eee;font:inherit;cursor:pointer}.resultado-cand:hover{background:#292929}.resultado-cand span{font-size:12px;color:#aaa}.perfil-metricas{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:22px 0}.perfil-metricas b{font-size:25px;display:block}.perfil-metricas span{color:#aaa}.cand .pct{color:var(--cor-candidato)}#perfilCandidato{margin-top:20px}#noticiasLista{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}#noticiasLista article{border-top:1px solid #444;padding-top:14px}#noticiasLista small{color:#aaa}#noticiasLista h3{line-height:1.5}summary{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #eee;outline-offset:3px}@media(max-width:600px){.extras{padding:16px;margin:16px 10px}.perfil-metricas{grid-template-columns:repeat(2,1fr)}.cid-controles .seg{flex-wrap:wrap}.extras .cid-controles>*{max-width:100%}}
+.extras{max-width:1400px;margin:24px auto;padding:24px}.extras input,.extras select,#perfilUF{padding:12px;background:#171717;color:#eee;border:1px solid #444;border-radius:8px;font:inherit}.extras input{flex:1;min-width:200px}.extras a{color:#ffffff}.extras p{line-height:1.6}#buscaLista{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;max-height:400px;overflow:auto}.resultado-cand{display:flex;flex-direction:column;gap:8px;text-align:left;padding:14px;border:1px solid #333;border-radius:8px;background:#191919;color:#eee;font:inherit;cursor:pointer}.resultado-cand:hover{background:#292929}.resultado-cand span{font-size:12px;color:#aaa}.perfil-metricas{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:22px 0}.perfil-metricas b{font-size:25px;display:block}.perfil-metricas span{color:#aaa}.cand .pct{color:var(--cor-candidato)}#perfilCandidato{margin-top:20px}#noticiasLista{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}#noticiasLista article{border-top:1px solid #444;padding-top:14px}#noticiasLista small{color:#aaa}#noticiasLista h3{line-height:1.5}summary{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #eee;outline-offset:3px}@media(max-width:600px){.extras{padding:16px;margin:16px 10px}.perfil-metricas{grid-template-columns:repeat(2,1fr)}.cid-controles .seg{flex-wrap:wrap}.extras .cid-controles>*{max-width:100%}}
 /* Linha do tempo: contraste escuro, largura completa e controles por toque. */
-.timeline{grid-column:1/-1;order:-1;min-width:0;padding:26px;border:1px solid #293444;border-radius:18px;background:linear-gradient(145deg,#111a27,#0b1019 70%);box-shadow:0 18px 50px #0004;color:#edf2f9}.tl-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}.tl-eyebrow{display:block;color:#93a5bd;letter-spacing:.15em;font-size:10px;font-weight:700;margin-bottom:9px}.graficos .timeline h3{font-size:24px;letter-spacing:-.03em}.tl-head p{margin:5px 0 0;color:#8d9eb6;font-size:13px}.tl-badge{border:1px solid #43516a;background:#182232;color:#bcc9db;padding:7px 12px;border-radius:30px;white-space:nowrap;font-size:12px}.tl-badge.live{color:#82dcc0;border-color:#285246;background:#142d28}.tl-toolbar{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:24px 0 18px}.tl-segments{display:flex;gap:4px;flex-wrap:wrap;padding:4px;background:#080e17;border:1px solid #263143;border-radius:10px}.tl-segments button,.tl-legend button{cursor:pointer;border:1px solid transparent;background:transparent;color:#99aac1;font:inherit;font-size:12px;border-radius:7px;padding:9px 12px}.tl-segments button[aria-pressed=true]{background:#29374d;color:#fff;box-shadow:0 1px 4px #0005}.tl-selects{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.tl-selects label{display:flex;gap:8px;align-items:center;font-size:12px;color:#a6b6ca}.tl-selects select{background:#111c2b;color:#e8effa;border:1px solid #35445b;border-radius:7px;padding:8px;font:inherit}.tl-legend{display:flex;gap:7px;flex-wrap:wrap}.tl-legend button{display:flex;align-items:center;gap:8px;background:#101925;border-color:#293449;color:#78879b;padding:8px 10px}.tl-legend button i{width:8px;height:8px;border-radius:50%;background:var(--candidate-color);opacity:.3}.tl-legend button[aria-pressed=true]{color:#e7edf8;border-color:var(--candidate-color)}.tl-legend button[aria-pressed=true] i{opacity:1}.tl-chart-wrap{margin:16px 0 0;min-width:0}#tl-svg{display:block;width:100%;height:auto;min-height:240px;overflow:visible;touch-action:pan-y}#tl-svg text{fill:#94a6bf;font:12px var(--fonte)}.tl-hint{font-size:12px;color:#92a3ba;line-height:1.6;margin:4px 0 20px}.tl-scrub{display:flex;align-items:center;gap:10px;background:#0a121e;padding:12px;border:1px solid #25334a;border-radius:10px}.tl-scrub input{flex:1;min-width:40px;accent-color:#90abd4;cursor:pointer}.timeline .btn{border-color:#35445b;color:#c3d1e5;background:#142033;white-space:nowrap}.timeline .btn:hover{background:#24374f}.timeline .btn:disabled{opacity:.4;cursor:default}.tl-summary-head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:23px 0 12px;font-size:13px}.tl-summary-head span{color:#95a9c5}.tl-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.tl-stat{padding:16px 18px;background:#131e2c;border:1px solid #29384c;border-top:2px solid var(--candidate-color);border-radius:10px;display:flex;flex-direction:column;gap:7px}.tl-stat>span{color:#bdcadb;font-size:13px}.tl-stat strong{color:var(--candidate-color);font-variant-numeric:tabular-nums;font-size:29px;letter-spacing:-.025em}.tl-stat small{color:#93a4bb;line-height:1.5;font-size:11px}.tl-footer{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:20px;border-top:1px solid #263246;padding-top:15px}.tl-note{font-size:11px;color:#8c9db5;line-height:1.7;margin:0}.tl-empty-chart{padding:60px 20px;margin:25px 0;text-align:center;border:1px dashed #32425b;border-radius:12px;background:repeating-linear-gradient(0deg,transparent,transparent 44px,#23314877 45px)}.tl-empty-chart span{font-size:20px;font-weight:700}.tl-empty-chart p{max-width:440px;margin:15px auto 0;color:#9aabc2;font-size:13px;line-height:1.7}.timeline-empty .tl-note{margin-bottom:15px}@media(max-width:640px){.timeline{padding:17px 12px;border-radius:12px}.tl-head{flex-wrap:wrap}.graficos .timeline h3{font-size:21px}.tl-toolbar{gap:12px;margin-top:18px}.tl-segments button{padding:8px;font-size:11px}.tl-selects{gap:8px}.tl-selects label{font-size:11px;gap:5px}.tl-selects select{max-width:155px}.tl-legend{gap:5px}.tl-legend button{font-size:10px;padding:7px}#tl-svg{min-height:0;aspect-ratio:auto}.tl-summary{grid-template-columns:1fr 1fr;gap:8px}.tl-stat{padding:12px 10px;min-width:0}.tl-stat strong{font-size:24px}.tl-scrub{padding:9px 7px;gap:5px}.tl-scrub .btn{font-size:11px;padding:7px}.tl-footer{flex-direction:column;align-items:flex-start}.tl-summary-head{font-size:12px}}
+.timeline{grid-column:1/-1;order:-1;min-width:0;padding:26px;border:1px solid #323232;border-radius:18px;background:linear-gradient(145deg,#151515,#070707 70%);box-shadow:0 18px 50px #0004;color:#f9f9f9}.tl-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}.tl-eyebrow{display:block;color:#bdbdbd;letter-spacing:.15em;font-size:10px;font-weight:700;margin-bottom:9px}.graficos .timeline h3{font-size:24px;letter-spacing:-.03em}.tl-head p{margin:5px 0 0;color:#b6b6b6;font-size:13px}.tl-badge{border:1px solid #5d5d5d;background:#202020;color:#dbdbdb;padding:7px 12px;border-radius:30px;white-space:nowrap;font-size:12px}.tl-badge.live{color:#82dcc0;border-color:#285246;background:#142d28}.tl-toolbar{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:24px 0 18px}.tl-segments{display:flex;gap:4px;flex-wrap:wrap;padding:4px;background:#050505;border:1px solid #313131;border-radius:10px}.tl-segments button,.tl-legend button{cursor:pointer;border:1px solid transparent;background:transparent;color:#c1c1c1;font:inherit;font-size:12px;border-radius:7px;padding:9px 12px}.tl-segments button[aria-pressed=true]{background:#3b3b3b;color:#fff;box-shadow:0 1px 4px #0005}.tl-selects{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.tl-selects label{display:flex;gap:8px;align-items:center;font-size:12px;color:#cacaca}.tl-selects select{background:#191919;color:#fafafa;border:1px solid #4e4e4e;border-radius:7px;padding:8px;font:inherit}.tl-legend{display:flex;gap:7px;flex-wrap:wrap}.tl-legend button{display:flex;align-items:center;gap:8px;background:#131313;border-color:#373737;color:#9b9b9b;padding:8px 10px}.tl-legend button i{width:8px;height:8px;border-radius:50%;background:var(--candidate-color);opacity:.3}.tl-legend button[aria-pressed=true]{color:#f8f8f8;border-color:var(--candidate-color)}.tl-legend button[aria-pressed=true] i{opacity:1}.tl-chart-wrap{margin:16px 0 0;min-width:0}#tl-svg{display:block;width:100%;height:auto;min-height:240px;overflow:visible;touch-action:pan-y}#tl-svg text{fill:#bfbfbf;font:12px var(--fonte)}.tl-hint{font-size:12px;color:#bababa;line-height:1.6;margin:4px 0 20px}.tl-scrub{display:flex;align-items:center;gap:10px;background:#0c0c0c;padding:12px;border:1px solid #383838;border-radius:10px}.tl-scrub input{flex:1;min-width:40px;accent-color:#d4d4d4;cursor:pointer}.timeline .btn{border-color:#4e4e4e;color:#e5e5e5;background:#212121;white-space:nowrap}.timeline .btn:hover{background:#3d3d3d}.timeline .btn:disabled{opacity:.4;cursor:default}.tl-summary-head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:23px 0 12px;font-size:13px}.tl-summary-head span{color:#c5c5c5}.tl-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.tl-stat{padding:16px 18px;background:#1a1a1a;border:1px solid #3a3a3a;border-top:2px solid var(--candidate-color);border-radius:10px;display:flex;flex-direction:column;gap:7px}.tl-stat>span{color:#dbdbdb;font-size:13px}.tl-stat strong{color:var(--candidate-color);font-variant-numeric:tabular-nums;font-size:29px;letter-spacing:-.025em}.tl-stat small{color:#bbbbbb;line-height:1.5;font-size:11px}.tl-footer{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:20px;border-top:1px solid #343434;padding-top:15px}.tl-note{font-size:11px;color:#b5b5b5;line-height:1.7;margin:0}.tl-empty-chart{padding:60px 20px;margin:25px 0;text-align:center;border:1px dashed #4e4e4e;border-radius:12px;background:repeating-linear-gradient(0deg,transparent,transparent 44px,#36363677 45px)}.tl-empty-chart span{font-size:20px;font-weight:700}.tl-empty-chart p{max-width:440px;margin:15px auto 0;color:#c2c2c2;font-size:13px;line-height:1.7}.timeline-empty .tl-note{margin-bottom:15px}@media(max-width:640px){.timeline{padding:17px 12px;border-radius:12px}.tl-head{flex-wrap:wrap}.graficos .timeline h3{font-size:21px}.tl-toolbar{gap:12px;margin-top:18px}.tl-segments button{padding:8px;font-size:11px}.tl-selects{gap:8px}.tl-selects label{font-size:11px;gap:5px}.tl-selects select{max-width:155px}.tl-legend{gap:5px}.tl-legend button{font-size:10px;padding:7px}#tl-svg{min-height:0;aspect-ratio:auto}.tl-summary{grid-template-columns:1fr 1fr;gap:8px}.tl-stat{padding:12px 10px;min-width:0}.tl-stat strong{font-size:24px}.tl-scrub{padding:9px 7px;gap:5px}.tl-scrub .btn{font-size:11px;padding:7px}.tl-footer{flex-direction:column;align-items:flex-start}.tl-summary-head{font-size:12px}}
 
 
-.estado-controle{margin:0 32px 22px;display:flex;gap:12px;align-items:center;padding:16px;border:1px solid #344052;border-radius:12px;background:#101a28;color:#c7d7ef}.estado-controle[hidden]{display:none}.estado-controle select{background:#1c2b40;color:#fff;padding:10px;border:1px solid #405576;border-radius:8px;font:inherit}#avisoPacote{margin:14px 32px;padding:13px 16px;background:#302718;border:1px solid #795e31;border-radius:9px;color:#e9cc95;font-size:13px;line-height:1.5}@media(max-width:640px){.estado-controle{margin:0 14px 16px;flex-wrap:wrap}#avisoPacote{margin:14px}}
+.estado-controle{margin:0 32px 22px;display:flex;gap:12px;align-items:center;padding:16px;border:1px solid #404040;border-radius:12px;background:#161616;color:#efefef}.estado-controle[hidden]{display:none}.estado-controle select{background:#2e2e2e;color:#fff;padding:10px;border:1px solid #696969;border-radius:8px;font:inherit}#avisoPacote{margin:14px 32px;padding:13px 16px;background:#302718;border:1px solid #795e31;border-radius:9px;color:#e9cc95;font-size:13px;line-height:1.5}@media(max-width:640px){.estado-controle{margin:0 14px 16px;flex-wrap:wrap}#avisoPacote{margin:14px}}
 </style>
 <link rel="stylesheet" href="professional.css">
 </head>
@@ -254,7 +254,7 @@ table.cidades td.lider{background:#ffffff10}
     <div class="mapa-modos"><div class="seg" role="group" aria-label="O que o mapa mostra"><button data-mapa-modo="municipios" aria-pressed="true">Municípios</button><button data-mapa-modo="estados" aria-pressed="false">Estados</button><button data-mapa-modo="exterior" aria-pressed="false">Exterior</button></div><span class="mapa-status" id="mapaStatus" role="status" aria-live="polite"></span></div>
     <div class="mapa-wrap">
       <svg id="mapa" role="group" aria-label="Mapa do Brasil por estado e município"></svg>
-      <svg id="mapaMundo" role="group" aria-label="Mapa-múndi com a votação de brasileiros no exterior" hidden></svg>
+      <div class="globo" id="globo" hidden><canvas id="globoCanvas" role="img" aria-label="Globo com a votação de brasileiros no exterior. A tabela abaixo traz os mesmos números por país."></canvas><aside class="globo-cartao" id="globoCartao" aria-live="polite" aria-hidden="true"></aside><div class="globo-rodape"><span>Arraste para girar · clique em um país</span><button class="btn" id="globoGirar" type="button">Pausar</button></div></div>
       <div class="dica" id="dica" hidden></div>
     </div>
     <div class="legenda" id="legenda"></div>
@@ -309,7 +309,7 @@ table.cidades td.lider{background:#ffffff10}
 <section id="sobreDados" class="method-section" hidden><div class="method-hero"><span class="eyebrow">TRANSPARÊNCIA</span><h2>Os números precisam de contexto.</h2><p>Esta é uma central independente. A fonte dos resultados é o Tribunal Superior Eleitoral; a apresentação dos dados é responsabilidade deste projeto.</p></div><div class="method-grid"><article class="cartao"><span class="method-number">01</span><h3>Atualizado ou salvo?</h3><p>Uma consulta concluída ao TSE atualiza os resultados. Se a conexão falhar, o site mantém a última cópia disponível e mostra seu horário. “Salvo” não significa atualização ao vivo.</p></article><article class="cartao"><span class="method-number">02</span><h3>Votos e percentuais</h3><p>Os totais do painel somam votos nominais dos candidatos, sem votos de legenda. Os percentuais individuais seguem os arquivos do TSE. No Senado, votos não equivalem a número de eleitores.</p></article><article class="cartao"><span class="method-number">03</span><h3>Liderança não é eleição</h3><p>Um candidato na frente pode não estar eleito. A marcação de eleito vem do TSE. Para deputados, a posição por votos não determina sozinha a distribuição de cadeiras.</p></article><article class="cartao"><span class="method-number">04</span><h3>Histórico e cobertura</h3><p>A linha do tempo exibe os registros reais disponíveis. Lacunas não são preenchidas com estimativas. O pacote traz resultados por UF; os municípios e as cidades do exterior são consultados conforme a apuração avança, e os completos (100% apurados) não são consultados de novo.</p></article><article class="cartao"><span class="method-number">05</span><h3>Mapa dos municípios e do exterior</h3><p>Os contornos municipais vêm da malha do IBGE; Boa Esperança do Norte (MT), instalado em 2025, aparece como um ponto em posição aproximada. No exterior, cada cidade com seções eleitorais é agrupada no seu país; Caiena e Saint-Georges, na Guiana Francesa, entram em França. Só há votação no exterior para presidente.</p></article></div><div class="method-links"><a href="https://resultados.tse.jus.br/" target="_blank" rel="noopener noreferrer">Consultar o TSE ↗</a><a href="https://www.tse.jus.br/eleicoes/informacoes-tecnicas-sobre-a-divulgacao-de-resultados" target="_blank" rel="noopener noreferrer">Documentação das fontes ↗</a></div></section>
 <footer>
   Dados: arquivos públicos de divulgação de resultados do TSE (resultados.tse.jus.br). Projeto independente, sem vínculo com a Justiça Eleitoral; os números oficiais são os do TSE.
-  Malha municipal: IBGE, via municipal-brazilian-geodata (MIT). Mapa-múndi: Natural Earth (domínio público).
+  Malha municipal: IBGE, via municipal-brazilian-geodata (MIT). Globo: Natural Earth (domínio público), d3-geo e topojson-client (ISC).
 </footer></div>
 
 <script src="history-core.js"></script>
@@ -554,7 +554,7 @@ function donut(fatias, titulo, sub) {
       off += len;
     }
   } else arcos = `<circle cx="70" cy="70" r="${R}" fill="none" stroke="#2c2c2c" stroke-width="22"/>`;
-  const svg = `<svg viewBox="0 0 140 140" role="img" aria-label="${esc(titulo)}">${arcos}<text x="70" y="69" text-anchor="middle" font-size="17" font-weight="800">${esc(titulo)}</text><text x="70" y="84" text-anchor="middle" font-size="8.5" style="fill:#9aa9b9">${esc(sub || '')}</text></svg>`;
+  const svg = `<svg viewBox="0 0 140 140" role="img" aria-label="${esc(titulo)}">${arcos}<text x="70" y="69" text-anchor="middle" font-size="17" font-weight="800">${esc(titulo)}</text><text x="70" y="84" text-anchor="middle" font-size="8.5" style="fill:#b9b9b9">${esc(sub || '')}</text></svg>`;
   const leg = fatias.map((f) => `<div><i style="background:${f.cor}"></i><span>${esc(f.rotulo)}</span><b>${tot ? fmtPct(f.valor / tot * 100) : '–'}</b></div>`).join('');
   return `<div class="donut-wrap">${svg}<div class="leg">${leg}</div></div>`;
 }
@@ -631,7 +631,7 @@ function graficoLinhas(raw){
  if(Timeline.follow)Timeline.time=end;else Timeline.time=visible[HistoryCore.nearest(visible,Timeline.time)].t;
  const formatAxis=v=>Timeline.metric==='pct'?fmtPct(v,ymax-ymin<5?2:1):new Intl.NumberFormat('pt-BR',{notation:'compact',maximumFractionDigits:1}).format(v);
  const timeLabel=t=>new Date(t).toLocaleTimeString('pt-BR',{timeZone:'America/Sao_Paulo',hour:'2-digit',minute:'2-digit',...(max-min<300000?{second:'2-digit'}:{})});
- let grid='';for(let i=0;i<=4;i++){const v=ymin+(ymax-ymin)*i/4;grid+=`<line x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="#26303e" stroke-dasharray="3 5"/><text x="${L-10}" y="${Y(v)+4}" text-anchor="end">${formatAxis(v)}</text>`;}
+ let grid='';for(let i=0;i<=4;i++){const v=ymin+(ymax-ymin)*i/4;grid+=`<line x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="#2c2c2c" stroke-dasharray="3 5"/><text x="${L-10}" y="${Y(v)+4}" text-anchor="end">${formatAxis(v)}</text>`;}
  const ticks=compact?2:4;
  for(let i=0;i<=ticks;i++){const t=min+(max-min)*i/ticks;grid+=`<text x="${X(t)}" y="${H-14}" text-anchor="${i===0?'start':i===ticks?'end':'middle'}">${timeLabel(t)}</text>`;}
  let missing='';if(min<visible[0].t-60000)missing=`<rect x="${L}" y="${T}" width="${X(visible[0].t)-L}" height="${H-T-B}" fill="url(#tl-hatch)"/><text x="${(L+X(visible[0].t))/2}" y="${H/2}" text-anchor="middle">Sem registros</text>`;
@@ -645,7 +645,7 @@ function graficoLinhas(raw){
  return `<section class="timeline" id="timeline"><div class="tl-head"><div><span class="tl-eyebrow">APURAÇÃO · BRASIL · ${S.turno}º TURNO</span><h3>Evolução do placar nacional</h3><p>Explore cada atualização · horário de Brasília</p></div><span class="tl-badge ${Timeline.follow?'live':''}" id="tl-mode">${Timeline.follow?'Último registro':'Consultando histórico'}</span></div>
  <div class="tl-toolbar"><div class="tl-segments" role="group" aria-label="Período">${options.map(([v,n])=>`<button data-tl-range="${v}" aria-pressed="${Timeline.range===v}">${n}</button>`).join('')}</div><div class="tl-selects"><label>Medida <select id="tl-metric"><option value="pct" ${Timeline.metric==='pct'?'selected':''}>Percentual</option><option value="votos" ${Timeline.metric==='votos'?'selected':''}>Votos</option></select></label><label>Escala <select id="tl-scale"><option value="auto" ${Timeline.scale==='auto'?'selected':''}>Ajustada às séries</option><option value="full" ${Timeline.scale==='full'?'selected':''}>Desde zero</option></select></label></div></div>
  <div class="tl-legend" role="group" aria-label="Candidatos exibidos">${all.map(c=>`<button data-tl-candidate="${c.n}" aria-pressed="${!Timeline.hidden.has(c.n)}" style="--candidate-color:${corCandidato(c)}"><i></i>${esc(c.nome)}</button>`).join('')}</div>
- <div class="tl-chart-wrap"><svg id="tl-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Linha do tempo da apuração nacional, horário de Brasília"><defs><pattern id="tl-hatch" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M0 8L8 0" stroke="#283242" stroke-width="1"/></pattern><clipPath id="tl-clip"><rect x="${L-7}" y="${T-7}" width="${W-L-R+14}" height="${H-T-B+14}"/></clipPath></defs>${grid}${missing}<g clip-path="url(#tl-clip)">${paths}<g id="tl-cursor"></g></g></svg></div>
+ <div class="tl-chart-wrap"><svg id="tl-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Linha do tempo da apuração nacional, horário de Brasília"><defs><pattern id="tl-hatch" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M0 8L8 0" stroke="#303030" stroke-width="1"/></pattern><clipPath id="tl-clip"><rect x="${L-7}" y="${T-7}" width="${W-L-R+14}" height="${H-T-B+14}"/></clipPath></defs>${grid}${missing}<g clip-path="url(#tl-clip)">${paths}<g id="tl-cursor"></g></g></svg></div>
  <p class="tl-hint">${visible.length===1?'Há apenas um registro neste período. A linha aparecerá quando chegar outra atualização.':'Passe o cursor pelo gráfico ou use a barra abaixo para consultar os valores.'} ${Timeline.scale==='auto'?'Escala vertical ajustada às séries selecionadas.':''}</p>
  <div class="tl-scrub"><button class="btn" data-tl-step="-1" aria-label="Registro anterior">←</button><input id="tl-slider" type="range" min="0" max="${visible.length-1}" value="${HistoryCore.nearest(visible,Timeline.time)}" aria-label="Consultar registro da apuração" ${visible.length===1?'disabled':''}><button class="btn" data-tl-step="1" aria-label="Próximo registro">→</button><button class="btn" data-tl-live>Último registro</button></div><div class="tl-summary-head"><b id="tl-time"></b><span id="tl-progress"></span></div><div id="tl-summary" class="tl-summary" aria-live="polite"></div>
  <div class="tl-footer"><p class="tl-note">${h.length} registros · ${dataHoraBR(h[0].t)} até ${dataHoraBR(end)}<br>${esc(status)} ${S.fonte==='tse'&&h[0].t>inicioApuracao(S.turno)+60000?'O período anterior ao primeiro registro não está disponível.':''} Intervalos maiores que 5 minutos ficam sem ligação.</p><button class="btn" data-tl-refresh ${Timeline.pending.has(key)?'disabled':''}>Sincronizar</button></div></section>`;
@@ -654,7 +654,7 @@ function atualizarCursorTimeline(){
  const h=Timeline.visible,g=Timeline.geometry;if(!g||!h.length||!$('#tl-cursor'))return;
  const index=HistoryCore.nearest(h,Timeline.time),p=h[index],prev=h[index-1];
  const X=t=>g.L+(t-g.min)/(g.max-g.min)*(g.W-g.L-g.R),Y=v=>g.T+(g.ymax-v)/(g.ymax-g.ymin)*(g.H-g.T-g.B);
- $('#tl-cursor').innerHTML=`<line x1="${X(p.t)}" x2="${X(p.t)}" y1="${g.T}" y2="${g.H-g.B}" stroke="#c0cbdc" stroke-dasharray="4 4"/>`+Timeline.series.map(c=>{const x=p.cands.find(x=>x.n===c.n);return x?`<circle cx="${X(p.t)}" cy="${Y(x[Timeline.metric])}" r="5" fill="${corCandidato(c)}" stroke="#fff" stroke-width="1.5"/>`:'';}).join('');
+ $('#tl-cursor').innerHTML=`<line x1="${X(p.t)}" x2="${X(p.t)}" y1="${g.T}" y2="${g.H-g.B}" stroke="#dcdcdc" stroke-dasharray="4 4"/>`+Timeline.series.map(c=>{const x=p.cands.find(x=>x.n===c.n);return x?`<circle cx="${X(p.t)}" cy="${Y(x[Timeline.metric])}" r="5" fill="${corCandidato(c)}" stroke="#fff" stroke-width="1.5"/>`:'';}).join('');
  $('#tl-time').textContent=dataHoraBR(p.t)+(p.timeKind==='observed'?' · horário da coleta':p.timeKind==='official'?' · horário do TSE':' · horário do registro');
  $('#tl-progress').textContent=fmtPct(p.a,2)+' das seções apuradas';
  $('#tl-summary').innerHTML=Timeline.series.map(c=>{const x=p.cands.find(x=>x.n===c.n),before=prev?.cands.find(x=>x.n===c.n);const delta=x&&before?x[Timeline.metric]-before[Timeline.metric]:null;return `<div class="tl-stat" style="--candidate-color:${corCandidato(c)}"><span>${esc(c.nome)}</span><strong>${x?(Timeline.metric==='pct'?fmtPct(x.pct,2):fmtInt(x.votos)):'Sem registro'}</strong><small>${x?fmtInt(x.votos)+' votos':''}${delta!==null?' · '+(delta>0?'+':'')+(Timeline.metric==='pct'?fmtPP(delta)+' pp':fmtInt(delta)+' votos')+' vs. registro anterior':''}</small></div>`;}).join('');
@@ -1016,7 +1016,7 @@ function renderUfs() {
 
 function renderLegenda() {
   if(S.turno===2&&S.fonte==='tse'&&semApuracaoSegundo()){
-   $('#legenda').innerHTML='<span><i style="background:#9bc477"></i>Com segundo turno</span>'+(S.cargo==='3'?'<span><i style="background:#28333f"></i>Sem disputa de 2º turno confirmada</span>':'');return;
+   $('#legenda').innerHTML='<span><i style="background:#9bc477"></i>Com segundo turno</span>'+(S.cargo==='3'?'<span><i style="background:#2d2d2d"></i>Sem disputa de 2º turno confirmada</span>':'');return;
   }
   const vistos = new Map();
   for (const uf of listaUfs(S.cargo)) for (const c of dadoUF(uf)?.cands || []) {
@@ -1176,9 +1176,9 @@ function renderTudo() {
 /* O mapa geral mostra cada município do Brasil e a votação nas cidades do exterior.
    Com o servidor, os resultados chegam já resumidos em /api/municipios; sem ele, a página
    consulta diretamente os arquivos do estado aberto (ou do exterior). */
-const Terr={modo:'municipios',geo:null,geoPromise:null,erroGeo:false,montado:false,mundoMontado:false,els:new Map(),dados:{},carregando:{},paisAberto:null,todosPaises:false,vb:null,anim:0,nomes:null,nomesTam:-1};
+const Terr={modo:'municipios',geo:null,geoPromise:null,erroGeo:false,montado:false,els:new Map(),dados:{},carregando:{},paisAberto:null,todosPaises:false,vb:null,anim:0,nomes:null,nomesTam:-1};
 const CARGOS_MUN=['1','3','5'];
-const SEM_COR='#293646';
+const SEM_COR='#343434';
 const muniDisponivel=(cargo=S.cargo)=>CARGOS_MUN.includes(cargo);
 function modoMapa(){if(Terr.modo==='exterior'&&S.cargo==='1')return 'exterior';if(Terr.modo!=='estados'&&muniDisponivel())return 'municipios';return 'estados';}
 const chaveTerr=(cargo,turno=S.turno)=>[S.fonte,cargo,turno].join('|');
@@ -1204,12 +1204,6 @@ function montarCamadas(){
    g.brasil.pontos.map(([i,uf,x,y])=>`<circle class="mun ponto" cx="${x}" cy="${y}" r="1.6" data-i="${i}" data-uf="${uf}"></circle>`).join('');
   for(const el of camada.children)Terr.els.set(el.dataset.i,el);
   Terr.montado=true;
- }
- if(!Terr.mundoMontado){
-  const w=g.mundo,svg=$('#mapaMundo');svg.setAttribute('viewBox',w.viewBox);
-  svg.innerHTML=`<path class="mundo-outros" d="${w.outros}"></path>`+w.paises.map(([iso,d])=>`<path class="pais" d="${d}" data-iso="${iso}"></path>`).join('')+
-   '<g id="cidadesExt">'+Object.keys(ExteriorCore.CIDADES).map(nome=>{const p=w.cidades[nome];return p?`<circle class="cidade-ext" cx="${p[0]}" cy="${p[1]}" r="2" data-cidade="${esc(nome)}"></circle>`:'';}).join('')+'</g>';
-  Terr.mundoMontado=true;
  }
 }
 
@@ -1240,7 +1234,7 @@ function registrarArquivo(j,uf,cd,cdi,nome,normalizado){
 }
 function gerarDemoTerr(cargo,turno){
  const j={cands:[],ufs:{},atualizadoEm:new Date().toISOString()};
- for(const [cdi,uf] of Terr.geo.brasil.municipios.concat(Terr.geo.brasil.pontos)){
+ if(Terr.geo)for(const [cdi,uf] of Terr.geo.brasil.municipios.concat(Terr.geo.brasil.pontos)){
   const r=Demo.arquivo(cargo,uf,turno,cdi);if(!r.dados)continue;
   registrarArquivo(j,uf,cdi,cdi,'Município fictício '+cdi.slice(-4),normalizar(r.dados,cargo));
  }
@@ -1268,8 +1262,7 @@ async function coletarDireto(cargo,turno,k,ufs){
 async function carregarTerritorio(){
  if(UI.view!=='resultados'||S.cargo==='cidades')return;
  const modo=modoMapa();if(modo==='estados')return;
- try{await carregarGeo();}catch{renderTerritorio();return;}
- montarCamadas();
+ try{if(modo==='exterior')await carregarGlobo();else{await carregarGeo();montarCamadas();}}catch{Terr.erroGeo=true;renderTerritorio();return;}
  const cargo=modo==='exterior'?'1':S.cargo,turno=S.turno,k=chaveTerr(cargo,turno);
  if(Terr.carregando[k])return;Terr.carregando[k]=true;
  try{
@@ -1296,7 +1289,7 @@ function liderVotos(votos,cands){
 }
 function estiloEstado(uf){
  const l=lider(dadoUF(uf)),segundo=S.turno===2&&S.fonte==='tse',status=segundo&&S.cargo==='3'?situacaoGovernador(uf):'runoff';
- if(segundo&&status!=='runoff')return {fill:'#28333f',op:1,status,segundo};
+ if(segundo&&status!=='runoff')return {fill:'#2d2d2d',op:1,status,segundo};
  if(l)return {fill:corCandidato(l.c),op:+(0.55+0.45*Math.min(Math.max(l.margem,0),20)/20).toFixed(2),cor:corDe(l.c,S.cargo),status,segundo};
  if(segundo)return {fill:'#9bc477',op:1,cor:'runoff',status,segundo};
  return {fill:null,op:null,status,segundo};
@@ -1307,7 +1300,7 @@ function pintarMunicipios(){
  for(const e of MAPA.estados)porUF[e.id]=estiloEstado(e.id);
  for(const [cdi,el] of Terr.els){
   const uf=el.dataset.uf,st=porUF[uf];let fill,op;
-  if(st.segundo&&st.status!=='runoff'){fill='#1d2733';op=1;}
+  if(st.segundo&&st.status!=='runoff'){fill='#212121';op=1;}
   else{
    const r=d?.porCdi.get(cdi),l=r&&liderVotos(r.votos,d.cands);
    if(l){fill=corCandidato(l.c);op=(0.38+0.62*Math.min(l.margem,40)/40).toFixed(2);}
@@ -1340,23 +1333,6 @@ function paisesExterior(){
   linhas.push({nome,apurado:r?.apurado||0,votos:Array.from({length:n},(_,i)=>r?.votos[i]||0),temDados:!!r});
  }
  return ExteriorCore.agruparPaises(linhas);
-}
-function pintarMundo(paises){
- if(!Terr.mundoMontado)return;
- const d=dadosTerr('1'),porIso=new Map(paises.map(p=>[p.id,p]));
- for(const el of $('#mapaMundo').querySelectorAll('.pais')){
-  const p=porIso.get(el.dataset.iso),l=p&&liderVotos(p.votos,d?.cands||[]);
-  el.classList.toggle('com-voto',!!p);el.classList.toggle('aberto',!!p&&Terr.paisAberto===p.id);
-  if(l){el.style.fill=corCandidato(l.c);el.style.fillOpacity=(0.4+0.6*Math.min(l.margem,40)/40).toFixed(2);}
-  else{el.style.fill='';el.style.fillOpacity='';}
- }
- const cidades=new Map(paises.flatMap(p=>p.cidades.map(c=>[c.nome,c])));
- const max=Math.max(1,...[...cidades.values()].map(c=>c.votos.reduce((a,b)=>a+b,0)));
- for(const el of $('#mapaMundo').querySelectorAll('.cidade-ext')){
-  const c=cidades.get(el.dataset.cidade),t=c?c.votos.reduce((a,b)=>a+b,0):0,l=c&&liderVotos(c.votos,d?.cands||[]);
-  el.setAttribute('r',t?(1.8+9*Math.sqrt(t/max)).toFixed(1):'1.8');
-  el.style.fill=l?corCandidato(l.c):'';el.classList.toggle('sem-voto',!l);
- }
 }
 function barraVotos(votos,cands){
  const l=liderVotos(votos,cands);if(!l)return '<div class="mini" aria-hidden="true"></div>';
@@ -1394,12 +1370,12 @@ function renderTerritorio(){
   b.disabled=m==='municipios'&&!muniDisponivel()&&S.cargo!=='cidades';
   b.title=b.disabled?'Disponível para presidente, governador e senador':'';
  });
- const svg=$('#mapa');svg.toggleAttribute('hidden',ext);$('#mapaMundo').toggleAttribute('hidden',!ext);$('#ufs').hidden=ext;$('#exteriorPainel').hidden=!ext;
+ const svg=$('#mapa');svg.toggleAttribute('hidden',ext);$('#globo').hidden=!ext;ativarGlobo(ext&&UI.view==='resultados');$('#ufs').hidden=ext;$('#exteriorPainel').hidden=!ext;
  svg.classList.toggle('modo-mun',modo==='municipios'&&Terr.montado);
  if(modo==='municipios'){pintarMunicipios();}
  aplicarZoom();
  let status='';
- if(modo!=='estados'&&!Terr.geo)status=Terr.erroGeo?'Não foi possível carregar o mapa dos municípios.':'Carregando o mapa…';
+ if(modo!=='estados'&&!(ext?Globo.features.length:Terr.geo))status=Terr.erroGeo?(ext?'Não foi possível carregar o globo.':'Não foi possível carregar o mapa dos municípios.'):(ext?'Carregando o globo…':'Carregando o mapa…');
  else if(modo!=='estados'){
   const d=dadosTerr(),c=d?.coleta;
   if(S.fonte!=='demo'&&!S.proxy&&modo==='municipios'&&!S.uf)status='Escolha um estado para carregar os municípios dele.';
@@ -1409,15 +1385,15 @@ function renderTerritorio(){
  }
  $('#mapaStatus').textContent=status;
  if(ext){
-  const paises=paisesExterior();pintarMundo(paises);renderExterior(paises);
+  const paises=paisesExterior();if(Globo.features.length)atualizarGlobo(paises,dadosTerr('1')?.cands||[]);renderCartaoGlobo();renderExterior(paises);
   const d=dadosTerr('1'),vistos=new Map();
   for(const p of paises){const l=liderVotos(p.votos,d?.cands||[]);if(l)vistos.set(l.c.nome,corCandidato(l.c));}
-  $('#legenda').innerHTML=[...vistos].map(([n,c])=>`<span><i style="background:${c}"></i>${esc(n)} lidera</span>`).join('')+'<span><i style="background:#3a4d63"></i>Com seções, sem votos apurados</span><span><i style="background:#18222d"></i>Sem seções eleitorais</span>';
+  $('#legenda').innerHTML=[...vistos].map(([n,c])=>`<span><i style="background:${c}"></i>${esc(n)} lidera</span>`).join('')+'<span><i style="background:#3d3d3d"></i>Com seções, sem votos apurados</span><span><i style="background:#1a1a1a;outline:1px solid #333"></i>Sem seções eleitorais</span>';
  }else if(modo==='municipios'&&!(S.turno===2&&S.fonte==='tse'&&semApuracaoSegundo())&&!$('#legenda .leg-nota'))$('#legenda').insertAdjacentHTML('beforeend','<span class="leg-nota">Cor mais forte: vantagem maior</span>');
 }
 function textoNotaMapa(){
  const modo=modoMapa(),segundo=S.turno===2&&S.fonte==='tse';
- if(modo==='exterior')return 'A cor de cada país mostra quem lidera entre os brasileiros que votam ali; os círculos são as cidades com seções eleitorais, maiores quanto mais votos apurados. Passe o cursor sobre um país ou uma cidade para ver os números.';
+ if(modo==='exterior')return 'O globo gira sozinho; arraste para girar à mão. Cada país tem a cor de quem lidera entre os brasileiros que votam ali, e os pontos são as cidades com seções eleitorais, maiores quanto mais votos. Clique em um país (no globo ou na tabela) para centralizá-lo e ver os votos.';
  if(modo==='municipios')return (segundo&&S.cargo==='3'?'Somente os estados com segundo turno para governador estão destacados. ':'')+'Cada município aparece na cor de quem lidera nele; quanto mais forte, maior a vantagem. Enquanto um estado não tem resultados municipais, os municípios dele usam a cor do estado. Clique em um estado para aproximar e, com ele aberto, clique em um município para ver todos os candidatos.';
  return null;
 }
@@ -1441,24 +1417,10 @@ function dicaTerritorio(alvo){
   if(S.uf===uf&&S.fonte!=='demo')h+='<span class="dica-acao">Clique para ver todos os candidatos</span>';
   return h;
  }
- const ext=dadosTerr('1'),cands=ext?.cands||[];
- if(alvo.classList.contains('cidade-ext')){
-  const nome=alvo.dataset.cidade,r=ext?.ext.get(nome),info=ExteriorCore.cidade(nome),l=r&&liderVotos(r.votos,cands);
-  let h=`<b>${esc(nomeBonito(nome))}</b><span class="dica-uf">${esc(info?.nomePais||'')}</span>`;
-  h+=l?`${fmtPct(r.apurado,2)} das seções apuradas · ${fmtInt(l.total)} votos`+l.ordem.slice(0,3).map(o=>`<span class="dica-cand"><i style="background:${corCandidato(o.c)}"></i>${esc(o.c.nome)}<b>${fmtPct(o.pct)}</b></span>`).join(''):'Sem votos apurados ainda';
-  return h;
- }
- if(alvo.classList.contains('pais')){
-  const p=paisesExterior().find(x=>x.id===alvo.dataset.iso);if(!p)return null;
-  const l=liderVotos(p.votos,cands);
-  let h=`<b>${esc(p.nome)}</b><span class="dica-uf">${p.cidades.length} ${p.cidades.length>1?'cidades':'cidade'} com seções</span>`;
-  h+=l?`${fmtInt(l.total)} votos apurados`+l.ordem.slice(0,3).map(o=>`<span class="dica-cand"><i style="background:${corCandidato(o.c)}"></i>${esc(o.c.nome)}<b>${fmtPct(o.pct)}</b></span>`).join(''):'Sem votos apurados ainda';
-  return h;
- }
  return null;
 }
 function moverDicaTerritorio(ev){
- const alvo=ev.target.closest('.mun,.pais,.cidade-ext'),dica=$('#dica'),hover=$('#munHover');
+ const alvo=ev.target.closest('.mun'),dica=$('#dica'),hover=$('#munHover');
  if(hover){if(alvo?.classList.contains('mun')&&alvo.tagName==='path'){hover.setAttribute('d',alvo.getAttribute('d'));hover.style.display='';}else hover.style.display='none';}
  if(!alvo)return false;
  const h=dicaTerritorio(alvo);if(!h){dica.hidden=true;return true;}
@@ -1469,18 +1431,9 @@ function moverDicaTerritorio(ev){
  if(y+150>box.height)y=Math.max(4,ev.clientY-box.top-150);
  dica.style.left=x+'px';dica.style.top=y+'px';return true;
 }
-$('#mapaMundo').addEventListener('mousemove',moverDicaTerritorio);
-$('#mapaMundo').addEventListener('mouseleave',()=>{$('#dica').hidden=true;});
-$('#mapaMundo').addEventListener('click',(ev)=>{
- const p=ev.target.closest('.pais.com-voto,.cidade-ext');if(!p)return;
- const iso=p.dataset.iso||ExteriorCore.cidade(p.dataset.cidade)?.pais;if(!iso)return;
- Terr.paisAberto=Terr.paisAberto===iso?null:iso;
- const paises=paisesExterior();if(paises.findIndex(x=>x.id===iso)>=12)Terr.todosPaises=true;
- renderTerritorio();document.querySelector(`#exteriorPainel tr[data-pais="${iso}"]`)?.scrollIntoView({block:'nearest',behavior:'smooth'});
-});
 $('#exteriorPainel').addEventListener('click',(ev)=>{
  const tr=ev.target.closest('tr[data-pais]');
- if(tr){Terr.paisAberto=Terr.paisAberto===tr.dataset.pais?null:tr.dataset.pais;renderTerritorio();return;}
+ if(tr){const iso=tr.dataset.pais;if(Globo.features.length&&iso!=='?'){selecionarPais(iso);if(Globo.selecionado)$('#globo').scrollIntoView({block:'nearest',behavior:'smooth'});}else{Terr.paisAberto=Terr.paisAberto===iso?null:iso;renderTerritorio();}return;}
  if(ev.target.closest('[data-ext-todos]')){Terr.todosPaises=!Terr.todosPaises;renderTerritorio();}
 });
 $('#exteriorPainel').addEventListener('keydown',(ev)=>{const tr=ev.target.closest('tr[data-pais]');if(tr&&(ev.key==='Enter'||ev.key===' ')){ev.preventDefault();tr.click();}});
@@ -1489,6 +1442,218 @@ function escolherModoMapa(m){
  if(m==='exterior'){if(S.cargo!=='1'){mudar(()=>{Terr.modo='exterior';S.cargo='1';S.uf=null;});return;}S.uf=null;}
  Terr.modo=m;guardarHash();renderTudo();carregarTerritorio();
 }
+/* --------------------------------- Globo -------------------------------- */
+/* Globo em canvas (projeção ortográfica do d3-geo). Gira sozinho; arraste para girar;
+   ao escolher um país, ele gira até o país, para e mostra os votos no cartão. */
+const Globo={libs:null,features:[],porIso:new Map(),centros:new Map(),ctx:null,proj:null,path:null,
+ rot:[45,-12],escala:1,desl:0,ultimoCartao:'',escalaAlvo:1,girando:true,pausado:false,arrasto:null,velX:0,velY:0,anim:null,raf:0,ultimo:0,
+ hover:null,hoverCidade:null,selecionado:null,cores:new Map(),cidades:[],cands:[],w:0,h:0,dpr:1,ativo:false,pulso:0,retomarEm:0};
+const movimentoReduzido=()=>!!window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+function carregarScript(src,teste){
+ if(teste())return Promise.resolve();
+ return new Promise((ok,falha)=>{const s=document.createElement('script');s.src=src;s.async=true;s.onload=()=>teste()?ok():falha(Error(src));s.onerror=()=>{s.remove();falha(Error(src));};document.head.appendChild(s);});
+}
+function carregarGlobo(){
+ if(!Globo.libs)Globo.libs=(async()=>{
+  await carregarScript('globo-libs.js',()=>!!(window.d3?.geoOrthographic&&window.topojson?.feature));
+  await carregarScript('globo-geo.js',()=>!!window.GLOBO_TOPO);
+  const t=window.GLOBO_TOPO;Globo.features=topojson.feature(t,t.objects.countries).features.filter(f=>f.geometry);
+  for(const f of Globo.features){
+   f.id=String(f.id||'');Globo.porIso.set(f.id,f);
+   // Centro do maior pedaço do país (a França fica na Europa, não no meio do Atlântico).
+   const polys=f.geometry.type==='MultiPolygon'?f.geometry.coordinates:[f.geometry.coordinates];
+   let maior=null,area=-1;for(const p of polys){const a=d3.geoArea({type:'Polygon',coordinates:p});if(a>area&&a<2*Math.PI){area=a;maior=p;}}
+   if(maior)Globo.centros.set(f.id,d3.geoCentroid({type:'Polygon',coordinates:maior}));
+  }
+  Globo.proj=d3.geoOrthographic().clipAngle(90).precision(0.4);
+  montarGlobo();
+ })().catch(e=>{Globo.libs=null;throw e;});
+ return Globo.libs;
+}
+function montarGlobo(){
+ const c=$('#globoCanvas');Globo.ctx=c.getContext?.('2d')||null;
+ if(!Globo.ctx)return;
+ Globo.path=d3.geoPath(Globo.proj,Globo.ctx);
+ const medir=()=>{const r={width:c.clientWidth,height:c.clientHeight};if(!r.width)return;Globo.dpr=Math.min(2,window.devicePixelRatio||1);Globo.w=r.width;Globo.h=r.height;c.width=Math.round(r.width*Globo.dpr);c.height=Math.round(r.height*Globo.dpr);desenharGlobo();};
+ if(window.ResizeObserver)new ResizeObserver(medir).observe(c);else window.addEventListener('resize',medir);
+ medir();
+ c.addEventListener('pointerdown',globoPressionar);c.addEventListener('pointermove',globoMover);
+ c.addEventListener('pointerup',globoSoltar);c.addEventListener('pointercancel',globoSoltar);
+ c.addEventListener('pointerleave',()=>{if(!Globo.arrasto){Globo.hover=null;Globo.hoverCidade=null;$('#dica').hidden=true;c.style.cursor='';}});
+ Globo.girando=!movimentoReduzido();
+}
+/* Cores e cidades a partir dos dados do exterior. */
+function atualizarGlobo(paises,cands){
+ Globo.cands=cands;Globo.cores.clear();Globo.paises=new Map(paises.map(p=>[p.id,p]));
+ for(const p of paises){const l=liderVotos(p.votos,cands);Globo.cores.set(p.id,l?{cor:corCandidato(l.c),a:0.5+0.5*Math.min(l.margem,40)/40}:{cor:'#3d3d3d',a:1});}
+ const todas=paises.flatMap(p=>p.cidades.map(c=>({c,pais:p.id,info:ExteriorCore.cidade(c.nome),t:c.votos.reduce((a,b)=>a+b,0)}))).filter(x=>x.info);
+ const max=Math.max(1,...todas.map(x=>x.t));
+ Globo.cidades=todas.map(x=>{const l=liderVotos(x.c.votos,cands);return {...x,lonlat:[x.info.lon,x.info.lat],r:x.t?2.2+8*Math.sqrt(x.t/max):1.8,cor:l?corCandidato(l.c):'#d9d9d9'};}).sort((a,b)=>b.r-a.r);
+ desenharGlobo();
+}
+const centroAtual=()=>[-Globo.rot[0],-Globo.rot[1]];
+function raioGlobo(){return Math.max(10,Math.min(Globo.w,Globo.h)/2*0.86)*Globo.escala;}
+function desenharGlobo(){
+ const ctx=Globo.ctx;if(!ctx||!Globo.w)return;
+ const {w,h,dpr}=Globo,r=raioGlobo(),cx=w/2-Globo.desl*w*0.15,cy=h/2,P=Globo.proj;
+ P.scale(r).translate([cx,cy]).rotate([Globo.rot[0],Globo.rot[1],0]);
+ ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
+ // Halo da atmosfera
+ const halo=ctx.createRadialGradient(cx,cy,r*0.92,cx,cy,r*1.22);
+ halo.addColorStop(0,'rgba(192,236,154,0.16)');halo.addColorStop(0.35,'rgba(192,236,154,0.05)');halo.addColorStop(1,'rgba(192,236,154,0)');
+ ctx.fillStyle=halo;ctx.beginPath();ctx.arc(cx,cy,r*1.22,0,2*Math.PI);ctx.fill();
+ // Oceano
+ const mar=ctx.createRadialGradient(cx-r*0.35,cy-r*0.4,r*0.05,cx,cy,r);
+ mar.addColorStop(0,'#121212');mar.addColorStop(0.75,'#070707');mar.addColorStop(1,'#020202');
+ ctx.beginPath();Globo.path({type:'Sphere'});ctx.fillStyle=mar;ctx.fill();
+ ctx.beginPath();Globo.path(Globo.grat||(Globo.grat=d3.geoGraticule10()));ctx.strokeStyle='rgba(255,255,255,0.045)';ctx.lineWidth=0.6;ctx.stroke();
+ // Países
+ for(const f of Globo.features){
+  const st=Globo.cores.get(f.id);
+  ctx.beginPath();Globo.path(f);
+  ctx.globalAlpha=1;ctx.fillStyle=st?'#2c2c2c':'#232323';ctx.fill();
+  if(st&&st.cor!=='#3d3d3d'){ctx.globalAlpha=st.a;ctx.fillStyle=st.cor;ctx.fill();}else if(st){ctx.fillStyle=st.cor;ctx.fill();}
+  ctx.globalAlpha=1;ctx.strokeStyle='rgba(0,0,0,0.85)';ctx.lineWidth=0.5;ctx.stroke();
+ }
+ for(const [iso,cor,larg] of [[Globo.hover,'rgba(255,255,255,0.55)',1.2],[Globo.selecionado,'#f5f5f5',1.8]]){
+  const f=iso&&Globo.porIso.get(iso);if(!f)continue;ctx.beginPath();Globo.path(f);ctx.strokeStyle=cor;ctx.lineWidth=larg;ctx.stroke();
+ }
+ // Cidades com seções eleitorais (só o lado visível)
+ const centro=centroAtual();
+ for(const c of Globo.cidades){
+  if(d3.geoDistance(c.lonlat,centro)>Math.PI/2-0.02)continue;
+  const p=P(c.lonlat);if(!p)continue;
+  const sel=c.pais===Globo.selecionado,rr=c.r*(sel?1.25:1);
+  ctx.globalAlpha=0.16;ctx.fillStyle=c.cor;ctx.beginPath();ctx.arc(p[0],p[1],rr*1.9,0,2*Math.PI);ctx.fill();
+  ctx.globalAlpha=1;ctx.beginPath();ctx.arc(p[0],p[1],rr,0,2*Math.PI);ctx.fillStyle=c.cor;ctx.fill();
+  ctx.lineWidth=sel?1.4:0.8;ctx.strokeStyle=sel?'#fff':'rgba(0,0,0,0.8)';ctx.stroke();
+  if(sel&&!movimentoReduzido()){const k=(Globo.pulso%1600)/1600;ctx.globalAlpha=0.6*(1-k);ctx.beginPath();ctx.arc(p[0],p[1],rr+2+k*14,0,2*Math.PI);ctx.strokeStyle='#fff';ctx.lineWidth=1;ctx.stroke();ctx.globalAlpha=1;}
+ }
+ // Brilho na borda
+ const brilho=ctx.createRadialGradient(cx-r*0.45,cy-r*0.5,0,cx-r*0.45,cy-r*0.5,r*1.3);
+ brilho.addColorStop(0,'rgba(255,255,255,0.07)');brilho.addColorStop(1,'rgba(255,255,255,0)');
+ ctx.beginPath();Globo.path({type:'Sphere'});ctx.fillStyle=brilho;ctx.fill();ctx.strokeStyle='rgba(255,255,255,0.12)';ctx.lineWidth=1;ctx.stroke();
+}
+function cicloGlobo(t){
+ Globo.raf=0;if(!Globo.ativo)return;
+ const dt=Math.min(64,t-(Globo.ultimo||t));Globo.ultimo=t;Globo.pulso+=dt;
+ let mexeu=false;
+ if(Globo.anim){
+  const a=Globo.anim,p=Math.min(1,(t-a.t0)/a.dur),e=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
+  const c=a.interp(e);Globo.rot=[-c[0],-c[1]];Globo.escala=a.e0+(a.e1-a.e0)*e;Globo.desl=a.d0+(a.d1-a.d0)*e;mexeu=true;
+  if(p>=1)Globo.anim=null;
+ }else if(Globo.arrasto){mexeu=true;}
+ else if(Math.abs(Globo.velX)>0.01||Math.abs(Globo.velY)>0.01){
+  Globo.rot[0]+=Globo.velX*dt;Globo.rot[1]=Math.max(-70,Math.min(70,Globo.rot[1]+Globo.velY*dt));Globo.velX*=Math.pow(0.94,dt/16);Globo.velY*=Math.pow(0.94,dt/16);mexeu=true;
+ }else if(Globo.girando&&!Globo.pausado&&!Globo.selecionado&&t>Globo.retomarEm){
+  Globo.rot[0]+=dt*0.006;  // 6° por segundo: uma volta completa a cada minuto
+  Globo.rot[1]+=(-12-Globo.rot[1])*Math.min(1,dt/1500);mexeu=true;
+ }
+ if(Globo.selecionado&&!movimentoReduzido())mexeu=true;  // pulso nas cidades do país escolhido
+ if(mexeu)desenharGlobo();
+ Globo.raf=requestAnimationFrame(cicloGlobo);
+}
+function ativarGlobo(ativo){
+ Globo.ativo=ativo&&!document.hidden;
+ if(Globo.ativo&&!Globo.raf&&Globo.ctx){Globo.ultimo=0;Globo.raf=requestAnimationFrame(cicloGlobo);}
+ if(!Globo.ativo&&Globo.raf){cancelAnimationFrame(Globo.raf);Globo.raf=0;}
+}
+document.addEventListener('visibilitychange',()=>ativarGlobo(modoMapa()==='exterior'&&UI.view==='resultados'));
+const cartaoLateral=()=>(Globo.w||0)>=480&&!window.matchMedia?.('(max-width:700px)')?.matches;
+function centralizar(iso){
+ const alvo=Globo.centros.get(iso)||Globo.cidades.find(c=>c.pais===iso)?.lonlat;if(!alvo||!window.d3)return;
+ const de=centroAtual(),dist=d3.geoDistance(de,alvo);
+ Globo.velX=Globo.velY=0;
+ Globo.anim={t0:performance.now(),dur:movimentoReduzido()?1:Math.max(700,Math.min(1600,dist*650)),interp:d3.geoInterpolate(de,[alvo[0],Math.max(-60,Math.min(60,alvo[1]))]),e0:Globo.escala,e1:1.04,d0:Globo.desl,d1:cartaoLateral()?1:0};
+}
+function selecionarPais(iso,{rolarTabela=false}={}){
+ if(!iso||iso===Globo.selecionado){fecharPais();return;}
+ Globo.selecionado=iso;Terr.paisAberto=iso;
+ const paises=paisesExterior();if(paises.findIndex(x=>x.id===iso)>=12)Terr.todosPaises=true;
+ centralizar(iso);renderTerritorio();
+ if(rolarTabela)document.querySelector(`#exteriorPainel tr[data-pais="${iso}"]`)?.scrollIntoView({block:'nearest',behavior:'smooth'});
+}
+function fecharPais(){
+ Globo.selecionado=null;Terr.paisAberto=null;
+ Globo.anim={t0:performance.now(),dur:movimentoReduzido()?1:700,interp:d3.geoInterpolate(centroAtual(),centroAtual()),e0:Globo.escala,e1:1,d0:Globo.desl,d1:0};
+ Globo.retomarEm=performance.now()+900;renderTerritorio();
+}
+function renderCartaoGlobo(){
+ const el=$('#globoCartao'),iso=Globo.selecionado,p=iso&&Globo.paises?.get(iso);
+ $('#globoGirar').textContent=Globo.selecionado?'Voltar a girar':Globo.pausado?'Girar':'Pausar';
+ if(!p){el.classList.remove('aberto');el.setAttribute('aria-hidden','true');Globo.ultimoCartao='';return;}
+ const cands=Globo.cands,l=liderVotos(p.votos,cands);
+ const linhas=l?l.ordem.slice(0,4):[];
+ if(l&&l.ordem.length>4){const resto=l.ordem.slice(4),v=resto.reduce((n,o)=>n+o.votos,0);linhas.push({c:{nome:`Outros ${resto.length} candidatos`},votos:v,pct:v/l.total*100,outros:true});}
+ const novoPais=!Globo.ultimoCartao.startsWith(iso+'|');
+ const html=`<button class="globo-fechar" data-globo-fechar aria-label="Fechar">×</button>
+  <span class="eyebrow">PRESIDENTE · ${esc(p.nome.toUpperCase())}</span>
+  <h3>${esc(p.nome)}</h3>
+  <div class="globo-total"><b class="num">${l?fmtInt(l.total):'0'}</b><span>votos nominais apurados</span></div>
+  <p class="globo-meta">${p.cidades.length} ${p.cidades.length>1?'cidades':'cidade'} com seções · ${p.total?fmtPct(p.apurado,1)+' das seções apuradas':'apuração ainda não começou'}</p>
+  ${linhas.length?`<div class="globo-cands">${linhas.map(o=>`<div class="globo-cand" style="--cor:${o.outros?'#8a8a8a':corCandidato(o.c)}"><div class="globo-cand-topo"><span>${esc(o.c.nome)}</span><b class="num">${fmtPct(o.pct)}</b></div><div class="globo-barra"><i style="width:${o.pct}%"></i></div><small>${fmtInt(o.votos)} votos</small></div>`).join('')}</div>`:'<p class="globo-meta">Os votos aparecem aqui assim que as urnas deste país forem apuradas.</p>'}
+  <div class="globo-cidades"><span class="globo-sub">Cidades</span>${p.cidades.slice(0,8).map(c=>{const t=c.votos.reduce((a,b)=>a+b,0),lc=liderVotos(c.votos,cands);return `<div><span>${esc(nomeBonito(c.nome))}</span><span class="num">${t?fmtInt(t)+' votos':'–'}</span>${lc?`<i style="background:${corCandidato(lc.c)}" title="${esc(lc.c.nome)} lidera"></i>`:'<i></i>'}</div>`;}).join('')}${p.cidades.length>8?`<small>+ ${p.cidades.length-8} cidades na tabela abaixo</small>`:''}</div>`;
+ if(Globo.ultimoCartao!==iso+'|'+html){el.innerHTML=html;el.classList.toggle('anima',novoPais);Globo.ultimoCartao=iso+'|'+html;}
+ el.setAttribute('aria-hidden','false');
+ requestAnimationFrame(()=>el.classList.add('aberto'));
+}
+/* Interação: arrastar, inércia, passar o cursor e clicar */
+function pontoGlobo(ev){const r=$('#globoCanvas').getBoundingClientRect();return [ev.clientX-r.left,ev.clientY-r.top];}
+function alvoGlobo(pt){
+ if(!Globo.proj)return null;
+ const centro=centroAtual();
+ for(const c of Globo.cidades){if(d3.geoDistance(c.lonlat,centro)>Math.PI/2-0.02)continue;const p=Globo.proj(c.lonlat);if(p&&Math.hypot(p[0]-pt[0],p[1]-pt[1])<=Math.max(5,c.r+2))return {cidade:c,iso:c.pais};}
+ const ll=Globo.proj.invert(pt);if(!ll||d3.geoDistance(ll,centro)>Math.PI/2)return null;
+ for(const f of Globo.features)if(d3.geoContains(f,ll))return {iso:f.id};
+ return null;
+}
+function globoPressionar(ev){
+ if(ev.button>0)return;
+ Globo.arrasto={x:ev.clientX,y:ev.clientY,rot:[...Globo.rot],t:performance.now(),moveu:0,ult:[ev.clientX,ev.clientY,performance.now()]};
+ Globo.anim=null;Globo.velX=Globo.velY=0;$('#globoCanvas').setPointerCapture?.(ev.pointerId);$('#dica').hidden=true;
+}
+function globoMover(ev){
+ const a=Globo.arrasto;
+ if(a){
+  const k=90/raioGlobo(),dx=ev.clientX-a.x,dy=ev.clientY-a.y;a.moveu=Math.max(a.moveu,Math.hypot(dx,dy));
+  Globo.rot=[a.rot[0]+dx*k,Math.max(-70,Math.min(70,a.rot[1]-dy*k))];
+  const agora=performance.now(),dt=Math.max(1,agora-a.ult[2]);Globo.velX=(ev.clientX-a.ult[0])*k/dt;Globo.velY=-(ev.clientY-a.ult[1])*k/dt;a.ult=[ev.clientX,ev.clientY,agora];
+  $('#globoCanvas').style.cursor='grabbing';return;
+ }
+ const alvo=alvoGlobo(pontoGlobo(ev)),dica=$('#dica'),iso=alvo?.iso&&Globo.paises?.has(alvo.iso)?alvo.iso:null;
+ if(iso!==Globo.hover||alvo?.cidade!==Globo.hoverCidade){Globo.hover=iso;Globo.hoverCidade=alvo?.cidade||null;if(!Globo.raf)desenharGlobo();}
+ $('#globoCanvas').style.cursor=iso?'pointer':'grab';
+ if(!iso){dica.hidden=true;return;}
+ dica.innerHTML=alvo.cidade?dicaCidadeExterior(alvo.cidade.c.nome):dicaPaisExterior(iso);dica.hidden=false;
+ const box=$('.mapa-wrap').getBoundingClientRect();let x=ev.clientX-box.left+16,y=ev.clientY-box.top+16;
+ if(x+250>box.width)x=ev.clientX-box.left-262;if(y+160>box.height)y=Math.max(4,ev.clientY-box.top-160);
+ dica.style.left=x+'px';dica.style.top=y+'px';
+}
+function globoSoltar(ev){
+ const a=Globo.arrasto;if(!a)return;Globo.arrasto=null;$('#globoCanvas').style.cursor='';
+ if(performance.now()-a.ult[2]>80)Globo.velX=Globo.velY=0;
+ Globo.retomarEm=performance.now()+2500;
+ if(a.moveu<5&&ev.type==='pointerup'){
+  const alvo=alvoGlobo(pontoGlobo(ev));Globo.velX=Globo.velY=0;
+  if(alvo?.iso&&Globo.paises?.has(alvo.iso))selecionarPais(alvo.iso===Globo.selecionado?null:alvo.iso,{rolarTabela:false});
+  else if(Globo.selecionado)fecharPais();
+ }
+}
+function dicaPaisExterior(iso){
+ const p=Globo.paises?.get(iso);if(!p)return '';const l=liderVotos(p.votos,Globo.cands);
+ return `<b>${esc(p.nome)}</b><span class="dica-uf">${p.cidades.length} ${p.cidades.length>1?'cidades':'cidade'} com seções</span>`+(l?`${fmtInt(l.total)} votos apurados`+l.ordem.slice(0,3).map(o=>`<span class="dica-cand"><i style="background:${corCandidato(o.c)}"></i>${esc(o.c.nome)}<b>${fmtPct(o.pct)}</b></span>`).join(''):'Sem votos apurados ainda')+(iso===Globo.selecionado?'':'<span class="dica-acao">Clique para ver os votos</span>');
+}
+function dicaCidadeExterior(nome){
+ const ext=dadosTerr('1'),r=ext?.ext.get(nome),info=ExteriorCore.cidade(nome),l=r&&liderVotos(r.votos,ext.cands);
+ return `<b>${esc(nomeBonito(nome))}</b><span class="dica-uf">${esc(info?.nomePais||'')}</span>`+(l?`${fmtPct(r.apurado,2)} das seções apuradas · ${fmtInt(l.total)} votos`+l.ordem.slice(0,3).map(o=>`<span class="dica-cand"><i style="background:${corCandidato(o.c)}"></i>${esc(o.c.nome)}<b>${fmtPct(o.pct)}</b></span>`).join(''):'Sem votos apurados ainda');
+}
+$('#globo').addEventListener('click',(ev)=>{
+ if(ev.target.closest('[data-globo-fechar]')){fecharPais();return;}
+ if(ev.target.closest('#globoGirar')){if(Globo.selecionado){fecharPais();return;}Globo.pausado=!Globo.pausado;Globo.retomarEm=0;renderCartaoGlobo();}
+});
+document.addEventListener('keydown',(ev)=>{if(ev.key==='Escape'&&Globo.selecionado&&modoMapa()==='exterior')fecharPais();});
+
+
 
 /* ------------------------------ Interação ----------------------------- */
 function escolherUF(uf) {
@@ -1756,6 +1921,7 @@ function aplicarNavegacao(){
  $('.map-note').textContent=textoNotaMapa()||(S.turno===2&&S.fonte==='tse'?(S.cargo==='3'?'Somente os estados com segundo turno confirmado estão coloridos. Antes da apuração, o verde indica participação, sem apontar liderança. Clique para conhecer os candidatos.':'A disputa presidencial acontece em todas as UFs. O verde indica participação; as cores dos candidatos aparecem quando houver votos do segundo turno.'):'A cor de cada estado mostra quem lidera a apuração; quanto mais forte, maior a vantagem. Clique em um estado para consultar os resultados.');
  $('#atualizar').disabled=S.carregando;$('#atualizar').textContent=S.carregando?'Atualizando…':'Atualizar';
  $('#compartilhar').hidden=view==='metodo'||view==='noticias';
+ if(typeof ativarGlobo==='function')ativarGlobo(modoMapa()==='exterior'&&view==='resultados');
 }
 function navegar(view){
  if(!['resultados','cidades','candidatos','noticias','metodo'].includes(view))return;

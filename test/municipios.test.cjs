@@ -48,11 +48,12 @@ test('valida fonte, cargo e turno',()=>{
  const col=createCollector({request:async()=>({body:'{}'}),dataDir:os.tmpdir(),automatico:false});
  assert(col.validar('tse','1',2));assert(col.validar('sim','3',1));assert(!col.validar('tse','6',1));assert(!col.validar('tse','5',2));assert(!col.validar('x','1',1));
 });
-test('todas as cidades do exterior do TSE têm país e posição no mapa',()=>{
+test('todas as cidades do exterior do TSE têm país, coordenadas e país no globo',()=>{
  const cfg=require('../data/tse/oficial/ele2026/6257/config/mun-e006257-cm.json');
  const zz=cfg.abr.find(a=>a.cd==='zz').mu;assert(zz.length>150);
  global.window={};require('../mapa-geo.js');const geo=global.window.MAPA_GEO;
- for(const m of zz){assert(ExteriorCore.cidade(m.nm),'sem país: '+m.nm);assert(geo.mundo.cidades[m.nm],'sem posição: '+m.nm);}
+ const ids=new Set(JSON.parse(require('fs').readFileSync(require('path').join(__dirname,'../globo-geo.js'),'utf8').replace(/^[\s\S]*?window\.GLOBO_TOPO=/,'').replace(/;\s*$/,'')).objects.countries.geometries.map(g=>String(g.id)));
+ for(const m of zz){const c=ExteriorCore.cidade(m.nm);assert(c,'sem país: '+m.nm);assert(Number.isFinite(c.lat)&&Number.isFinite(c.lon),'sem coordenadas: '+m.nm);assert(ids.has(c.pais),'país fora do globo: '+c.nomePais);}
  const paises=ExteriorCore.agruparPaises([{cd:'1',nome:'LISBOA',apurado:100,votos:[5,1]},{cd:'2',nome:'PORTO',apurado:50,votos:[1,3]},{cd:'3',nome:'MIAMI',apurado:100,votos:[1,2]}]);
  assert.equal(paises[0].nome,'Portugal');assert.deepEqual(paises[0].votos,[6,4]);assert.equal(paises[0].apurado,75);assert.equal(paises[1].nome,'Estados Unidos');
  const brasil=new Set(geo.brasil.municipios.map(m=>m[0]));const faltam=cfg.abr.filter(a=>a.cd!=='zz').flatMap(a=>a.mu).filter(m=>!brasil.has(m.cdi)&&!geo.brasil.pontos.some(p=>p[0]===m.cdi));

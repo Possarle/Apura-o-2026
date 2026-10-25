@@ -37,9 +37,9 @@ O mapa da Visão geral tem três botões:
 
 - **Municípios**: os 5.571 municípios, cada um na cor de quem lidera nele (presidente, governador ou senador). Clique em um estado para aproximar; com o estado aberto, clique em um município para abrir a página “Por município” já filtrada. Enquanto um estado ainda não tem resultados municipais, os municípios dele usam a cor do estado.
 - **Estados**: o mapa por UF de antes.
-- **Exterior**: mapa-múndi com os países e as 186 cidades onde brasileiros votam para presidente, com placar do exterior e tabela por país (clique para ver as cidades).
+- **Exterior**: um globo que gira sozinho (uma volta por minuto), com os países na cor de quem lidera e pontos nas 186 cidades onde brasileiros votam para presidente. Arraste para girar à mão. Ao clicar em um país (no globo ou na tabela), o globo gira até ele, para e mostra um cartão com os votos de cada candidato e das cidades; “Voltar a girar”, o “×” ou a tecla Esc retomam o giro. Abaixo ficam o placar do exterior e a tabela por país.
 
-Com `node server.js`, o servidor reúne os arquivos municipais do TSE em segundo plano e salva o resumo em `data/municipios/` (ou em `DATA_DIR/municipios/`). Abrindo só o HTML, a página consulta diretamente os municípios do estado aberto ou do exterior. As malhas ficam em `mapa-geo.js`, que precisa estar na mesma pasta do `index.html`.
+Com `node server.js`, o servidor reúne os arquivos municipais do TSE em segundo plano e salva o resumo em `data/municipios/` (ou em `DATA_DIR/municipios/`). Abrindo só o HTML, a página consulta diretamente os municípios do estado aberto ou do exterior. As malhas ficam em `mapa-geo.js`, `globo-geo.js` e `globo-libs.js`, que precisam estar na mesma pasta do `index.html`.
 
 Quando usa uma cópia salva, a interface mostra um aviso com os horários dos dados e não a apresenta como atualização ao vivo. Consultas online que falham não apagam os resultados salvos de outras UFs. Os gráficos usam os mesmos dados das listas de candidatos.
 
@@ -133,4 +133,4 @@ Testes de histórico, parsing e segurança dos links RSS, rotas HTTP, inicializa
 - g1 Política RSS: https://g1.globo.com/rss/g1/politica/
 - Agência Brasil RSS: https://agenciabrasil.ebc.com.br/rss/politica/feed.xml
 
-Projeto independente, sem vínculo com a Justiça Eleitoral. Os números oficiais são os do TSE. Malha municipal: IBGE, via municipal-brazilian-geodata (MIT). Mapa-múndi: Natural Earth (domínio público).
+Projeto independente, sem vínculo com a Justiça Eleitoral. Os números oficiais são os do TSE. Malha municipal: IBGE, via municipal-brazilian-geodata (MIT). Globo: Natural Earth (domínio público), d3-geo e topojson-client (ISC).

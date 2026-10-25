@@ -1,10 +1,10 @@
 'use strict';
 /*
- Gera mapa-geo.js (municípios do Brasil + mapa-múndi) e atualiza os contornos dos
+ Gera mapa-geo.js (municípios do Brasil), globo-geo.js + globo-libs.js (globo da aba Exterior) e atualiza os contornos dos
  estados em index.template.html, para que estados e municípios fiquem alinhados.
 
  Não faz parte do build: o arquivo gerado já está no repositório. Para refazer:
-   1. npm i --no-save mapshaper@0.7 world-atlas@2 d3-geo@3 topojson-client@3 topojson-simplify@3
+   1. npm i --no-save mapshaper@0.7 world-atlas@2 d3-array@3 d3-geo@3 topojson-client@3 topojson-simplify@3
    2. Baixe as malhas municipais (IBGE, via github.com/luizpedone/municipal-brazilian-geodata,
       licença MIT) para uma pasta, um arquivo por UF: AC.json, AL.json, ... TO.json
    3. node ferramentas/gerar-mapas.cjs <pasta-das-malhas>
@@ -55,35 +55,27 @@ async function brasil(){
  return {viewBox:`0 0 ${W} ${H}`,estados,municipios,pontos};
 }
 
-async function mundo(){
- // O mapa-múndi usa a projeção esférica do d3-geo, que corta corretamente os países no antimeridiano.
- const {geoNaturalEarth1,geoPath}=require('d3-geo');
- const {feature}=require('topojson-client'),{presimplify,simplify,quantile}=require('topojson-simplify');
- let topo=presimplify(require('world-atlas/countries-50m.json'));
- topo=simplify(topo,quantile(topo,0.12));
- const geo=feature(topo,topo.objects.countries);
- geo.features=geo.features.filter(f=>f.id!=='010');
- for(const f of geo.features)f.properties={iso:f.id||''};
- const W=960,m=4,projection=geoNaturalEarth1().fitWidth(W-2*m,{type:'Sphere'});
- let path=geoPath(projection).digits(1);const [[,y0],[,y1]]=path.bounds(geo);
- // Sem a Antártida, o recorte vertical vai só até as terras habitadas.
- projection.translate([projection.translate()[0]+m,projection.translate()[1]+m-y0]);path=geoPath(projection).digits(1);
- const H=Math.ceil(y1-y0+2*m);
- // Remove ilhas que viram um ponto na escala do mapa.
- const limpa=d=>(d||'').split('M').filter(p=>p&&new Set(p.replace(/Z$/,'').split('L')).size>2).map(p=>'M'+p).join('');
- const paises=geo.features.filter(f=>f.properties.iso&&f.geometry).map(f=>[f.properties.iso,limpa(path(f))]).filter(x=>x[1]);
- const outros=geo.features.filter(f=>!f.properties.iso&&f.geometry).map(f=>limpa(path(f))).join('');
- const cidades={};for(const [nome,[,lat,lon]] of Object.entries(ExteriorCore.CIDADES)){const [x,y]=projection([lon,lat]);cidades[nome]=[+x.toFixed(1),+y.toFixed(1)];}
- return {viewBox:`0 0 ${W} ${H}`,paises,outros,cidades};
+/* Globo: topologia dos países (Natural Earth 1:50m simplificada) e bibliotecas do navegador. */
+function globo(){
+ const {presimplify,simplify,quantile}=require('topojson-simplify'),{filter}=require('topojson-simplify');
+ let topo=presimplify(JSON.parse(JSON.stringify(require('world-atlas/countries-50m.json'))));
+ topo=simplify(topo,quantile(topo,0.05));
+ delete topo.objects.land;
+ for(const g of topo.objects.countries.geometries){g.properties={};}
+ topo=filter(topo,()=>true);
+ fs.writeFileSync(path.join(base,'globo-geo.js'),'/* Países: Natural Earth (domínio público), via world-atlas, simplificado. Gerado por ferramentas/gerar-mapas.cjs. */\nwindow.GLOBO_TOPO='+JSON.stringify(topo)+';\n');
+ const libs=['d3-array/dist/d3-array.min.js','d3-geo/dist/d3-geo.min.js','topojson-client/dist/topojson-client.min.js'].map(f=>{const [pkg,...resto]=f.split('/'),entrada=require.resolve(pkg),raiz=entrada.slice(0,entrada.lastIndexOf(path.sep+'node_modules'+path.sep+pkg+path.sep)+pkg.length+14);return fs.readFileSync(path.join(raiz,...resto),'utf8').trim();});
+ fs.writeFileSync(path.join(base,'globo-libs.js'),'/* d3-array, d3-geo e topojson-client (licença ISC, © Mike Bostock e colaboradores; d3-geo inclui código de Charles Karney, MIT). Usados pelo globo da aba Exterior. */\n'+libs.join('\n')+'\n');
+ return fs.statSync(path.join(base,'globo-geo.js')).size;
 }
 
 (async()=>{
- const b=await brasil(),w=await mundo();
- const geo={brasil:{viewBox:b.viewBox,municipios:b.municipios,pontos:b.pontos},mundo:w};
- fs.writeFileSync(path.join(base,'mapa-geo.js'),'/* Malhas: municípios (IBGE, via luizpedone/municipal-brazilian-geodata, MIT) e países (Natural Earth, domínio público, via world-atlas). Gerado por ferramentas/gerar-mapas.cjs. */\nwindow.MAPA_GEO='+JSON.stringify(geo)+';\n');
+ const b=await brasil(),tamGlobo=globo();
+ const geo={brasil:{viewBox:b.viewBox,municipios:b.municipios,pontos:b.pontos}};
+ fs.writeFileSync(path.join(base,'mapa-geo.js'),'/* Malhas: municípios (IBGE, via luizpedone/municipal-brazilian-geodata, MIT) Gerado por ferramentas/gerar-mapas.cjs. */\nwindow.MAPA_GEO='+JSON.stringify(geo)+';\n');
  const tpl=path.join(base,'index.template.html');let html=fs.readFileSync(tpl,'utf8');
  const a=html.indexOf('const MAPA = '),z=html.indexOf('\n',a);if(a<0)throw Error('MAPA não encontrado');
  html=html.slice(0,a)+'const MAPA = '+JSON.stringify({viewBox:b.viewBox,estados:b.estados})+';'+html.slice(z);
  fs.writeFileSync(tpl,html);
- console.log('Municípios:',b.municipios.length,'· pontos:',b.pontos.length,'· países:',w.paises.length,'· mapa-geo.js:',fs.statSync(path.join(base,'mapa-geo.js')).size,'bytes');
+ console.log('Municípios:',b.municipios.length,'· pontos:',b.pontos.length,'· globo-geo.js:',tamGlobo,'bytes · mapa-geo.js:',fs.statSync(path.join(base,'mapa-geo.js')).size,'bytes');
 })().catch(e=>{console.error(e);process.exit(1);});

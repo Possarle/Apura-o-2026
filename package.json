@@ -1,6 +1,6 @@
 {
   "name": "apuracao-2026",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "private": true,
   "description": "Apuração por município (mapa com as 5.571 cidades e o exterior), busca de candidatos, histórico persistente e notícias",
   "engines": {
