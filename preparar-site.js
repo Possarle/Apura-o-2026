@@ -11,5 +11,5 @@ function embed(name,tag){
  else {const old=tag==='style'?`<link rel="stylesheet" href="${name}">`:`<script src="${name}"></script>`;if(!html.includes(old))throw Error('Recurso não encontrado: '+name);html=html.replace(old,()=>block);}
 }
 embed('professional.css','style');
-for(const name of ['history-core.js','election-core.js','snapshot-data.js'])embed(name,'script');
+for(const name of ['history-core.js','election-core.js','exterior-core.js','snapshot-data.js'])embed(name,'script');
 fs.writeFileSync(file,html);console.log('HTML completo preparado:',Buffer.byteLength(html),'bytes.');

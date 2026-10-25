@@ -6,6 +6,7 @@ const https = require('node:https');
 const fs = require('node:fs');
 const path = require('node:path');
 const HistoryCore = require('./history-core');
+const {createCollector} = require('./coletor-municipios');
 const DATA_DIR = path.resolve(process.env.DATA_DIR || path.join(__dirname, 'data'));
 function initializeDataDirectory(destination, seed = path.join(__dirname, 'data')) {
  const target=path.resolve(destination),source=path.resolve(seed);
@@ -85,6 +86,7 @@ async function refreshNews() {
   save('news.json',news);newsFailed=false;
  }catch(e){newsFailed=true;console.warn('Notícias: '+e.message);}finally{newsPending=null;}return news;})();return newsPending;
 }
+const municipios=createCollector({request,dataDir:DATA_DIR,automatico:process.env.DISABLE_BACKGROUND!=='1'});
 const cache=new Map(), inflight=new Map();
 let nextSlot=0;
 async function proxy(url) {
@@ -103,13 +105,23 @@ function createServer() {return http.createServer(async(req,res)=>{
  if(u.pathname==='/__proxy_ok'){res.end('ok');return;}
  if(u.pathname==='/healthz')return json(200,{status:'ok'});
  if(u.pathname==='/api/history'){const turn=u.searchParams.get('turno')||'1';if(!['1','2'].includes(turn))return json(400,{error:'Turno inválido'});return json(200,{points:HistoryCore.merge(load(`history-${turn}.json`,[]))});}
+ if(u.pathname==='/api/municipios'){
+  const fonte=u.searchParams.get('fonte')||'tse',cargo=u.searchParams.get('cargo')||'1',turno=Number(u.searchParams.get('turno')||'1');
+  if(!municipios.validar(fonte,cargo,turno))return json(400,{error:'Consulta inválida'});
+  const dados=municipios.consultar(fonte,cargo,turno),etag=`"m${dados.codigo||0}-${Date.parse(dados.atualizadoEm)||0}-${dados.coleta.feitos}-${dados.coleta.emAndamento?1:0}"`;
+  res.setHeader('Cache-Control','no-cache');res.setHeader('ETag',etag);
+  if(req.headers['if-none-match']===etag){res.writeHead(304);res.end();return;}
+  const body=JSON.stringify(dados);res.setHeader('Content-Type','application/json; charset=utf-8');
+  if(/gzip/.test(req.headers['accept-encoding']||'')){res.setHeader('Content-Encoding','gzip');res.setHeader('Vary','Accept-Encoding');res.end(zlib.gzipSync(body));}else res.end(body);
+  return;
+ }
  if(u.pathname==='/api/news'){await refreshNews();return news?json(200,{...news,stale:newsFailed||Date.now()-Date.parse(news.updatedAt)>3700000}):json(503,{error:'Feed indisponível'});}
  for(const [prefix,host] of [['/tse/','resultados.tse.jus.br'],['/tse-sim/','resultados-sim.tse.jus.br']])if(u.pathname.startsWith(prefix)){
   try{const r=await proxy('https://'+host+'/'+u.pathname.slice(prefix.length));res.writeHead(200,{'Content-Type':r.type||'application/json','Cache-Control':'no-store'});res.end(r.body);if(prefix==='/tse/'&&u.pathname.endsWith('.json')){try{const local=path.resolve(DATA_DIR,'tse',u.pathname.slice(prefix.length));const root=path.resolve(DATA_DIR,'tse')+path.sep;if(local.startsWith(root)){fs.mkdirSync(path.dirname(local),{recursive:true});fs.writeFileSync(local,r.body);}}catch{console.warn('Não foi possível salvar o cache do TSE.');}}}catch(e){const local=path.resolve(DATA_DIR,'tse',u.pathname.slice(prefix.length));const root=path.resolve(DATA_DIR,'tse')+path.sep;if(prefix==='/tse/'&&local.startsWith(root)&&fs.existsSync(local)){res.writeHead(200,{'Content-Type':'application/json','Cache-Control':'no-store','X-Apuracao-Source':'snapshot'});fs.createReadStream(local).pipe(res);return;}const code=/HTTP (404|403|429)/.exec(e.message);json(code?Number(code[1]):502,{error:'Arquivo do TSE indisponível'});}return;
  }
- const assets={'/':'text/html','/index.html':'text/html','/snapshot-data.js':'application/javascript','/history-core.js':'application/javascript','/election-core.js':'application/javascript','/professional.css':'text/css','/favicon.svg':'image/svg+xml'};
+ const assets={'/':'text/html','/index.html':'text/html','/snapshot-data.js':'application/javascript','/history-core.js':'application/javascript','/election-core.js':'application/javascript','/exterior-core.js':'application/javascript','/mapa-geo.js':'application/javascript','/professional.css':'text/css','/favicon.svg':'image/svg+xml'};
  if(assets[u.pathname]){const f=path.join(__dirname,u.pathname==='/'?'index.html':u.pathname.slice(1));if(!fs.existsSync(f)){res.writeHead(404);res.end();return;}const stat=fs.statSync(f),etag=`"${stat.size}-${Math.round(stat.mtimeMs)}"`;res.setHeader('ETag',etag);res.setHeader('Cache-Control','no-cache');res.setHeader('Content-Type',assets[u.pathname]+'; charset=utf-8');if(req.headers['if-none-match']===etag){res.writeHead(304);res.end();return;}const stream=fs.createReadStream(f);if(/gzip/.test(req.headers['accept-encoding']||'')){res.setHeader('Content-Encoding','gzip');res.setHeader('Vary','Accept-Encoding');stream.pipe(zlib.createGzip()).pipe(res);}else stream.pipe(res);return;}
  res.writeHead(404);res.end('Não encontrado');
 });}
-if(require.main===module){createServer().listen(process.env.PORT||8080,()=>console.log('Site disponível em http://localhost:'+(process.env.PORT||8080)));if(process.env.DISABLE_BACKGROUND!=='1'){collectHistory();refreshNews();setInterval(collectHistory,60000);setInterval(refreshNews,3600000);}}
+if(require.main===module){createServer().listen(process.env.PORT||8080,()=>console.log('Site disponível em http://localhost:'+(process.env.PORT||8080)));if(process.env.DISABLE_BACKGROUND!=='1'){collectHistory();refreshNews();setInterval(collectHistory,60000);setInterval(refreshNews,3600000);setInterval(()=>municipios.manter(),30000);}}
 module.exports={point,parseFeed,createServer,initializeDataDirectory};

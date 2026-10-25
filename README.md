@@ -1,6 +1,6 @@
 # Apuração 2026
 
-Painel eleitoral com tema escuro, resultados por estado e município, busca de candidatos, linha do tempo e notícias. A versão 3.1 abre no segundo turno e destaca no mapa de governadores somente as UFs com disputa pendente. Os resultados do primeiro turno continuam disponíveis.
+Painel eleitoral com tema escuro, resultados por estado e município, busca de candidatos, linha do tempo e notícias. A versão 3.2 traz o mapa geral dividido em todos os municípios do Brasil e uma aba Exterior, com a votação de brasileiros em 186 cidades de 133 países. A versão 3.1 abriu o segundo turno e destaca no mapa de governadores somente as UFs com disputa pendente. Os resultados do primeiro turno continuam disponíveis.
 
 ## Publicar e obter um link
 
@@ -19,6 +19,7 @@ Para testar gratuitamente, siga a alternativa em [COMO-HOSPEDAR.md](COMO-HOSPEDA
 ## Recursos
 
 - Presidente, governador, senador, deputado federal e deputado estadual/distrital, com filtros por UF e município.
+- Mapa geral em três visões: **Municípios** (cada um dos 5.571 municípios na cor de quem lidera, com aproximação ao clicar em um estado), **Estados** e **Exterior** (mapa-múndi com países e cidades, mais uma tabela por país e cidade). A camada municipal vale para presidente, governador e senador; o exterior, só para presidente.
 - Pesquisa de candidatos e perfis com votos e distribuição geográfica.
 - Cores dos partidos, com Lula em vermelho e Bolsonaro em azul.
 - Linha do tempo nacional com horários, separação por turno e histórico salvo pelo servidor.
@@ -29,7 +30,7 @@ Para testar gratuitamente, siga a alternativa em [COMO-HOSPEDAR.md](COMO-HOSPEDA
 
 A pasta `data/` contém a base incluída e deve permanecer no repositório. O build gera `snapshot-data.js` e `index.html` a partir de `index.template.html` e dos arquivos salvos; esses dois arquivos gerados não são versionados. O pacote contém 136 resultados consolidados: cinco cargos nas 27 UFs e presidente no Brasil, além das configurações, notícias e quatro registros nacionais reais para iniciar o histórico. A coleta incluída foi consultada em 07/10/2026; a interface informa os horários originais da fonte.
 
-Os votos municipais são consultados conforme a navegação e armazenados após consultas bem-sucedidas. O segundo turno aguarda os resultados oficiais: os dados do primeiro turno usados como referência aparecem identificados. Períodos anteriores sem registros não são reconstruídos artificialmente.
+Os votos municipais são consultados conforme a navegação e armazenados após consultas bem-sucedidas. Para o mapa geral, o servidor reúne os arquivos municipais do TSE em segundo plano (até 12 consultas por segundo, separadas das consultas dos visitantes), guarda o resumo em `DATA_DIR/municipios/` e o entrega em `/api/municipios`. Municípios já 100% apurados não são consultados de novo. Sem o servidor, a página consulta só os municípios do estado aberto ou do exterior. O segundo turno aguarda os resultados oficiais: os dados do primeiro turno usados como referência aparecem identificados. Períodos anteriores sem registros não são reconstruídos artificialmente.
 
 ## Executar no computador
 
@@ -67,6 +68,6 @@ Use uma única instância com o disco configurado. Faça backups dos dados persi
 - [Recursos, limitações e uso do pacote](LEIA-ME.md)
 - Resultados: [Tribunal Superior Eleitoral](https://resultados.tse.jus.br/)
 - Notícias: feeds públicos do g1 e da Agência Brasil, com links para as publicações originais.
-- Mapa: @svg-maps/brazil (CC BY 4.0), com crédito preservado na interface.
+- Malha municipal: IBGE, via [municipal-brazilian-geodata](https://github.com/luizpedone/municipal-brazilian-geodata) (MIT). Mapa-múndi: [Natural Earth](https://www.naturalearthdata.com/) (domínio público), via world-atlas. Os dois estão em `mapa-geo.js`, gerado por `ferramentas/gerar-mapas.cjs`.
 
 Projeto independente, sem vínculo com a Justiça Eleitoral. O modo Demonstração utiliza dados fictícios identificados na interface e não representa resultados eleitorais.

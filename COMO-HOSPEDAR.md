@@ -30,7 +30,7 @@ Abra http://localhost:8080. No Windows, você também pode executar `INICIAR.bat
 
 ## 2. Envie os arquivos para um repositório no GitHub
 
-Crie um repositório em https://github.com/new. Envie o conteúdo extraído, com `package.json`, `package-lock.json`, `server.js`, `index.template.html`, os scripts de build, os estilos e a pasta `data` na raiz. Os arquivos `index.html` e `snapshot-data.js` são gerados automaticamente pelo build. Inclua também os demais arquivos do projeto. Não envie apenas o ZIP.
+Crie um repositório em https://github.com/new. Envie o conteúdo extraído, com `package.json`, `package-lock.json`, `server.js`, `coletor-municipios.js`, `index.template.html`, `mapa-geo.js`, `exterior-core.js`, os scripts de build, os estilos e a pasta `data` na raiz. Os arquivos `index.html` e `snapshot-data.js` são gerados automaticamente pelo build. Inclua também os demais arquivos do projeto. Não envie apenas o ZIP.
 
 Para transferir a pasta inteira, use o GitHub Desktop: https://desktop.github.com/. Crie ou clone o repositório, copie os arquivos para a pasta dele, faça um commit e use **Publish repository** ou **Push origin**. Isso preserva os subdiretórios de `data`. O repositório pode ser privado; autorize o Render a acessá-lo na próxima etapa.
 

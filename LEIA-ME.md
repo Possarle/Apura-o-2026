@@ -31,6 +31,16 @@ O pacote contém **136 resultados oficiais do TSE do primeiro turno**: president
 
 Os **resultados municipais individuais ainda exigem consulta online**. A configuração com nomes/códigos dos municípios está incluída, mas este ZIP não contém os resultados de todos os municípios do país.
 
+## Mapa dos municípios e do exterior
+
+O mapa da Visão geral tem três botões:
+
+- **Municípios**: os 5.571 municípios, cada um na cor de quem lidera nele (presidente, governador ou senador). Clique em um estado para aproximar; com o estado aberto, clique em um município para abrir a página “Por município” já filtrada. Enquanto um estado ainda não tem resultados municipais, os municípios dele usam a cor do estado.
+- **Estados**: o mapa por UF de antes.
+- **Exterior**: mapa-múndi com os países e as 186 cidades onde brasileiros votam para presidente, com placar do exterior e tabela por país (clique para ver as cidades).
+
+Com `node server.js`, o servidor reúne os arquivos municipais do TSE em segundo plano e salva o resumo em `data/municipios/` (ou em `DATA_DIR/municipios/`). Abrindo só o HTML, a página consulta diretamente os municípios do estado aberto ou do exterior. As malhas ficam em `mapa-geo.js`, que precisa estar na mesma pasta do `index.html`.
+
 Quando usa uma cópia salva, a interface mostra um aviso com os horários dos dados e não a apresenta como atualização ao vivo. Consultas online que falham não apagam os resultados salvos de outras UFs. Os gráficos usam os mesmos dados das listas de candidatos.
 
 No primeiro turno, ao abrir um cargo estadual sem uma UF selecionada, o site usa a UF de “Por cidade” (SP por padrão). No segundo turno, Governador abre com o resumo das disputas confirmadas. O seletor “Resultados e gráficos de” permite trocar de UF ou abrir o resumo nacional.
@@ -114,7 +124,7 @@ npm install
 npm test
 ```
 
-Testes de histórico, parsing e segurança dos links RSS, rotas HTTP, inicialização do disco e interações DOM: busca, perfil, municípios nos cinco cargos, DF, segundo turno e gráfico temporal. Há testes específicos de datas, correções no mesmo horário, dados inválidos e seleção de registros. O teste municipal usa dados de demonstração e limita a três municípios por UF para execução rápida. Use Node.js 24.
+Testes de histórico, parsing e segurança dos links RSS, rotas HTTP, inicialização do disco e interações DOM: busca, perfil, municípios nos cinco cargos, DF, segundo turno e gráfico temporal. Há testes específicos de datas, correções no mesmo horário, dados inválidos e seleção de registros. O teste municipal usa dados de demonstração e limita a três municípios por UF para execução rápida. `test/mapa.test.cjs` cobre o mapa de municípios, a aproximação por estado e a aba Exterior; `test/municipios.test.cjs` cobre o coletor do servidor e confere se todas as cidades do exterior têm país e posição no mapa. Use Node.js 24.
 
 ## Fontes técnicas
 
@@ -123,4 +133,4 @@ Testes de histórico, parsing e segurança dos links RSS, rotas HTTP, inicializa
 - g1 Política RSS: https://g1.globo.com/rss/g1/politica/
 - Agência Brasil RSS: https://agenciabrasil.ebc.com.br/rss/politica/feed.xml
 
-Projeto independente, sem vínculo com a Justiça Eleitoral. Os números oficiais são os do TSE. Mapa: @svg-maps/brazil (CC BY 4.0).
+Projeto independente, sem vínculo com a Justiça Eleitoral. Os números oficiais são os do TSE. Malha municipal: IBGE, via municipal-brazilian-geodata (MIT). Mapa-múndi: Natural Earth (domínio público).

@@ -12,3 +12,50 @@ main{padding:0 36px 28px;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr
 @media(max-width:600px){.app-sidebar{inset:auto 0 0;width:100%;height:67px;border-right:0;border-top:1px solid #35485b;padding:0 4px;background:#0f1927f5;backdrop-filter:blur(16px)}.app-sidebar .brand{display:none}.app-nav{margin:0;flex-direction:row;justify-content:space-around;gap:0;height:100%}.app-nav button{flex-direction:column;gap:5px;padding:9px 6px;border-radius:0;border:0;min-width:0;flex:1;font-size:8px}.app-nav button span{display:block;white-space:nowrap}.app-nav button svg{width:18px;height:18px}.app-nav button[aria-current=page]{background:none;color:var(--accent)}.app-shell{margin-left:0;padding-bottom:70px}.topo{padding:14px 0;margin:0 16px;min-height:75px}.controles{gap:6px;justify-content:space-between}.controles #fonte{width:145px;max-width:145px;font-size:10px;padding:7px}.controles .seg button{font-size:10px;padding:7px 8px}.controles .btn{font-size:10px;padding:7px 9px}.controles .status{width:100%;max-width:100%;flex:auto;text-align:right;font-size:9px}.page-intro{padding:26px 16px 23px;gap:12px;align-items:flex-start}.page-intro h1{font-size:29px;letter-spacing:-1px}.page-intro p{font-size:11px;line-height:1.8;max-width:230px}.page-intro .share-button{font-size:0;padding:8px;width:33px;height:33px;gap:0}.share-button span{font-size:17px}.eyebrow{font-size:8px;letter-spacing:1.6px}.tabs{margin:0 16px 19px}.tabs button{font-size:11px;padding:12px 14px}.tabs button:first-child{padding-right:16px}.placar{margin:0 16px 20px;gap:10px}.score-card{padding:16px 13px;border-radius:9px}.score-card .score-value{font-size:30px}.score-card h2{font-size:12px;line-height:1.4;min-height:33px}.score-rank{font-size:8px;letter-spacing:1px}.score-party{font-size:8px}.score-votes{font-size:10px!important}.score-line{margin-top:14px}.progress-card h2{min-height:0}.progress-card{padding:17px}.progress-card .score-value{font-size:28px}.score-context{font-size:9px}.aviso,#avisoPacote{margin:0 16px 18px;padding:11px;font-size:10px;line-height:1.8}#avisoPacote::before{display:block;font-size:8px}.estado-controle{margin:0 16px 17px;gap:8px;font-size:11px}.estado-controle select{min-width:170px;font-size:11px}.cartao{padding:17px;border-radius:10px}main{padding:0 16px 24px;gap:16px}.section-heading{gap:10px}.section-heading h2{font-size:18px}.subtle-tag{font-size:9px}.mapa-wrap{padding:0}.mapa-wrap #mapa{max-height:320px}.map-note{font-size:9px}.legenda{font-size:9px}.painel{max-height:610px}.cand .nome{font-size:12px}.cand .pct{font-size:18px!important}.analytics-heading{margin:0 16px 20px}.analytics-heading h2{font-size:23px}.analytics-heading p{font-size:11px}.graficos{grid-template-columns:1fr;padding:0 16px 26px;gap:16px}.timeline{padding:17px 12px}.extras,#cidadesWrap,.method-section{margin:0 16px 25px;padding:17px}.extras .section-heading{align-items:flex-start;flex-wrap:wrap}.extras .section-heading p{font-size:11px;line-height:1.7}.extras .cid-controles{padding:11px;gap:8px}.extras .cid-controles input{width:100%;flex-basis:100%}.extras .cid-controles select{flex:1;max-width:50%;padding:10px 6px;font-size:11px}.extras .cid-controles .btn{width:100%;font-size:11px}#buscaLista{grid-template-columns:1fr}.resultado-cand{padding:17px}.perfil-metricas{grid-template-columns:1fr 1fr}.perfil-metricas>div{padding:13px 10px}.perfil-metricas b{font-size:20px}#perfilCandidato>.cartao{padding:16px}#perfilCandidato h2{font-size:22px}.tl-summary{grid-template-columns:1fr 1fr}#cidadesWrap{padding:0}#cidResumo h2{font-size:21px}.cid-controles .seg button{font-size:10px;padding:8px}.cid-controles input[type=search]{min-width:0;flex:1;width:100%}.cid-graficos{display:block}.cid-graficos>.g{margin-bottom:12px}#noticiasLista{grid-template-columns:1fr}#noticiasLista article{padding:20px}#noticiasLista h3{font-size:17px}.method-section{padding:0}.method-hero h2{font-size:27px}.method-grid{gap:15px}.method-links{gap:15px;flex-direction:column}.app-shell>footer{margin:20px 16px 0;font-size:9px}.toast{bottom:85px;right:16px;left:16px;max-width:none}.hb{grid-template-columns:minmax(80px,.85fr) minmax(40px,1fr) auto!important}.donut-wrap svg{width:130px;height:130px}.donut-wrap .leg{min-width:110px;font-size:10px}.timeline .tl-legend button{font-size:9px}.timeline .tl-hint{font-size:10px}.timeline .tl-summary-head{font-size:11px}.extras .section-heading .btn{font-size:11px}.tl-stat strong{font-size:23px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
 .table-hint{display:none}.cand>div:last-child{min-width:0}.cidades th{white-space:nowrap}@media(max-width:600px){.table-hint{display:block;color:#819bb7;font-size:10px;margin:12px 0}.det{display:block!important}.det .grade{grid-template-columns:1fr!important;min-width:0!important;margin-top:15px}.det .donut-wrap{width:100%;min-width:0}.tabela-wrap .det .cand{min-width:0}.tabela-wrap .det .cand .nome{overflow-wrap:anywhere}.tabela-wrap .det .cand .votos{font-size:9px}}
+/* Municípios e exterior no mapa geral */
+.mapa-modos{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 14px;margin:-6px 0 12px}
+.mapa-modos .seg button{font-size:11px;padding:7px 12px}
+.mapa-status{font-size:10.5px;color:#8ea3bb;min-height:14px}
+#mapa .mun{stroke:#0e1620;stroke-width:.35;vector-effect:non-scaling-stroke;cursor:pointer;fill:var(--sem);transition:fill .5s ease,fill-opacity .5s ease,opacity .35s ease}
+#mapa .mun.ponto{stroke:#e8eef5;stroke-width:.8}
+#camadaMun{display:none}
+#mapa.modo-mun #camadaMun{display:inline}
+#mapa.modo-mun .estado{fill:none!important;pointer-events:none;stroke:#0b1017;stroke-width:1.4;vector-effect:non-scaling-stroke}
+#mapa.modo-mun .estado.sel{stroke:#f2f7ec;stroke-width:2.2}
+#mapa.modo-mun.zoom .mun.fora{opacity:.28}
+#mapa.zoom #rotulos{display:none}
+#munHover{fill:none;stroke:#fff;stroke-width:1.6;vector-effect:non-scaling-stroke;pointer-events:none}
+#mapaMundo{width:100%;height:auto;display:block;max-height:460px;margin:auto}
+#mapaMundo .pais{fill:#18222d;stroke:#0d151e;stroke-width:.5;transition:fill .5s ease,fill-opacity .5s ease}
+#mapaMundo .pais.com-voto{fill:#3a4d63;cursor:pointer}
+#mapaMundo .pais.com-voto:hover,#mapaMundo .pais.aberto{stroke:#f2f7ec;stroke-width:1.1}
+#mapaMundo .mundo-outros{fill:#18222d;stroke:#0d151e;stroke-width:.5}
+#mapaMundo .cidade-ext{fill:#8aa0b8;fill-opacity:.9;stroke:#0b1017;stroke-width:.7;cursor:pointer;transition:r .5s ease,fill .5s ease}
+#mapaMundo .cidade-ext.sem-voto{fill:#c7d3e0;fill-opacity:.55}
+#mapaMundo .cidade-ext:hover{stroke:#fff;stroke-width:1.4}
+.dica .dica-uf{display:block;color:#8ea3bb;font-size:10.5px;margin:1px 0 6px}
+.dica .dica-cand{display:flex;align-items:center;gap:6px;margin-top:4px}
+.dica .dica-cand i{width:8px;height:8px;border-radius:2px;flex:none}
+.dica .dica-cand b{margin-left:auto;padding-left:10px;font-size:12px;display:inline}
+.dica .dica-acao{display:block;margin-top:8px;color:var(--accent);font-size:10.5px}
+.leg-nota{color:#6f839a}
+.exterior{margin-top:18px;border-top:1px solid #24303e;padding-top:18px}
+.ext-cab{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px 24px;align-items:flex-end;margin-bottom:14px}
+.ext-cab h3{margin:0;font-size:16px;font-weight:650;letter-spacing:-.3px}
+.ext-placar{display:flex;flex-wrap:wrap;gap:8px}
+.ext-placar div{border-left:3px solid var(--cor);background:#162130;border-radius:6px;padding:7px 12px;display:grid;min-width:120px}
+.ext-placar span{font-size:10px;color:#9fb1c6;text-transform:uppercase;letter-spacing:.5px}
+.ext-placar b{font-size:20px;color:var(--cor)}
+.ext-placar small{font-size:10px;color:#8ea3bb}
+.ext-tabela tr.linha{cursor:pointer}
+.ext-tabela tr.aberta{background:#16263a}
+.ext-tabela tr.ext-cidade td{font-size:11px;background:#0f1a26;padding-top:8px;padding-bottom:8px}
+.ext-tabela tr.ext-cidade td:first-child{padding-left:22px;color:#c8d4e2}
+.ext-lider{display:inline-flex;align-items:center;gap:5px;white-space:nowrap;margin-right:8px}
+.ext-lider i{width:8px;height:8px;border-radius:2px}
+.ext-tabela .mini{margin-top:5px}
+.ext-todos{margin-top:12px}
+@media(max-width:600px){.mapa-modos .seg{width:100%}.mapa-modos .seg button{flex:1}#mapaMundo{max-height:260px}.ext-placar div{min-width:0;flex:1}}
+.map-card,.exterior{min-width:0}.exterior .tabela-wrap{overflow-x:auto;max-width:100%}
+@media(max-width:600px){.ext-tabela{font-size:11px}.ext-tabela th,.ext-tabela td{padding:9px 7px}.ext-lider{white-space:normal}.ext-cab h3{font-size:15px}.ext-placar b{font-size:17px}}
+@media(max-width:600px){.ext-placar{display:grid;grid-template-columns:1fr 1fr;width:100%}}
