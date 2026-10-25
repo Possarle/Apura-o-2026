@@ -1,8 +1,18 @@
 # Apuração 2026
 
-Painel eleitoral com tema preto, resultados por estado e município, busca de candidatos, linha do tempo e notícias. A versão 3.4 corrige o 2º turno para governador (5 estados e DF, sem o RJ, retotalizado pelo TRE-RJ em 15/10), atualiza as notícias a cada 10 minutos na semana da eleição (g1, Agência Brasil e TSE), reduz a página de 6,8 MB para 4,2 MB e redesenha só o que muda. A versão 3.3 deixou o site todo em preto e troca o mapa-múndi da aba Exterior por um globo que gira e mostra os votos de cada país ao ser clicado. A versão 3.2 trouxe o mapa geral dividido em todos os municípios do Brasil e a aba Exterior, com a votação de brasileiros em 186 cidades de 133 países. A versão 3.1 abriu o segundo turno e destaca no mapa de governadores somente as UFs com disputa pendente. Os resultados do primeiro turno continuam disponíveis.
+Painel eleitoral com tema preto, resultados por estado e município, busca de candidatos, linha do tempo e notícias. A versão 3.7 pode ser publicada na Vercel com link público. A versão 3.4 corrigiu o 2º turno para governador (5 estados e DF, sem o RJ, retotalizado pelo TRE-RJ em 15/10), atualiza as notícias a cada 10 minutos na semana da eleição (g1, Agência Brasil e TSE), reduz a página de 6,8 MB para 4,2 MB e redesenha só o que muda. A versão 3.3 deixou o site todo em preto e troca o mapa-múndi da aba Exterior por um globo que gira e mostra os votos de cada país ao ser clicado. A versão 3.2 trouxe o mapa geral dividido em todos os municípios do Brasil e a aba Exterior, com a votação de brasileiros em 186 cidades de 133 países. A versão 3.1 abriu o segundo turno e destaca no mapa de governadores somente as UFs com disputa pendente. Os resultados do primeiro turno continuam disponíveis.
 
-## Publicar e obter um link
+## Publicar na Vercel (grátis, com link público)
+
+O projeto já está pronto para a Vercel (`vercel.json` e a pasta `api/`). As funções rodam em São Paulo (`gru1`), perto do TSE.
+
+1. Entre em [vercel.com](https://vercel.com) com a sua conta do GitHub.
+2. Clique em **Add New… → Project** e escolha o repositório **Apura-o-2026** (se ele não aparecer, clique em *Adjust GitHub App Permissions* e libere o repositório).
+3. Não mude nada na tela de configuração e clique em **Deploy**. Em cerca de 2 minutos aparece o endereço público (algo como `apura-o-2026.vercel.app`).
+
+Cada novo envio ao GitHub publica uma nova versão automaticamente. Na Vercel não há servidor ligado o tempo todo: os resultados são buscados no TSE quando alguém abre o site e ficam guardados por alguns segundos na rede da Vercel para todos os visitantes; os municípios são consultados estado por estado. A linha do tempo do 2º turno é montada no navegador de cada visitante enquanto a página fica aberta, porque a Vercel não guarda arquivos entre as consultas.
+
+## Publicar no Render (servidor contínuo)
 
 Este repositório já contém a aplicação completa e os dados do pacote. O botão abaixo abre a configuração do serviço no Render:
 

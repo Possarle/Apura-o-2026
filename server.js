@@ -132,4 +132,4 @@ function createServer() {return http.createServer(async(req,res)=>{
 if(require.main===module){createServer().listen(process.env.PORT||8080,()=>console.log('Site disponível em http://localhost:'+(process.env.PORT||8080)));if(process.env.DISABLE_BACKGROUND!=='1'){collectHistory();refreshNews();setInterval(collectHistory,30000);setInterval(refreshNews,300000);
   // A partir das 17h do 2º turno, mantém presidente (com o exterior) e governador por município mesmo sem visitantes.
   setInterval(()=>{if(Date.now()>=Date.parse('2026-10-25T17:00:00-03:00')){municipios.consultar('tse','1',2);municipios.consultar('tse','3',2);}municipios.manter();},30000);}}
-module.exports={point,parseFeed,createServer,initializeDataDirectory};
+module.exports={point,parseFeed,createServer,initializeDataDirectory,FEEDS,newsInterval};

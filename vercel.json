@@ -1,0 +1,23 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "npm ci --omit=dev",
+  "buildCommand": "npm run build && node preparar-vercel.js",
+  "outputDirectory": "public",
+  "regions": ["gru1"],
+  "functions": {
+    "api/*.js": { "maxDuration": 60, "includeFiles": "data/**" }
+  },
+  "rewrites": [
+    { "source": "/tse/:path*", "destination": "/api/tse?h=oficial&p=:path*" },
+    { "source": "/tse-sim/:path*", "destination": "/api/tse?h=sim&p=:path*" },
+    { "source": "/__proxy_ok", "destination": "/api/proxy-ok" },
+    { "source": "/healthz", "destination": "/api/proxy-ok" }
+  ],
+  "headers": [
+    { "source": "/(.*)", "headers": [
+      { "key": "X-Content-Type-Options", "value": "nosniff" },
+      { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+    ] },
+    { "source": "/index.html", "headers": [ { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" } ] }
+  ]
+}

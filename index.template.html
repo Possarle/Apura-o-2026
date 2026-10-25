@@ -1286,6 +1286,30 @@ async function coletarDireto(cargo,turno,k,ufs){
  j.atualizadoEm=new Date().toISOString();j.coleta={emAndamento:false,feitos:tarefas.length,total:tarefas.length,direto:true};
  Terr.dados[k]=converterTerr(j);
 }
+const ufsDoCargo=(cargo,turno)=>cargo==='3'&&turno===2&&S.fonte==='tse'?listaUfs('3',2):MAPA.estados.map(e=>e.id);
+/* Junta respostas de vários estados numa lista única de candidatos (cada estado vem com a sua). */
+function mesclarTerr(glob,idx,j,ufs){
+ const mapa=(j.cands||[]).map(c=>{const n=String(c.n);if(!idx.has(n)){idx.set(n,glob.cands.length);glob.cands.push(c);}return idx.get(n);});
+ for(const uf of ufs||Object.keys(j.ufs||{})){
+  const regs=j.ufs?.[uf];if(!regs)continue;const novo={};
+  for(const [cd,a] of Object.entries(regs)){const v=[];a.slice(3).forEach((x,i)=>{v[mapa[i]]=Number(x)||0;});novo[cd]=[a[0],a[1],a[2],...Array.from({length:glob.cands.length},(_,i)=>v[i]||0)];}
+  glob.ufs[uf]=novo;
+ }
+}
+async function coletarPorUF(cargo,turno,k,ufs){
+ const run=S.run,glob={cands:[],ufs:{},atualizadoEm:null,coleta:{emAndamento:true,feitos:0,total:ufs.length,unidade:'estados'}},idx=new Map();
+ const antes=Terr.dados[k]?.bruto;if(antes)mesclarTerr(glob,idx,antes);   // mantém o que já havia se um estado falhar
+ let feitos=0,ultimo=0;
+ await pool(ufs,6,async(uf)=>{
+  if(run!==S.run)return;
+  try{const r=await fetch(`/api/municipios?fonte=${S.fonte}&cargo=${cargo}&turno=${turno}&uf=${uf}`,{signal:AbortSignal.any([AbortSignal.timeout(65000),UI.requestController.signal])});
+   if(r.ok){const j=await r.json();if(j.cands?.length||!antes?.ufs?.[uf])mesclarTerr(glob,idx,j,[uf]);}}catch{}
+  glob.coleta.feitos=++feitos;
+  if(run===S.run&&k===chaveTerr(cargo,S.turno)&&performance.now()-ultimo>700){ultimo=performance.now();Terr.dados[k]=converterTerr(glob);renderTerritorio();}
+ });
+ if(run!==S.run)return;
+ glob.coleta.emAndamento=false;glob.atualizadoEm=new Date().toISOString();Terr.dados[k]=converterTerr(glob);
+}
 async function carregarTerritorio(){
  if(UI.view!=='resultados'||S.cargo==='cidades')return;
  const modo=modoMapa();if(modo==='estados')return;
@@ -1298,7 +1322,12 @@ async function carregarTerritorio(){
    // O navegador revalida pela ETag; sem mudança, o resumo já convertido é mantido.
    const r=await fetch(`/api/municipios?fonte=${S.fonte}&cargo=${cargo}&turno=${turno}`,{cache:'no-cache',signal:AbortSignal.any([AbortSignal.timeout(20000),UI.requestController.signal])});
    const etag=r.headers.get('ETag');
-   if(r.ok&&k===chaveTerr(cargo,S.turno)&&(!etag||etag!==Terr.dados[k]?.etag)){Terr.dados[k]=converterTerr(await r.json());Terr.dados[k].etag=etag;}
+   if(r.ok&&k===chaveTerr(cargo,S.turno)&&(!etag||etag!==Terr.dados[k]?.etag)){
+    const j=await r.json();
+    // Na Vercel não há coletor em segundo plano: a página pede um estado por vez (cada um fica guardado na CDN).
+    if(j.porUF)await coletarPorUF(cargo,turno,k,modo==='exterior'?['zz']:ufsDoCargo(cargo,turno));
+    else{Terr.dados[k]=converterTerr(j);Terr.dados[k].etag=etag;}
+   }
   }
   else await coletarDireto(cargo,turno,k,modo==='exterior'?['zz']:S.uf?[S.uf]:[]);
   if(modo==='exterior'){const z=await buscar('1',turno,'zz');const kz=chave('1',turno,'zz');S.dados[kz]=conservarMaisRecente(S.dados[kz],z);}
@@ -1485,7 +1514,7 @@ function renderTerritorio(){
  else if(modo!=='estados'){
   const d=dadosTerr(),c=d?.coleta;
   if(S.fonte!=='demo'&&!S.proxy&&modo==='municipios'&&!S.uf)status='Escolha um estado para carregar os municípios dele.';
-  else if(c?.emAndamento&&c.total)status=`Consultando municípios no TSE: ${fmtInt(c.feitos)} de ${fmtInt(c.total)}`;
+  else if(c?.emAndamento&&c.total)status=c.unidade==='estados'?`Consultando o TSE: ${fmtInt(c.feitos)} de ${fmtInt(c.total)} ${ext?'arquivos':'estados'}`:`Consultando municípios no TSE: ${fmtInt(c.feitos)} de ${fmtInt(c.total)}`;
   else if(Terr.carregando[chaveTerr(ext?'1':S.cargo)])status='Atualizando os municípios…';
   else if(d?.atualizadoEm)status=(ext?'Exterior atualizado às ':'Municípios atualizados às ')+new Date(d.atualizadoEm).toLocaleTimeString('pt-BR',{timeZone:'America/Sao_Paulo',hour:'2-digit',minute:'2-digit'});
  }
