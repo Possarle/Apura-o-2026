@@ -23,14 +23,14 @@ Para experimentar no plano gratuito, crie manualmente um Web Service pelas instr
 Extraia todo o ZIP em uma pasta nova. Instale Node.js 24 pelo site https://nodejs.org/ e abra um terminal nessa pasta:
 
 ```sh
-node server.js
+node servidor.js
 ```
 
 Abra http://localhost:8080. No Windows, você também pode executar `INICIAR.bat`. Mantenha o terminal aberto enquanto usar o servidor local.
 
 ## 2. Envie os arquivos para um repositório no GitHub
 
-Crie um repositório em https://github.com/new. Envie o conteúdo extraído, com `package.json`, `package-lock.json`, `server.js`, `coletor-municipios.js`, `index.template.html`, `mapa-geo.js`, `globo-geo.js`, `globo-libs.js`, `exterior-core.js`, os scripts de build, os estilos e a pasta `data` na raiz. Os arquivos `index.html` e `snapshot-data.js` são gerados automaticamente pelo build. Inclua também os demais arquivos do projeto. Não envie apenas o ZIP.
+Crie um repositório em https://github.com/new. Envie o conteúdo extraído, com `package.json`, `package-lock.json`, `servidor.js`, `coletor-municipios.js`, `index.template.html`, `mapa-geo.js`, `globo-geo.js`, `globo-libs.js`, `exterior-core.js`, os scripts de build, os estilos e a pasta `data` na raiz. Os arquivos `index.html` e `snapshot-data.js` são gerados automaticamente pelo build. Inclua também os demais arquivos do projeto. Não envie apenas o ZIP.
 
 Para transferir a pasta inteira, use o GitHub Desktop: https://desktop.github.com/. Crie ou clone o repositório, copie os arquivos para a pasta dele, faça um commit e use **Publish repository** ou **Push origin**. Isso preserva os subdiretórios de `data`. O repositório pode ser privado; autorize o Render a acessá-lo na próxima etapa.
 
@@ -90,7 +90,7 @@ Se já tem um domínio, adicione-o em **Settings → Custom Domains** e siga os 
 
 O coletor registra a evolução nacional a cada minuto enquanto o processo estiver ativo, desde que o TSE responda. Horas sem coleta não podem ser recuperadas automaticamente sem snapshots oficiais daquele período. Falhas nas fontes mantêm as cópias salvas identificadas como tal.
 
-GitHub Pages e hospedagens apenas de HTML não executam `server.js`. Para ter notícias, consultas pelo servidor e histórico compartilhado, use **Web Service Node.js** ou outra hospedagem que mantenha esse processo e um volume persistente.
+GitHub Pages e hospedagens apenas de HTML não executam `servidor.js`. Para ter notícias, consultas pelo servidor e histórico compartilhado, use **Web Service Node.js** ou outra hospedagem que mantenha esse processo e um volume persistente.
 
 ## Referências
 

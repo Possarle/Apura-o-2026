@@ -7,7 +7,7 @@
     "node": ">=24 <25"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "node servidor.js",
     "build": "node gerar-pacote-dados.js && node preparar-site.js",
     "test": "node --test test/*.test.cjs",
     "prestart": "npm run build",

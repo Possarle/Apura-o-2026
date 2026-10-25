@@ -8,5 +8,5 @@ if errorlevel 1 (
 )
 echo Abra http://localhost:8080 no navegador.
 echo Mantenha esta janela aberta para atualizar os dados.
-node server.js
+node servidor.js
 pause

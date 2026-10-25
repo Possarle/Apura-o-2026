@@ -2,7 +2,7 @@
 /* Notícias: feeds do g1 e da Agência Brasil somados às manchetes salvas no pacote (inclui as do TSE).
    A CDN guarda o resultado por 10 minutos na semana da eleição. */
 const {json,lerLocal}=require('./_comum');
-const {parseFeed,FEEDS,newsInterval}=require('../server');
+const {parseFeed,FEEDS,newsInterval}=require('../servidor');
 module.exports=async(req,res)=>{
  let salvas=[];try{salvas=JSON.parse(lerLocal('data/news.json')||'{}').items||[];}catch{}
  const r=await Promise.allSettled(FEEDS.map(async f=>{const x=await fetch(f.url,{headers:{'User-Agent':'Apuracao2026/3'},signal:AbortSignal.timeout(12000)});if(!x.ok)throw Error('HTTP '+x.status);const t=await x.text();if(!/<rss|<rdf:RDF/i.test(t))throw Error('Feed inválido');return parseFeed(t,f);}));

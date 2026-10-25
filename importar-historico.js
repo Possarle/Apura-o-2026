@@ -1,5 +1,5 @@
 'use strict';
-const fs=require('node:fs');const path=require('node:path');const {point}=require('./server');const H=require('./history-core');
+const fs=require('node:fs');const path=require('node:path');const {point}=require('./servidor');const H=require('./history-core');
 const [turn,dir]=process.argv.slice(2);
 if(!['1','2'].includes(turn)||!dir){console.error('Uso: node importar-historico.js 1|2 ./snapshots');process.exit(1);}
 const output=process.env.DATA_DIR||path.join(__dirname,'data');fs.mkdirSync(output,{recursive:true});

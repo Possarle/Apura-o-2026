@@ -60,7 +60,7 @@ test('todas as cidades do exterior do TSE têm país, coordenadas e país no glo
  assert.deepEqual(faltam,[],'todo município do TSE deve ter contorno ou ponto no mapa');
 });
 test('endpoint de municípios valida a consulta e responde 304 sem mudanças',async()=>{
- process.env.DISABLE_BACKGROUND='1';const {createServer}=require('../server');
+ process.env.DISABLE_BACKGROUND='1';const {createServer}=require('../servidor');
  const server=createServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));const base='http://127.0.0.1:'+server.address().port;
  try{
   assert.equal((await fetch(base+'/api/municipios?cargo=6&turno=1')).status,400);

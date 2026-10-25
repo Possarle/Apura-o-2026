@@ -10,7 +10,7 @@ A consulta de 07/10/2026 confirmou AC, AM, DF, ES, RJ, RN e TO com segundo turno
 
 Candidatos com situação “2º turno” não aparecem mais como “eleitos”. Senador e deputados ficam na consulta de **1º turno**. Na busca do segundo turno, os votos usados como referência histórica estão identificados como votos do primeiro turno.
 
-**Como atualizar:** extraia o novo ZIP em uma pasta nova. Abra o `index.html` para conferir o visual ou execute `INICIAR.bat` / `node server.js` para usar as consultas online. Em uma hospedagem, substitua os arquivos do projeto e reinicie o serviço, preservando o disco de dados. O HTML entregue já está preparado; não exige etapa de build.
+**Como atualizar:** extraia o novo ZIP em uma pasta nova. Abra o `index.html` para conferir o visual ou execute `INICIAR.bat` / `node servidor.js` para usar as consultas online. Em uma hospedagem, substitua os arquivos do projeto e reinicie o serviço, preservando o disco de dados. O HTML entregue já está preparado; não exige etapa de build.
 
 ## Nova interface
 
@@ -41,7 +41,7 @@ O mapa da Visão geral tem três botões:
 Nos modos Municípios e Estados o mapa é livre: arraste para andar, use a roda do mouse, a pinça (celular), os botões − + 1:1 ou o duplo clique para dar zoom, e “Tela cheia” para ampliar. O 1:1 enquadra de novo o Brasil (ou o estado escolhido).
 - **Exterior**: um globo que gira sozinho (uma volta por minuto), com os países na cor de quem lidera e pontos nas 186 cidades onde brasileiros votam para presidente. Arraste para girar à mão e use a roda do mouse, a pinça (celular), os botões − + 1:1 ou o duplo clique para dar zoom; “Tela cheia” amplia o globo para a tela toda. Ao clicar em um país (no globo ou na tabela), o globo gira até ele, aproxima de acordo com o tamanho do país, para e mostra um cartão com os votos de cada candidato e das cidades; “Voltar a girar”, o “×” ou a tecla Esc retomam o giro. Abaixo ficam o placar do exterior e a tabela por país.
 
-Com `node server.js`, o servidor reúne os arquivos municipais do TSE em segundo plano e salva o resumo em `data/municipios/` (ou em `DATA_DIR/municipios/`). Abrindo só o HTML, a página consulta diretamente os municípios do estado aberto ou do exterior. As malhas ficam em `mapa-geo.js`, `globo-geo.js` e `globo-libs.js`, que precisam estar na mesma pasta do `index.html`.
+Com `node servidor.js`, o servidor reúne os arquivos municipais do TSE em segundo plano e salva o resumo em `data/municipios/` (ou em `DATA_DIR/municipios/`). Abrindo só o HTML, a página consulta diretamente os municípios do estado aberto ou do exterior. As malhas ficam em `mapa-geo.js`, `globo-geo.js` e `globo-libs.js`, que precisam estar na mesma pasta do `index.html`.
 
 Quando usa uma cópia salva, a interface mostra um aviso com os horários dos dados e não a apresenta como atualização ao vivo. Consultas online que falham não apagam os resultados salvos de outras UFs. Os gráficos usam os mesmos dados das listas de candidatos.
 
@@ -49,7 +49,7 @@ No primeiro turno, ao abrir um cargo estadual sem uma UF selecionada, o site usa
 
 ### Executar
 
-Extraia **todo o ZIP** em uma pasta nova. Com Node.js 24 instalado, execute `node server.js` e abra http://localhost:8080. No Windows, também pode dar dois cliques em `INICIAR.bat`, aguardar a mensagem e abrir o endereço mostrado. Abrir só o HTML exibe as cópias salvas, mas a consulta ao vivo pode sofrer bloqueio de CORS; notícias atualizadas e coleta contínua precisam do servidor.
+Extraia **todo o ZIP** em uma pasta nova. Com Node.js 24 instalado, execute `node servidor.js` e abra http://localhost:8080. No Windows, também pode dar dois cliques em `INICIAR.bat`, aguardar a mensagem e abrir o endereço mostrado. Abrir só o HTML exibe as cópias salvas, mas a consulta ao vivo pode sofrer bloqueio de CORS; notícias atualizadas e coleta contínua precisam do servidor.
 
 Preserve a pasta `data` de qualquer instalação anterior que tenha histórico próprio. Para evitar sobrescrevê-la, extraia esta versão em outra pasta e importe os snapshots antigos com `importar-historico.js`.
 
@@ -65,7 +65,7 @@ Preserve a pasta `data` de qualquer instalação anterior que tenha histórico p
 - Registros duplicados no mesmo horário são substituídos pela versão mais recente. Registros inválidos são descartados, sem quebrar o gráfico. Horários de coleta e horários oficiais são identificados; registros antigos sem identificação mostram “horário do registro”.
 - Demonstração não reutiliza históricos de sessões antigas. Fontes e turnos permanecem separados.
 
-**Atualização:** substitua os arquivos do projeto, incluindo o novo `history-core.js`, e reinicie `node server.js`. Preserve a pasta `data` da instalação existente. Recarregue a página com Ctrl+F5.
+**Atualização:** substitua os arquivos do projeto, incluindo o novo `history-core.js`, e reinicie `node servidor.js`. Preserve a pasta `data` da instalação existente. Recarregue a página com Ctrl+F5.
 
 
 ## Abrir o site
@@ -73,7 +73,7 @@ Preserve a pasta `data` de qualquer instalação anterior que tenha histórico p
 Instale Node.js 24, extraia este ZIP e execute nesta pasta:
 
 ```sh
-node server.js
+node servidor.js
 ```
 
 Abra http://localhost:8080. Não precisa instalar dependências para usar o site.

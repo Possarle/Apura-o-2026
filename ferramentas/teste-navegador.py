@@ -46,9 +46,9 @@ async def main():
     st, body, h = http('/', {'Accept-Encoding': 'gzip'}); ok('servidor: página comprimida (gzip)', h.get('Content-Encoding') == 'gzip', f'{len(body)//1024} KB')
     for f in ['/mapa-geo.js', '/globo-geo.js', '/globo-libs.js', '/exterior-core.js', '/professional.css', '/favicon.svg']:
         st, _, _ = http(f); ok('servidor: arquivo ' + f, st == 200)
-    for f in ['/server.js', '/../package.json', '/data/news.json', '/coletor-municipios.js']:
+    for f in ['/servidor.js', '/server.js', '/../package.json', '/data/news.json', '/coletor-municipios.js']:
         st, _, _ = http(f); ok('segurança: bloqueia ' + f, st == 404)
-    st, _, _ = http('/tse/../../server.js'); ok('segurança: proxy do TSE não lê arquivos locais', st in (400, 403, 404, 502))
+    st, _, _ = http('/tse/../../servidor.js'); ok('segurança: proxy do TSE não lê arquivos locais', st in (400, 403, 404, 502))
     st, _, _ = http('/api/history?turno=9'); ok('servidor: histórico rejeita turno inválido', st == 400)
     st, b2, _ = http('/api/history?turno=1'); ok('servidor: histórico do 1º turno', st == 200 and len(json.loads(b2)['points']) > 0, len(json.loads(b2)['points']))
     st, b2, _ = http('/api/news'); ok('servidor: notícias', st in (200, 503))

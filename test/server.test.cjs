@@ -1,4 +1,4 @@
-const {test}=require('node:test');const assert=require('node:assert/strict');const {point,parseFeed,createServer,initializeDataDirectory}=require('../server');
+const {test}=require('node:test');const assert=require('node:assert/strict');const {point,parseFeed,createServer,initializeDataDirectory}=require('../servidor');
 test('volume novo recebe os dados incluídos e preserva a coleta existente',()=>{
  const fs=require('node:fs'),path=require('node:path'),os=require('node:os');const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'apuracao-volume-'));
  try{
@@ -20,7 +20,7 @@ test('RSS filtra eleição, ordena, deduplica e rejeita links externos ou javasc
 });
 test('servidor serve a página, valida turno e não permite ler arquivos locais',async()=>{
  const server=createServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));const base='http://127.0.0.1:'+server.address().port;
- try{assert.equal((await fetch(base)).status,200);assert.equal((await fetch(base+'/healthz')).status,200);assert.equal((await fetch(base+'/api/history?turno=9')).status,400);assert.equal((await fetch(base+'/server.js')).status,404);assert.equal((await fetch(base+'/api/history?turno=1')).status,200);
+ try{assert.equal((await fetch(base)).status,200);assert.equal((await fetch(base+'/healthz')).status,200);assert.equal((await fetch(base+'/api/history?turno=9')).status,400);assert.equal((await fetch(base+'/servidor.js')).status,404);assert.equal((await fetch(base+'/api/history?turno=1')).status,200);
  const css=await fetch(base+'/professional.css');assert.equal(css.status,200);assert((await css.text()).includes('.app-sidebar'));
  assert.equal((await fetch(base+'/professional.css',{headers:{'If-None-Match':css.headers.get('etag')}})).status,304);
  }finally{await new Promise(r=>server.close(r));}
