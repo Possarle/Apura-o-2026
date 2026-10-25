@@ -1186,14 +1186,18 @@ const dadosTerr=(cargo=modoMapa()==='exterior'?'1':S.cargo)=>Terr.dados[chaveTer
 const MINUSCULAS=new Set(['de','da','do','das','dos','e','d']);
 const nomeBonito=(t)=>String(t||'').toLowerCase().split(/(\s+|-)/).map((p,i)=>i&&MINUSCULAS.has(p)?p:p.replace(/^(\p{L})/u,c=>c.toUpperCase())).join('').replace(/\bD'(\p{L})/gu,(m,c)=>"D'"+c.toUpperCase());
 
+/* Executa um arquivo embutido no index.html (mapas e globo); devolve false se ele não estiver lá. */
+function rodarEmbutido(nome){
+ const bloco=document.querySelector(`script[data-embutido="${nome}"]`);if(!bloco)return false;
+ const s=document.createElement('script');s.textContent=bloco.textContent;document.head.appendChild(s);bloco.remove();return true;
+}
+function carregarScript(src,teste){
+ if(teste())return Promise.resolve();
+ try{if(rodarEmbutido(src)&&teste())return Promise.resolve();}catch{}
+ return new Promise((ok,falha)=>{const s=document.createElement('script');s.src=src;s.async=true;s.onload=()=>teste()?ok():falha(Error(src));s.onerror=()=>{s.remove();falha(Error(src));};document.head.appendChild(s);});
+}
 function carregarGeo(){
- if(window.MAPA_GEO){Terr.geo=window.MAPA_GEO;return Promise.resolve(Terr.geo);}
- if(!Terr.geoPromise)Terr.geoPromise=new Promise((ok,falha)=>{
-  const s=document.createElement('script');s.src='mapa-geo.js';s.async=true;
-  s.onload=()=>{if(window.MAPA_GEO){Terr.geo=window.MAPA_GEO;Terr.erroGeo=false;ok(Terr.geo);}else falha(Error('malha'));};
-  s.onerror=()=>{Terr.geoPromise=null;Terr.erroGeo=true;falha(Error('malha'));};
-  document.head.appendChild(s);
- });
+ if(!Terr.geoPromise)Terr.geoPromise=carregarScript('mapa-geo.js',()=>!!window.MAPA_GEO).then(()=>{Terr.geo=window.MAPA_GEO;Terr.erroGeo=false;return Terr.geo;},e=>{Terr.geoPromise=null;Terr.erroGeo=true;throw e;});
  return Terr.geoPromise;
 }
 function montarCamadas(){
@@ -1300,7 +1304,7 @@ function pintarMunicipios(){
  for(const e of MAPA.estados)porUF[e.id]=estiloEstado(e.id);
  for(const [cdi,el] of Terr.els){
   const uf=el.dataset.uf,st=porUF[uf];let fill,op;
-  if(st.segundo&&st.status!=='runoff'){fill='#212121';op=1;}
+  if(st.segundo&&st.status!=='runoff'){fill='#262626';op=1;}
   else{
    const r=d?.porCdi.get(cdi),l=r&&liderVotos(r.votos,d.cands);
    if(l){fill=corCandidato(l.c);op=(0.38+0.62*Math.min(l.margem,40)/40).toFixed(2);}
@@ -1375,7 +1379,7 @@ function renderTerritorio(){
  if(modo==='municipios'){pintarMunicipios();}
  aplicarZoom();
  let status='';
- if(modo!=='estados'&&!(ext?Globo.features.length:Terr.geo))status=Terr.erroGeo?(ext?'Não foi possível carregar o globo.':'Não foi possível carregar o mapa dos municípios.'):(ext?'Carregando o globo…':'Carregando o mapa…');
+ if(modo!=='estados'&&!(ext?Globo.features.length:Terr.geo))status=Terr.erroGeo?(ext?'Não foi possível carregar o globo. Extraia o ZIP inteiro e abra pelo INICIAR.bat.':'Não foi possível carregar o mapa dos municípios. Extraia o ZIP inteiro e abra pelo INICIAR.bat.'):(ext?'Carregando o globo…':'Carregando o mapa…');
  else if(modo!=='estados'){
   const d=dadosTerr(),c=d?.coleta;
   if(S.fonte!=='demo'&&!S.proxy&&modo==='municipios'&&!S.uf)status='Escolha um estado para carregar os municípios dele.';
@@ -1449,10 +1453,6 @@ const Globo={libs:null,features:[],porIso:new Map(),centros:new Map(),ctx:null,p
  rot:[45,-12],escala:1,desl:0,ultimoCartao:'',escalaAlvo:1,girando:true,pausado:false,arrasto:null,velX:0,velY:0,anim:null,raf:0,ultimo:0,
  hover:null,hoverCidade:null,selecionado:null,cores:new Map(),cidades:[],cands:[],w:0,h:0,dpr:1,ativo:false,pulso:0,retomarEm:0};
 const movimentoReduzido=()=>!!window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
-function carregarScript(src,teste){
- if(teste())return Promise.resolve();
- return new Promise((ok,falha)=>{const s=document.createElement('script');s.src=src;s.async=true;s.onload=()=>teste()?ok():falha(Error(src));s.onerror=()=>{s.remove();falha(Error(src));};document.head.appendChild(s);});
-}
 function carregarGlobo(){
  if(!Globo.libs)Globo.libs=(async()=>{
   await carregarScript('globo-libs.js',()=>!!(window.d3?.geoOrthographic&&window.topojson?.feature));

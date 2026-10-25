@@ -16,11 +16,11 @@ main{padding:0 36px 28px;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr
 .mapa-modos{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 14px;margin:-6px 0 12px}
 .mapa-modos .seg button{font-size:11px;padding:7px 12px}
 .mapa-status{font-size:10.5px;color:#bbbbbb;min-height:14px}
-#mapa .mun{stroke:#0e0e0e;stroke-width:.35;vector-effect:non-scaling-stroke;cursor:pointer;fill:var(--sem);transition:fill .5s ease,fill-opacity .5s ease,opacity .35s ease}
+#mapa .mun{stroke:#000;stroke-width:.55;vector-effect:non-scaling-stroke;cursor:pointer;fill:var(--sem);transition:fill .5s ease,fill-opacity .5s ease,opacity .35s ease}
 #mapa .mun.ponto{stroke:#f5f5f5;stroke-width:.8}
 #camadaMun{display:none}
 #mapa.modo-mun #camadaMun{display:inline}
-#mapa.modo-mun .estado{fill:none!important;pointer-events:none;stroke:#050505;stroke-width:1.4;vector-effect:non-scaling-stroke}
+#mapa.modo-mun .estado{fill:none!important;pointer-events:none;stroke:#cfcfcf;stroke-opacity:.5;stroke-width:1.1;vector-effect:non-scaling-stroke}
 #mapa.modo-mun .estado.sel{stroke:#f2f7ec;stroke-width:2.2}
 #mapa.modo-mun.zoom .mun.fora{opacity:.28}
 #mapa.zoom #rotulos{display:none}
