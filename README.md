@@ -1,6 +1,6 @@
 # Apuração 2026
 
-Painel eleitoral com tema preto, resultados por estado e município, busca de candidatos, linha do tempo e notícias. A versão 3.3 deixa o site todo em preto e troca o mapa-múndi da aba Exterior por um globo que gira e mostra os votos de cada país ao ser clicado. A versão 3.2 trouxe o mapa geral dividido em todos os municípios do Brasil e a aba Exterior, com a votação de brasileiros em 186 cidades de 133 países. A versão 3.1 abriu o segundo turno e destaca no mapa de governadores somente as UFs com disputa pendente. Os resultados do primeiro turno continuam disponíveis.
+Painel eleitoral com tema preto, resultados por estado e município, busca de candidatos, linha do tempo e notícias. A versão 3.4 corrige o 2º turno para governador (5 estados e DF, sem o RJ, retotalizado pelo TRE-RJ em 15/10), atualiza as notícias a cada 10 minutos na semana da eleição (g1, Agência Brasil e TSE), reduz a página de 6,8 MB para 4,2 MB e redesenha só o que muda. A versão 3.3 deixou o site todo em preto e troca o mapa-múndi da aba Exterior por um globo que gira e mostra os votos de cada país ao ser clicado. A versão 3.2 trouxe o mapa geral dividido em todos os municípios do Brasil e a aba Exterior, com a votação de brasileiros em 186 cidades de 133 países. A versão 3.1 abriu o segundo turno e destaca no mapa de governadores somente as UFs com disputa pendente. Os resultados do primeiro turno continuam disponíveis.
 
 ## Publicar e obter um link
 
@@ -23,7 +23,7 @@ Para testar gratuitamente, siga a alternativa em [COMO-HOSPEDAR.md](COMO-HOSPEDA
 - Pesquisa de candidatos e perfis com votos e distribuição geográfica.
 - Cores dos partidos, com Lula em vermelho e Bolsonaro em azul.
 - Linha do tempo nacional com horários, separação por turno e histórico salvo pelo servidor.
-- Notícias eleitorais com fonte e horário; tentativa de atualização a cada hora.
+- Notícias eleitorais com fonte e horário; atualização a cada 10 minutos na semana do 2º turno (a cada hora nos demais dias). As manchetes novas se somam às anteriores.
 - Layout adaptável a computador e celular e cópia de dados para consultas quando a fonte estiver indisponível.
 
 ## Dados incluídos
@@ -67,7 +67,7 @@ Use uma única instância com o disco configurado. Faça backups dos dados persi
 - [Guia de hospedagem](COMO-HOSPEDAR.md)
 - [Recursos, limitações e uso do pacote](LEIA-ME.md)
 - Resultados: [Tribunal Superior Eleitoral](https://resultados.tse.jus.br/)
-- Notícias: feeds públicos do g1 e da Agência Brasil, com links para as publicações originais.
+- Notícias: feeds públicos do g1 e da Agência Brasil, além de manchetes do TSE incluídas no pacote, com links para as publicações originais.
 - Malha municipal: IBGE, via [municipal-brazilian-geodata](https://github.com/luizpedone/municipal-brazilian-geodata) (MIT). Globo: países do [Natural Earth](https://www.naturalearthdata.com/) (domínio público), via world-atlas, em `globo-geo.js`, desenhado com d3-geo e topojson-client (ISC), incluídos em `globo-libs.js`. Os arquivos são gerados por `ferramentas/gerar-mapas.cjs`.
 
 Projeto independente, sem vínculo com a Justiça Eleitoral. O modo Demonstração utiliza dados fictícios identificados na interface e não representa resultados eleitorais.

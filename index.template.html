@@ -368,6 +368,20 @@ const fmtPct = (n, d = 1) => n.toLocaleString('pt-BR', { minimumFractionDigits: 
 const pad = (n, t = 4) => String(n).padStart(t, '0');
 const nomeUF = (id) => MAPA.estados.find((e) => e.id === id)?.nome || id.toUpperCase();
 const cargoAtual = () => CARGOS.find((c) => c.cd === S.cargo) || null;
+/* Redesenho econômico: estas áreas só trocam o HTML quando o conteúdo realmente muda.
+   Evita refazer a tela a cada consulta sem novidade e não troca botões no meio de um clique. */
+(() => {
+  const desc = Object.getOwnPropertyDescriptor(Element.prototype, 'innerHTML');
+  for (const id of ['tabs','ufs','legenda','placar','painel','graficos','cidResumo','cidGraficos','cidCab','cidCorpo','exteriorPainel','buscaLista','noticiasLista','perfilCandidato']) {
+    const el = document.getElementById(id); if (!el) continue;
+    let ultimo = null;
+    const obs = window.MutationObserver ? new MutationObserver(() => { ultimo = null; }) : null;
+    obs?.observe(el, { childList: true, subtree: true, attributes: true, characterData: true });
+    Object.defineProperty(el, 'innerHTML', { configurable: true,
+      get() { return desc.get.call(el); },
+      set(v) { v = String(v); if (v === ultimo) return; desc.set.call(el, v); obs?.takeRecords(); ultimo = v; } });
+  }
+})();
 const iniciais = (nome) => String(nome || '?').split(/\s+/).filter(Boolean).slice(0, 2).map((p) => p[0]).join('').toUpperCase();
 
 /* --------------------------- Regras de cor ---------------------------- */
@@ -454,8 +468,9 @@ function listaUfs(cargo,turno=S.turno) {
   return cargo === '1' ? ['br', ...ids] : ids;
 }
 
-function situacaoGovernador(uf){return ElectionCore.governorStatus(S.dados[chave('3',1,uf)],S.dados[chave('3',2,uf)]);}
-function classificados(cargo,uf){return ElectionCore.contenders(S.dados[chave(cargo,1,uf)],S.dados[chave(cargo,2,uf)]);}
+function situacaoGovernador(uf){return ElectionCore.governorStatus(S.dados[chave('3',1,uf)],S.dados[chave('3',2,uf)],uf);}
+function classificados(cargo,uf){return ElectionCore.contenders(S.dados[chave(cargo,1,uf)],S.dados[chave(cargo,2,uf)],cargo==='3'?uf:null);}
+function notaDecisao(cargo,uf){const x=uf&&ElectionCore.decisaoPosterior(cargo,uf,S.dados[chave(cargo,1,uf)]);return x?`<p class="aviso-decisao"><b>Resultado retotalizado.</b> ${esc(x.nota)} <a href="${esc(x.fonte)}" target="_blank" rel="noopener noreferrer">Fonte ↗</a></p>`:'';}
 function semApuracaoSegundo(cargo=S.cargo,uf=S.uf){
  if(S.turno!==2||S.fonte!=='tse')return false;
  const ufs=uf?[uf]:listaUfs(cargo);return !ufs.some(u=>S.dados[chave(cargo,2,u)]?.totalVotos>0);
@@ -1043,7 +1058,7 @@ function avatarHTML(c, pasta, cls = 'foto', cargoCd) {
 
 function painelDisputa(cargo,uf){
  const first=S.dados[chave(cargo,1,uf)],status=cargo==='3'?situacaoGovernador(uf):'runoff';
- if(status!=='runoff')return `<h2>${esc(nomeUF(uf))}</h2><div class="empty-state"><h3>${status==='decided'?'Governo definido no primeiro turno':'Aguardando a definição da disputa'}</h3><p>${status==='decided'?'Este estado não terá nova votação para governador.':'A lista de classificados ainda não está disponível nos dados recebidos.'}</p><button class="btn" data-first-round>Consultar primeiro turno</button></div>`;
+ if(status!=='runoff')return `<h2>${esc(nomeUF(uf))}</h2><div class="empty-state"><h3>${status==='decided'?'Governo definido no primeiro turno':'Aguardando a definição da disputa'}</h3><p>${status==='decided'?'Este estado não terá nova votação para governador.':'A lista de classificados ainda não está disponível nos dados recebidos.'}</p>${notaDecisao(cargo,uf)}<button class="btn" data-first-round>Consultar primeiro turno</button></div>`;
  const candidates=classificados(cargo,uf);
  return `<span class="eyebrow">${cargo==='1'?'PRESIDENTE · BRASIL':`GOVERNADOR · ${esc(uf.toUpperCase())}`}</span><h2>${uf==='br'?'A decisão nacional':esc(nomeUF(uf))}</h2><p class="nota">Candidatos classificados para 25 de outubro.</p><div class="runoff-candidates">${candidates.map(c=>`<article class="runoff-candidate" style="--candidate-color:${corCandidato(c)}"><span class="runoff-avatar">${esc(iniciais(c.nome))}</span><div><h3>${esc(c.nome)}</h3><p>${esc(c.part)} · ${esc(c.n)}</p><span class="runoff-tag">No segundo turno</span></div></article>`).join('')||'<p>Lista de candidatos aguardando confirmação do TSE.</p>'}</div><div class="runoff-wait"><b>Aguardando a apuração do 2º turno</b><p>Os votos desta etapa serão exibidos após a divulgação do TSE. Os resultados do primeiro turno permanecem disponíveis no botão “1º turno”.</p></div>${first?`<p class="source-date">Classificação do TSE · ${esc(first.dg)} ${esc(first.hg)} · Brasília</p>`:''}`;
 }
@@ -1111,7 +1126,7 @@ function renderPainel() {
   const l = lider(d); const cor = l ? corDe(l.c, S.cargo) : 'sem';
   const b = bbox[uf]; const m = Math.max(b.width, b.height) * 0.06;
   const mini = `<svg viewBox="${b.x - m} ${b.y - m} ${b.width + 2 * m} ${b.height + 2 * m}" aria-hidden="true"><path d="${MAPA.estados.find((e) => e.id === uf).d}" style="fill:${l ? corCandidato(l.c) : '#777'};fill-opacity:${l ? 0.9 : 1}"></path></svg>`;
-  let head = `${cabBase}<div class="cab-estado">${mini}<div><h2>${esc(nomeUF(uf))}</h2><div class="meta">${c.rotulo}${d.vagas && !c.majoritario || (S.cargo === '5' && d.vagas) ? ', ' + d.vagas + ' vaga' + (d.vagas > 1 ? 's' : '') : ''}<br>${d.erro ? '' : fmtPct(d.apurado, 2) + ' das seções apuradas'}</div></div></div>`;
+  let head = notaDecisao(S.cargo,uf)+`${cabBase}<div class="cab-estado">${mini}<div><h2>${esc(nomeUF(uf))}</h2><div class="meta">${c.rotulo}${d.vagas && !c.majoritario || (S.cargo === '5' && d.vagas) ? ', ' + d.vagas + ' vaga' + (d.vagas > 1 ? 's' : '') : ''}<br>${d.erro ? '' : fmtPct(d.apurado, 2) + ' das seções apuradas'}</div></div></div>`;
   if (d.erro) {
     const msg = d.erro === 'sem2' || (S.turno === 2 && d.erro === 404) ? 'Este estado não tem 2º turno para este cargo.' : 'O TSE ainda não publicou este arquivo. Os resultados aparecem aqui assim que a apuração começar.';
     el.innerHTML = head + `<p class="vazio">${msg}</p>`; return;
@@ -1882,8 +1897,8 @@ async function carregarPerfil() {
 function renderNoticias(data,failed=false){
  const status=$('#noticiasStatus');
  if(!data||!Array.isArray(data.items)){status.textContent='Nenhuma consulta de notícias disponível.';$('#noticiasLista').innerHTML='<div class="empty-state"><h3>O radar está temporariamente indisponível</h3><p>As fontes podem estar sem resposta. Tente novamente em alguns minutos; o painel de resultados continua disponível.</p><button class="btn" data-news-retry>Tentar novamente</button></div>';return;}
- const date=new Date(data.updatedAt);status.textContent=`${failed||data.stale?'Cópia salva · ':''}Última consulta: ${date.toLocaleString('pt-BR',{timeZone:'America/Sao_Paulo'})} (Brasília). Atualização automática a cada hora.${data.unavailableSources?.length?' Algumas fontes estão temporariamente indisponíveis.':''}`;
- const items=data.items.filter(n=>{try{const u=new URL(n.url);return u.protocol==='https:'&&['g1.globo.com','agenciabrasil.ebc.com.br'].includes(u.hostname);}catch{return false;}});
+ const date=new Date(data.updatedAt);status.textContent=`${failed||data.stale?'Cópia salva · ':''}Última consulta: ${date.toLocaleString('pt-BR',{timeZone:'America/Sao_Paulo'})} (Brasília). Atualização automática a cada ${data.interval&&data.interval<3600000?Math.round(data.interval/60000)+' minutos':'hora'}.${data.unavailableSources?.length?' Algumas fontes estão temporariamente indisponíveis.':''}`;
+ const items=data.items.filter(n=>{try{const u=new URL(n.url);return u.protocol==='https:'&&['g1.globo.com','agenciabrasil.ebc.com.br','www.tse.jus.br'].includes(u.hostname);}catch{return false;}});
  $('#noticiasLista').innerHTML=items.map(n=>`<article><small>${esc(n.source)}<br>${esc(new Date(n.publishedAt).toLocaleString('pt-BR',{timeZone:'America/Sao_Paulo',day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}))}</small><h3><a href="${esc(n.url)}" target="_blank" rel="noopener noreferrer">${esc(n.title)}</a></h3><a class="article-link" href="${esc(n.url)}" target="_blank" rel="noopener noreferrer">Ler na fonte original ↗</a></article>`).join('')||'<div class="empty-state"><h3>Nenhuma manchete eleitoral nesta consulta</h3><p>O painel será atualizado novamente em uma hora.</p></div>';
 }
 async function carregarNoticias(){
@@ -1904,7 +1919,7 @@ $('#buscaLista').addEventListener('click',e=>{const b=e.target.closest('[data-ca
 $('#perfilCandidato').addEventListener('click',e=>{if(e.target.closest('#carregarPerfil'))carregarPerfil();});
 $('#perfilCandidato').addEventListener('change',e=>{if(e.target.id==='perfilUF'){Busca.geoGen++;Busca.geo=null;$('#perfilMunicipios').innerHTML='';}});
 $('#recarregarNoticias').addEventListener('click',carregarNoticias);
-carregarNoticias();setInterval(carregarNoticias,3600000);
+carregarNoticias();setInterval(carregarNoticias,600000);
 
 function aplicarNavegacao(){
  const view=UI.view,overview=view==='resultados',city=view==='cidades';

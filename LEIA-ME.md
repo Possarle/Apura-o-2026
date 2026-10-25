@@ -119,6 +119,9 @@ O comando usa os arquivos oficiais existentes em `data/tse` e não faz uma nova 
 
 ## Testes
 
+Além dos testes abaixo, `ferramentas/teste-navegador.py` percorre o site inteiro no navegador (91 verificações: páginas, abas, turnos, mapa, globo, por município, planilha, busca, notícias, celular e segurança do servidor). Instruções no início do arquivo.
+
+
 ```sh
 npm install
 npm test

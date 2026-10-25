@@ -75,14 +75,17 @@ function parseFeed(xml, feed=FEEDS[1]) {
  return [...new Map(out.map(n=>[n.url,n])).values()].sort((a,b)=>Date.parse(b.publishedAt)-Date.parse(a.publishedAt)).slice(0,18);
 }
 let news=load('news.json',null), newsPending=null, lastAttempt=0, newsFailed=false;
+// Na semana do 2º turno as notícias são consultadas a cada 10 minutos; fora dela, a cada hora.
+function newsInterval(now=Date.now()){return now>=Date.parse('2026-10-24T00:00:00-03:00')&&now<Date.parse('2026-10-28T00:00:00-03:00')?600000:3600000;}
 async function refreshNews() {
  if(newsPending)return newsPending;
- if(Date.now()-lastAttempt<3600000)return news;
+ if(Date.now()-lastAttempt<newsInterval())return news;
  lastAttempt=Date.now();
  newsPending=(async()=>{try{
   const responses=await Promise.allSettled(FEEDS.map(async feed=>{const xml=(await request(feed.url)).body.toString('utf8');if(!/<rss|<rdf:RDF/i.test(xml))throw Error('Feed inválido');return parseFeed(xml,feed);}));
   const valid=responses.filter(r=>r.status==='fulfilled');if(!valid.length)throw Error('Fontes indisponíveis');
-  news={updatedAt:new Date().toISOString(),items:[...new Map(valid.flatMap(r=>r.value).map(n=>[n.url,n])).values()].sort((a,b)=>Date.parse(b.publishedAt)-Date.parse(a.publishedAt)).slice(0,24),unavailableSources:responses.flatMap((r,i)=>r.status==='rejected'?[FEEDS[i].source]:[])};
+  // Mantém as manchetes anteriores (inclusive as do TSE) e acrescenta as novas, sem repetir.
+  news={updatedAt:new Date().toISOString(),items:[...new Map([...(news?.items||[]),...valid.flatMap(r=>r.value)].map(n=>[n.url,n])).values()].filter(n=>Date.now()-Date.parse(n.publishedAt)<30*86400000).sort((a,b)=>Date.parse(b.publishedAt)-Date.parse(a.publishedAt)).slice(0,30),unavailableSources:responses.flatMap((r,i)=>r.status==='rejected'?[FEEDS[i].source]:[])};
   save('news.json',news);newsFailed=false;
  }catch(e){newsFailed=true;console.warn('Notícias: '+e.message);}finally{newsPending=null;}return news;})();return newsPending;
 }
@@ -97,6 +100,9 @@ async function proxy(url) {
  const p=(async()=>{await new Promise(r=>setTimeout(r,Math.max(0,start-Date.now())));const value=await request(url);if(value.body.length<2*1024*1024){if(cache.size>100)cache.delete(cache.keys().next().value);cache.set(url,{at:Date.now(),value});}return value;})();
  inflight.set(url,p);try{return await p;}finally{inflight.delete(url);}
 }
+// Arquivos estáticos comprimidos uma única vez por versão (a página tem alguns MB).
+const gz=new Map();
+function gzipCache(file,etag){const c=gz.get(file);if(c&&c.etag===etag)return c.body;const body=zlib.gzipSync(fs.readFileSync(file),{level:9});gz.set(file,{etag,body});return body;}
 function createServer() {return http.createServer(async(req,res)=>{
  res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Referrer-Policy','strict-origin-when-cross-origin');
  const json=(status,data)=>{res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'});res.end(JSON.stringify(data));};
@@ -115,13 +121,15 @@ function createServer() {return http.createServer(async(req,res)=>{
   if(/gzip/.test(req.headers['accept-encoding']||'')){res.setHeader('Content-Encoding','gzip');res.setHeader('Vary','Accept-Encoding');res.end(zlib.gzipSync(body));}else res.end(body);
   return;
  }
- if(u.pathname==='/api/news'){await refreshNews();return news?json(200,{...news,stale:newsFailed||Date.now()-Date.parse(news.updatedAt)>3700000}):json(503,{error:'Feed indisponível'});}
+ if(u.pathname==='/api/news'){await refreshNews();return news?json(200,{...news,stale:newsFailed||Date.now()-Date.parse(news.updatedAt)>newsInterval()+300000,interval:newsInterval()}):json(503,{error:'Feed indisponível'});}
  for(const [prefix,host] of [['/tse/','resultados.tse.jus.br'],['/tse-sim/','resultados-sim.tse.jus.br']])if(u.pathname.startsWith(prefix)){
   try{const r=await proxy('https://'+host+'/'+u.pathname.slice(prefix.length));res.writeHead(200,{'Content-Type':r.type||'application/json','Cache-Control':'no-store'});res.end(r.body);if(prefix==='/tse/'&&u.pathname.endsWith('.json')){try{const local=path.resolve(DATA_DIR,'tse',u.pathname.slice(prefix.length));const root=path.resolve(DATA_DIR,'tse')+path.sep;if(local.startsWith(root)){fs.mkdirSync(path.dirname(local),{recursive:true});fs.writeFileSync(local,r.body);}}catch{console.warn('Não foi possível salvar o cache do TSE.');}}}catch(e){const local=path.resolve(DATA_DIR,'tse',u.pathname.slice(prefix.length));const root=path.resolve(DATA_DIR,'tse')+path.sep;if(prefix==='/tse/'&&local.startsWith(root)&&fs.existsSync(local)){res.writeHead(200,{'Content-Type':'application/json','Cache-Control':'no-store','X-Apuracao-Source':'snapshot'});fs.createReadStream(local).pipe(res);return;}const code=/HTTP (404|403|429)/.exec(e.message);json(code?Number(code[1]):502,{error:'Arquivo do TSE indisponível'});}return;
  }
  const assets={'/':'text/html','/index.html':'text/html','/snapshot-data.js':'application/javascript','/history-core.js':'application/javascript','/election-core.js':'application/javascript','/exterior-core.js':'application/javascript','/mapa-geo.js':'application/javascript','/globo-geo.js':'application/javascript','/globo-libs.js':'application/javascript','/professional.css':'text/css','/favicon.svg':'image/svg+xml'};
- if(assets[u.pathname]){const f=path.join(__dirname,u.pathname==='/'?'index.html':u.pathname.slice(1));if(!fs.existsSync(f)){res.writeHead(404);res.end();return;}const stat=fs.statSync(f),etag=`"${stat.size}-${Math.round(stat.mtimeMs)}"`;res.setHeader('ETag',etag);res.setHeader('Cache-Control','no-cache');res.setHeader('Content-Type',assets[u.pathname]+'; charset=utf-8');if(req.headers['if-none-match']===etag){res.writeHead(304);res.end();return;}const stream=fs.createReadStream(f);if(/gzip/.test(req.headers['accept-encoding']||'')){res.setHeader('Content-Encoding','gzip');res.setHeader('Vary','Accept-Encoding');stream.pipe(zlib.createGzip()).pipe(res);}else stream.pipe(res);return;}
+ if(assets[u.pathname]){const f=path.join(__dirname,u.pathname==='/'?'index.html':u.pathname.slice(1));if(!fs.existsSync(f)){res.writeHead(404);res.end();return;}const stat=fs.statSync(f),etag=`"${stat.size}-${Math.round(stat.mtimeMs)}"`;res.setHeader('ETag',etag);res.setHeader('Cache-Control','no-cache');res.setHeader('Content-Type',assets[u.pathname]+'; charset=utf-8');if(req.headers['if-none-match']===etag){res.writeHead(304);res.end();return;}if(/gzip/.test(req.headers['accept-encoding']||'')){res.setHeader('Content-Encoding','gzip');res.setHeader('Vary','Accept-Encoding');res.end(gzipCache(f,etag));}else fs.createReadStream(f).pipe(res);return;}
  res.writeHead(404);res.end('Não encontrado');
 });}
-if(require.main===module){createServer().listen(process.env.PORT||8080,()=>console.log('Site disponível em http://localhost:'+(process.env.PORT||8080)));if(process.env.DISABLE_BACKGROUND!=='1'){collectHistory();refreshNews();setInterval(collectHistory,60000);setInterval(refreshNews,3600000);setInterval(()=>municipios.manter(),30000);}}
+if(require.main===module){createServer().listen(process.env.PORT||8080,()=>console.log('Site disponível em http://localhost:'+(process.env.PORT||8080)));if(process.env.DISABLE_BACKGROUND!=='1'){collectHistory();refreshNews();setInterval(collectHistory,30000);setInterval(refreshNews,300000);
+  // A partir das 17h do 2º turno, mantém presidente (com o exterior) e governador por município mesmo sem visitantes.
+  setInterval(()=>{if(Date.now()>=Date.parse('2026-10-25T17:00:00-03:00')){municipios.consultar('tse','1',2);municipios.consultar('tse','3',2);}municipios.manter();},30000);}}
 module.exports={point,parseFeed,createServer,initializeDataDirectory};
