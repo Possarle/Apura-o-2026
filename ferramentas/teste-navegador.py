@@ -240,6 +240,10 @@ async def main():
         pg = await nova_pagina(b, BASE + '/')
         await pg.wait_for_timeout(5000)
         ok('abertura: 2º turno por padrão', 'turno=2' in pg.url or (await pg.get_attribute('#t2', 'aria-pressed')) == 'true')
+        for t, titulo in [('pt', 'Faz o L'), ('pl', 'Brasil acima de tudo'), ('padrao', 'O Brasil volta')]:
+            await clicar(pg, f'.temas button[data-tema="{t}"]', 500)
+            ok(f'tema {t}: aplica visual e título', (await pg.get_attribute('html', 'data-tema')) == t and titulo in await texto(pg, '#pageTitle'))
+        ok('tema padrão: sem faixa de bordões', await pg.locator('#faixaTema').is_hidden())
         ok('abertura: aba Presidente selecionada', (await pg.get_attribute('[data-cargo="1"]', 'aria-pressed')) == 'true')
         ok('abertura: disputa presidencial no placar', 'NO SEGUNDO TURNO' in (await texto(pg, '#placar')).upper())
         await pg.close()

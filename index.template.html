@@ -236,7 +236,7 @@ table.cidades td.lider{background:#ffffff10}
     <button class="btn" id="atualizar" title="Atualizar agora">Atualizar</button>
     <span class="status" id="status" role="status" aria-live="polite">Carregando…</span>
   </div>
-</header><div class="page-intro"><div><span class="eyebrow" id="pageEyebrow">PANORAMA ELEITORAL</span><h1 id="pageTitle">O Brasil, voto a voto.</h1><p id="pageSubtitle">Acompanhe a apuração. Explore o resultado de cada região.</p></div><button class="btn share-button" id="compartilhar">Copiar consulta <span aria-hidden="true">↗</span></button></div>
+</header><div class="temas-barra"><div class="temas" role="group" aria-label="Tema do site"><button type="button" data-tema="padrao" aria-pressed="true">Padrão</button><button type="button" data-tema="pt" aria-pressed="false"><span class="tema-estrela" aria-hidden="true">★</span> PT</button><button type="button" data-tema="pl" aria-pressed="false"><span class="tema-bandeira" aria-hidden="true"></span> PL</button></div></div><div class="faixa-tema" id="faixaTema" aria-hidden="true" hidden><div class="faixa-trilho" id="faixaTrilho"></div></div><div class="page-intro"><div><span class="eyebrow" id="pageEyebrow">PANORAMA ELEITORAL</span><h1 id="pageTitle">O Brasil, voto a voto.</h1><p id="pageSubtitle">Acompanhe a apuração. Explore o resultado de cada região.</p></div><button class="btn share-button" id="compartilhar">Copiar consulta <span aria-hidden="true">↗</span></button></div>
 <div class="toast" id="toast" role="status" hidden></div>
 
 <div class="aviso demo" id="avisoDemo" hidden><b>Demonstração.</b> Todos os números, candidatos e fotos deste modo são fictícios e só servem para testar o visual. Para ver a apuração real, escolha “Ao vivo (TSE)”.</div>
@@ -2076,11 +2076,31 @@ $('#perfilCandidato').addEventListener('change',e=>{if(e.target.id==='perfilUF')
 $('#recarregarNoticias').addEventListener('click',carregarNoticias);
 carregarNoticias();setInterval(carregarNoticias,600000);
 
+/* ------------------------------- Temas ---------------------------------- */
+/* Só muda a aparência e os bordões; os números e as cores dos candidatos continuam os do TSE. */
+const TEMAS={
+ pt:{eyebrow:'ELEIÇÕES 2026 · É 13!',titulo:'Faz o L, voto a voto.',subtitulo:'Acompanhe a apuração do lado vermelho da força.',
+  frases:['Faz o L','Lula lá','Fora Bolsonaro','Sem anistia','O amor vence o ódio','Ninguém solta a mão de ninguém','É 13!','Democracia sempre','O Brasil é do povo','Picanha e cervejinha']},
+ pl:{eyebrow:'ELEIÇÕES 2026 · É 22!',titulo:'Brasil acima de tudo, voto a voto.',subtitulo:'Acompanhe a apuração com Deus, pátria, família e liberdade.',
+  frases:['Brasil acima de tudo, Deus acima de todos','Fora PT','Fora Lula','Mito!','Nossa bandeira jamais será vermelha','É 22!','Deus, pátria, família e liberdade','O gigante acordou','Flávio presidente','Faz o F']}
+};
+const Tema={atual:'padrao'};
+function aplicarTema(t,salvar=true){
+ if(!['padrao','pt','pl'].includes(t))t='padrao';Tema.atual=t;
+ document.documentElement.dataset.tema=t;
+ document.querySelectorAll('[data-tema]').forEach(b=>{if(b.tagName==='BUTTON')b.setAttribute('aria-pressed',String(b.dataset.tema===t));});
+ const faixa=$('#faixaTema'),cfg=TEMAS[t];faixa.hidden=!cfg;
+ if(cfg){const sep=`<i>${t==='pt'?'★':'✦'}</i>`,itens=cfg.frases.map(f=>`<span>${esc(f)}</span>`).join(sep)+sep;$('#faixaTrilho').innerHTML=`<div>${itens}</div><div>${itens}</div>`;}
+ if(salvar)try{localStorage.setItem('apuracao-tema',t);}catch{}
+ if(typeof aplicarNavegacao==='function'&&document.querySelector('#pageTitle'))aplicarNavegacao();
+}
+document.querySelector('.temas').addEventListener('click',ev=>{const b=ev.target.closest('button[data-tema]');if(b)aplicarTema(b.dataset.tema);});
 function aplicarNavegacao(){
  const view=UI.view,overview=view==='resultados',city=view==='cidades';
  renderAvisos();
  const text={resultados:['PANORAMA ELEITORAL','O Brasil, voto a voto.','Acompanhe a apuração. Explore o resultado de cada região.'],cidades:['UM OLHAR MAIS PERTO','Cada município importa.','Compare a votação local, explore candidatos e exporte os resultados.'],candidatos:['QUEM RECEBEU SEU VOTO','Nomes, números e território.','Encontre candidatos e descubra onde seus votos se concentram.'],noticias:['RADAR ELEITORAL','A notícia, com contexto.','Acompanhe as manchetes e consulte as publicações originais.'],metodo:['FONTES E METODOLOGIA','Transparência em primeiro lugar.','Entenda de onde vêm os dados e como eles são apresentados.']}[view];
  if(overview&&S.turno===2){text[0]='ELEIÇÕES 2026 · SEGUNDO TURNO';text[1]=S.cargo==='3'?'A decisão, estado por estado.':'O Brasil volta às urnas.';text[2]=S.cargo==='3'?'Explore as disputas confirmadas para governador em 25 de outubro.':'Lula e Flávio Bolsonaro disputam a Presidência em 25 de outubro.';}
+ if(overview&&TEMAS[Tema.atual]){const t=TEMAS[Tema.atual];text[0]=t.eyebrow;text[1]=t.titulo;text[2]=t.subtitulo;}
  $('#pageEyebrow').textContent=text[0];$('#pageTitle').textContent=text[1];$('#pageSubtitle').textContent=text[2];
  document.querySelectorAll('[data-page]').forEach(b=>b.setAttribute('aria-current',b.dataset.page===view?'page':'false'));
  $('#placar').hidden=!overview;$('#tabs').hidden=!overview;$('#overviewMain').hidden=!overview;$('#graficos').hidden=!overview;$('#analyticsHeading').hidden=!overview;$('#estadoControle').hidden=!overview||S.cargo==='1';
@@ -2127,6 +2147,7 @@ async function verificarProxy() {
 }
 async function iniciar() {
   lerHash();
+  { let t = new URLSearchParams(location.hash.slice(1)).get('tema'); if (!t) try { t = localStorage.getItem('apuracao-tema'); } catch {} aplicarTema(t || 'padrao', false); }
   carregarPacote();
   $('#fonte').value = S.fonte;
   montarMapa(); renderTudo();
