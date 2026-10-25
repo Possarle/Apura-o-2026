@@ -240,7 +240,8 @@ async def main():
         pg = await nova_pagina(b, BASE + '/')
         await pg.wait_for_timeout(5000)
         ok('abertura: 2º turno por padrão', 'turno=2' in pg.url or (await pg.get_attribute('#t2', 'aria-pressed')) == 'true')
-        ok('abertura: governadores em disputa', 'UFs' in await texto(pg, '#placar'))
+        ok('abertura: aba Presidente selecionada', (await pg.get_attribute('[data-cargo="1"]', 'aria-pressed')) == 'true')
+        ok('abertura: disputa presidencial no placar', 'NO SEGUNDO TURNO' in (await texto(pg, '#placar')).upper())
         await pg.close()
 
         # ---------------- Celular ----------------
