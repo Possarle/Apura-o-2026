@@ -254,7 +254,7 @@ table.cidades td.lider{background:#ffffff10}
     <div class="mapa-modos"><div class="seg" role="group" aria-label="O que o mapa mostra"><button data-mapa-modo="municipios" aria-pressed="true">Municípios</button><button data-mapa-modo="estados" aria-pressed="false">Estados</button><button data-mapa-modo="exterior" aria-pressed="false">Exterior</button></div><span class="mapa-status" id="mapaStatus" role="status" aria-live="polite"></span></div>
     <div class="mapa-wrap">
       <svg id="mapa" role="group" aria-label="Mapa do Brasil por estado e município"></svg>
-      <div class="globo" id="globo" hidden><canvas id="globoCanvas" role="img" aria-label="Globo com a votação de brasileiros no exterior. A tabela abaixo traz os mesmos números por país."></canvas><aside class="globo-cartao" id="globoCartao" aria-live="polite" aria-hidden="true"></aside><div class="globo-rodape"><span>Arraste para girar · clique em um país</span><button class="btn" id="globoGirar" type="button">Pausar</button></div></div>
+      <div class="globo" id="globo" hidden><canvas id="globoCanvas" role="img" aria-label="Globo com a votação de brasileiros no exterior. A tabela abaixo traz os mesmos números por país."></canvas><aside class="globo-cartao" id="globoCartao" aria-live="polite" aria-hidden="true"></aside><div class="globo-rodape"><span>Arraste para girar · role ou use a pinça para o zoom · clique em um país</span><div class="globo-botoes"><div class="globo-zoom" role="group" aria-label="Zoom do globo"><button type="button" data-zoom="menos" aria-label="Afastar" title="Afastar">−</button><button type="button" data-zoom="mais" aria-label="Aproximar" title="Aproximar">+</button><button type="button" data-zoom="ajustar" aria-label="Ver o globo inteiro" title="Ver o globo inteiro">1:1</button></div><button class="btn" id="globoTela" type="button" aria-pressed="false">Tela cheia</button><button class="btn" id="globoGirar" type="button">Pausar</button></div></div></div>
       <div class="dica" id="dica" hidden></div>
     </div>
     <div class="legenda" id="legenda"></div>
@@ -1389,7 +1389,7 @@ function renderTerritorio(){
   b.disabled=m==='municipios'&&!muniDisponivel()&&S.cargo!=='cidades';
   b.title=b.disabled?'Disponível para presidente, governador e senador':'';
  });
- const svg=$('#mapa');svg.toggleAttribute('hidden',ext);$('#globo').hidden=!ext;ativarGlobo(ext&&UI.view==='resultados');$('#ufs').hidden=ext;$('#exteriorPainel').hidden=!ext;
+ const svg=$('#mapa');svg.toggleAttribute('hidden',ext);$('#globo').hidden=!ext;if(!ext&&Globo.expandido)expandirGlobo(false);ativarGlobo(ext&&UI.view==='resultados');$('#ufs').hidden=ext;$('#exteriorPainel').hidden=!ext;
  svg.classList.toggle('modo-mun',modo==='municipios'&&Terr.montado);
  if(modo==='municipios'){pintarMunicipios();}
  aplicarZoom();
@@ -1465,7 +1465,7 @@ function escolherModoMapa(m){
 /* Globo em canvas (projeção ortográfica do d3-geo). Gira sozinho; arraste para girar;
    ao escolher um país, ele gira até o país, para e mostra os votos no cartão. */
 const Globo={libs:null,features:[],porIso:new Map(),centros:new Map(),ctx:null,proj:null,path:null,
- rot:[45,-12],escala:1,desl:0,ultimoCartao:'',escalaAlvo:1,girando:true,pausado:false,arrasto:null,velX:0,velY:0,anim:null,raf:0,ultimo:0,
+ rot:[45,-12],escala:1,desl:0,zoom:1,zoomAlvo:1,raios:new Map(),ponteiros:new Map(),pinca:null,ultimoClique:null,expandido:false,ultimoCartao:'',escalaAlvo:1,girando:true,pausado:false,arrasto:null,velX:0,velY:0,anim:null,raf:0,ultimo:0,
  hover:null,hoverCidade:null,selecionado:null,cores:new Map(),cidades:[],cands:[],w:0,h:0,dpr:1,ativo:false,pulso:0,retomarEm:0};
 const movimentoReduzido=()=>!!window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
 function carregarGlobo(){
@@ -1478,7 +1478,7 @@ function carregarGlobo(){
    // Centro do maior pedaço do país (a França fica na Europa, não no meio do Atlântico).
    const polys=f.geometry.type==='MultiPolygon'?f.geometry.coordinates:[f.geometry.coordinates];
    let maior=null,area=-1;for(const p of polys){const a=d3.geoArea({type:'Polygon',coordinates:p});if(a>area&&a<2*Math.PI){area=a;maior=p;}}
-   if(maior)Globo.centros.set(f.id,d3.geoCentroid({type:'Polygon',coordinates:maior}));
+   if(maior){Globo.centros.set(f.id,d3.geoCentroid({type:'Polygon',coordinates:maior}));Globo.raios.set(f.id,Math.sqrt(area/Math.PI));}
   }
   Globo.proj=d3.geoOrthographic().clipAngle(90).precision(0.4);
   montarGlobo();
@@ -1493,6 +1493,7 @@ function montarGlobo(){
  if(window.ResizeObserver)new ResizeObserver(medir).observe(c);else window.addEventListener('resize',medir);
  medir();
  c.addEventListener('pointerdown',globoPressionar);c.addEventListener('pointermove',globoMover);
+ c.addEventListener('wheel',globoRoda,{passive:false});c.addEventListener('dblclick',globoDuplo);
  c.addEventListener('pointerup',globoSoltar);c.addEventListener('pointercancel',globoSoltar);
  c.addEventListener('pointerleave',()=>{if(!Globo.arrasto){Globo.hover=null;Globo.hoverCidade=null;$('#dica').hidden=true;c.style.cursor='';}});
  Globo.girando=!movimentoReduzido();
@@ -1507,7 +1508,7 @@ function atualizarGlobo(paises,cands){
  desenharGlobo();
 }
 const centroAtual=()=>[-Globo.rot[0],-Globo.rot[1]];
-function raioGlobo(){return Math.max(10,Math.min(Globo.w,Globo.h)/2*0.86)*Globo.escala;}
+function raioGlobo(){return Math.max(10,Math.min(Globo.w,Globo.h)/2*0.86)*Globo.escala*Globo.zoom;}
 function desenharGlobo(){
  const ctx=Globo.ctx;if(!ctx||!Globo.w)return;
  const {w,h,dpr}=Globo,r=raioGlobo(),cx=w/2-Globo.desl*w*0.15,cy=h/2,P=Globo.proj;
@@ -1553,6 +1554,7 @@ function cicloGlobo(t){
  Globo.raf=0;if(!Globo.ativo)return;
  const dt=Math.min(64,t-(Globo.ultimo||t));Globo.ultimo=t;Globo.pulso+=dt;
  let mexeu=false;
+ if(Math.abs(Globo.zoomAlvo-Globo.zoom)>0.0005){Globo.zoom+=(Globo.zoomAlvo-Globo.zoom)*(movimentoReduzido()?1:Math.min(1,dt/110));mexeu=true;}
  if(Globo.anim){
   const a=Globo.anim,p=Math.min(1,(t-a.t0)/a.dur),e=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
   const c=a.interp(e);Globo.rot=[-c[0],-c[1]];Globo.escala=a.e0+(a.e1-a.e0)*e;Globo.desl=a.d0+(a.d1-a.d0)*e;mexeu=true;
@@ -1561,7 +1563,7 @@ function cicloGlobo(t){
  else if(Math.abs(Globo.velX)>0.01||Math.abs(Globo.velY)>0.01){
   Globo.rot[0]+=Globo.velX*dt;Globo.rot[1]=Math.max(-70,Math.min(70,Globo.rot[1]+Globo.velY*dt));Globo.velX*=Math.pow(0.94,dt/16);Globo.velY*=Math.pow(0.94,dt/16);mexeu=true;
  }else if(Globo.girando&&!Globo.pausado&&!Globo.selecionado&&t>Globo.retomarEm){
-  Globo.rot[0]+=dt*0.006;  // 6° por segundo: uma volta completa a cada minuto
+  Globo.rot[0]+=dt*0.006/Globo.zoom;  // 6° por segundo (mais devagar com zoom): uma volta completa a cada minuto
   Globo.rot[1]+=(-12-Globo.rot[1])*Math.min(1,dt/1500);mexeu=true;
  }
  if(Globo.selecionado&&!movimentoReduzido())mexeu=true;  // pulso nas cidades do país escolhido
@@ -1580,6 +1582,8 @@ function centralizar(iso){
  const de=centroAtual(),dist=d3.geoDistance(de,alvo);
  Globo.velX=Globo.velY=0;
  Globo.anim={t0:performance.now(),dur:movimentoReduzido()?1:Math.max(700,Math.min(1600,dist*650)),interp:d3.geoInterpolate(de,[alvo[0],Math.max(-60,Math.min(60,alvo[1]))]),e0:Globo.escala,e1:1.04,d0:Globo.desl,d1:cartaoLateral()?1:0};
+ // Aproxima de acordo com o tamanho do país (países pequenos ganham mais zoom).
+ const raio=Globo.raios.get(iso);definirZoom(raio?Math.max(1,Math.min(6,0.32/raio)):4);
 }
 function selecionarPais(iso,{rolarTabela=false}={}){
  if(!iso||iso===Globo.selecionado){fecharPais();return;}
@@ -1591,7 +1595,7 @@ function selecionarPais(iso,{rolarTabela=false}={}){
 function fecharPais(){
  Globo.selecionado=null;Terr.paisAberto=null;
  Globo.anim={t0:performance.now(),dur:movimentoReduzido()?1:700,interp:d3.geoInterpolate(centroAtual(),centroAtual()),e0:Globo.escala,e1:1,d0:Globo.desl,d1:0};
- Globo.retomarEm=performance.now()+900;renderTerritorio();
+ definirZoom(1);Globo.retomarEm=performance.now()+900;renderTerritorio();
 }
 function renderCartaoGlobo(){
  const el=$('#globoCartao'),iso=Globo.selecionado,p=iso&&Globo.paises?.get(iso);
@@ -1622,12 +1626,29 @@ function alvoGlobo(pt){
  for(const f of Globo.features)if(d3.geoContains(f,ll))return {iso:f.id};
  return null;
 }
+/* Zoom: roda do mouse, pinça, botões e duplo clique. Ao aproximar com o cursor, o globo puxa o ponto para o centro. */
+function definirZoom(z,ponto){
+ z=Math.max(1,Math.min(8,z));
+ if(ponto&&z>Globo.zoomAlvo&&Globo.proj){const ll=Globo.proj.invert(ponto),centro=centroAtual();if(ll&&d3.geoDistance(ll,centro)<Math.PI/2){const c=d3.geoInterpolate(centro,ll)(Math.min(0.5,(1-Globo.zoomAlvo/z)*0.9));Globo.rot=[-c[0],Math.max(-70,Math.min(70,-c[1]))];}}
+ Globo.zoomAlvo=z;Globo.retomarEm=performance.now()+2500;
+ const ajustar=document.querySelector('[data-zoom="ajustar"]');if(ajustar)ajustar.disabled=z<=1.001;
+ const menos=document.querySelector('[data-zoom="menos"]');if(menos)menos.disabled=z<=1.001;
+ const mais=document.querySelector('[data-zoom="mais"]');if(mais)mais.disabled=z>=7.99;
+ if(!Globo.raf)desenharGlobo();
+}
+function globoRoda(ev){ev.preventDefault();definirZoom(Globo.zoomAlvo*Math.exp(-Math.max(-60,Math.min(60,ev.deltaY))*0.004),pontoGlobo(ev));}
+function globoDuplo(ev){ev.preventDefault();definirZoom(Globo.zoomAlvo*1.8,pontoGlobo(ev));}
+function distanciaPinca(){const [a,b]=[...Globo.ponteiros.values()];return Math.hypot(a[0]-b[0],a[1]-b[1]);}
 function globoPressionar(ev){
+ Globo.ponteiros.set(ev.pointerId,[ev.clientX,ev.clientY]);
+ if(Globo.ponteiros.size===2){Globo.arrasto=null;Globo.pinca={d0:distanciaPinca(),z0:Globo.zoomAlvo};return;}
  if(ev.button>0)return;
  Globo.arrasto={x:ev.clientX,y:ev.clientY,rot:[...Globo.rot],t:performance.now(),moveu:0,ult:[ev.clientX,ev.clientY,performance.now()]};
  Globo.anim=null;Globo.velX=Globo.velY=0;$('#globoCanvas').setPointerCapture?.(ev.pointerId);$('#dica').hidden=true;
 }
 function globoMover(ev){
+ if(Globo.ponteiros.has(ev.pointerId))Globo.ponteiros.set(ev.pointerId,[ev.clientX,ev.clientY]);
+ if(Globo.pinca&&Globo.ponteiros.size===2){const z=Math.max(1,Math.min(8,Globo.pinca.z0*distanciaPinca()/Math.max(1,Globo.pinca.d0)));definirZoom(z);Globo.zoom=z;return;}
  const a=Globo.arrasto;
  if(a){
   const k=90/raioGlobo(),dx=ev.clientX-a.x,dy=ev.clientY-a.y;a.moveu=Math.max(a.moveu,Math.hypot(dx,dy));
@@ -1640,16 +1661,21 @@ function globoMover(ev){
  $('#globoCanvas').style.cursor=iso?'pointer':'grab';
  if(!iso){dica.hidden=true;return;}
  dica.innerHTML=alvo.cidade?dicaCidadeExterior(alvo.cidade.c.nome):dicaPaisExterior(iso);dica.hidden=false;
- const box=$('.mapa-wrap').getBoundingClientRect();let x=ev.clientX-box.left+16,y=ev.clientY-box.top+16;
+ const box=dica.parentElement.getBoundingClientRect();let x=ev.clientX-box.left+16,y=ev.clientY-box.top+16;
  if(x+250>box.width)x=ev.clientX-box.left-262;if(y+160>box.height)y=Math.max(4,ev.clientY-box.top-160);
  dica.style.left=x+'px';dica.style.top=y+'px';
 }
 function globoSoltar(ev){
+ Globo.ponteiros.delete(ev.pointerId);
+ if(Globo.pinca){if(Globo.ponteiros.size<2){Globo.pinca=null;Globo.arrasto=null;}return;}
  const a=Globo.arrasto;if(!a)return;Globo.arrasto=null;$('#globoCanvas').style.cursor='';
  if(performance.now()-a.ult[2]>80)Globo.velX=Globo.velY=0;
  Globo.retomarEm=performance.now()+2500;
  if(a.moveu<5&&ev.type==='pointerup'){
   const alvo=alvoGlobo(pontoGlobo(ev));Globo.velX=Globo.velY=0;
+  // Segundo clique rápido no mesmo lugar é duplo clique (zoom), não fecha o país.
+  const agora=performance.now(),duplo=Globo.ultimoClique&&agora-Globo.ultimoClique.t<380&&Globo.ultimoClique.iso===(alvo?.iso||null);
+  Globo.ultimoClique={t:agora,iso:alvo?.iso||null};if(duplo)return;
   if(alvo?.iso&&Globo.paises?.has(alvo.iso))selecionarPais(alvo.iso===Globo.selecionado?null:alvo.iso,{rolarTabela:false});
   else if(Globo.selecionado)fecharPais();
  }
@@ -1662,11 +1688,26 @@ function dicaCidadeExterior(nome){
  const ext=dadosTerr('1'),r=ext?.ext.get(nome),info=ExteriorCore.cidade(nome),l=r&&liderVotos(r.votos,ext.cands);
  return `<b>${esc(nomeBonito(nome))}</b><span class="dica-uf">${esc(info?.nomePais||'')}</span>`+(l?`${fmtPct(r.apurado,2)} das seções apuradas · ${fmtInt(l.total)} votos`+l.ordem.slice(0,3).map(o=>`<span class="dica-cand"><i style="background:${corCandidato(o.c)}"></i>${esc(o.c.nome)}<b>${fmtPct(o.pct)}</b></span>`).join(''):'Sem votos apurados ainda');
 }
+function expandirGlobo(sim){
+ const g=$('#globo');sim=sim??!Globo.expandido;if(sim===Globo.expandido)return;
+ Globo.expandido=sim;g.classList.toggle('expandido',sim);document.body.classList.toggle('globo-aberto',sim);
+ const dica=$('#dica');dica.hidden=true;(sim?g:$('.mapa-wrap')).appendChild(dica);
+ $('#globoTela').textContent=sim?'Sair da tela cheia':'Tela cheia';$('#globoTela').setAttribute('aria-pressed',String(sim));
+ try{if(sim&&g.requestFullscreen&&!document.fullscreenElement)g.requestFullscreen().catch(()=>{});else if(!sim&&document.fullscreenElement)document.exitFullscreen().catch(()=>{});}catch{}
+}
+document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&Globo.expandido)expandirGlobo(false);});
 $('#globo').addEventListener('click',(ev)=>{
  if(ev.target.closest('[data-globo-fechar]')){fecharPais();return;}
+ const z=ev.target.closest('[data-zoom]');if(z){const k=z.dataset.zoom;definirZoom(k==='mais'?Globo.zoomAlvo*1.6:k==='menos'?Globo.zoomAlvo/1.6:1);return;}
+ if(ev.target.closest('#globoTela')){expandirGlobo();return;}
  if(ev.target.closest('#globoGirar')){if(Globo.selecionado){fecharPais();return;}Globo.pausado=!Globo.pausado;Globo.retomarEm=0;renderCartaoGlobo();}
 });
-document.addEventListener('keydown',(ev)=>{if(ev.key==='Escape'&&Globo.selecionado&&modoMapa()==='exterior')fecharPais();});
+document.addEventListener('keydown',(ev)=>{
+ if(modoMapa()!=='exterior')return;
+ if(ev.key==='Escape'){if(Globo.selecionado)fecharPais();else if(Globo.expandido)expandirGlobo(false);}
+ else if(Globo.expandido&&(ev.key==='+'||ev.key==='='))definirZoom(Globo.zoomAlvo*1.4);
+ else if(Globo.expandido&&ev.key==='-')definirZoom(Globo.zoomAlvo/1.4);
+});
 
 
 

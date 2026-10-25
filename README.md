@@ -19,7 +19,7 @@ Para testar gratuitamente, siga a alternativa em [COMO-HOSPEDAR.md](COMO-HOSPEDA
 ## Recursos
 
 - Presidente, governador, senador, deputado federal e deputado estadual/distrital, com filtros por UF e município.
-- Mapa geral em três visões: **Municípios** (cada um dos 5.571 municípios na cor de quem lidera, com aproximação ao clicar em um estado), **Estados** e **Exterior** (globo que gira sozinho; ao clicar em um país, ele gira até o país, para e mostra os votos de cada candidato e das cidades, mais uma tabela por país). A camada municipal vale para presidente, governador e senador; o exterior, só para presidente.
+- Mapa geral em três visões: **Municípios** (cada um dos 5.571 municípios na cor de quem lidera, com aproximação ao clicar em um estado), **Estados** e **Exterior** (globo que gira sozinho, com zoom pela roda do mouse, pinça ou botões e modo tela cheia; ao clicar em um país, ele gira até o país, para e mostra os votos de cada candidato e das cidades, mais uma tabela por país). A camada municipal vale para presidente, governador e senador; o exterior, só para presidente.
 - Pesquisa de candidatos e perfis com votos e distribuição geográfica.
 - Cores dos partidos, com Lula em vermelho e Bolsonaro em azul.
 - Linha do tempo nacional com horários, separação por turno e histórico salvo pelo servidor.
